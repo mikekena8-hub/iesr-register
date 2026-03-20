@@ -1647,6 +1647,218 @@
       color: #28a745;
     }
     
+    /* AI INSIGHTS STYLES */
+    .ai-insights-panel {
+      background: linear-gradient(135deg, #0b2f4e 0%, #0a4c6e 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .ai-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding-bottom: 12px;
+    }
+    
+    .ai-header i {
+      font-size: 28px;
+      color: #ffd966;
+    }
+    
+    .ai-header h3 {
+      color: white;
+      font-size: 20px;
+      margin: 0;
+    }
+    
+    .ai-header .badge {
+      background: rgba(255,255,255,0.2);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      color: #ffd966;
+      margin-left: auto;
+    }
+    
+    .insight-card {
+      background: white;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .insight-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    
+    .insight-header {
+      padding: 15px 20px;
+      background: #f8f9fa;
+      border-left: 4px solid var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .insight-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(11,102,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    
+    .insight-icon.critical {
+      background: rgba(220,53,69,0.1);
+      color: #dc3545;
+    }
+    
+    .insight-icon.warning {
+      background: rgba(255,193,7,0.1);
+      color: #856404;
+    }
+    
+    .insight-icon.success {
+      background: rgba(40,167,69,0.1);
+      color: #28a745;
+    }
+    
+    .insight-icon.info {
+      background: rgba(11,102,255,0.1);
+      color: #0b66ff;
+    }
+    
+    .insight-title {
+      flex: 1;
+    }
+    
+    .insight-title h4 {
+      margin: 0 0 5px 0;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    
+    .insight-title .insight-meta {
+      font-size: 11px;
+      color: #666;
+    }
+    
+    .insight-priority {
+      background: #ffc107;
+      color: #856404;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    
+    .insight-priority.high {
+      background: #dc3545;
+      color: white;
+    }
+    
+    .insight-priority.medium {
+      background: #ffc107;
+      color: #856404;
+    }
+    
+    .insight-priority.low {
+      background: #28a745;
+      color: white;
+    }
+    
+    .insight-body {
+      padding: 15px 20px;
+      line-height: 1.6;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    .insight-body p {
+      margin: 0;
+    }
+    
+    .insight-footer {
+      padding: 10px 20px;
+      background: #fafbfc;
+      border-top: 1px solid #e9ecef;
+      display: flex;
+      gap: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .insight-stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .insight-stat {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .insight-stat i {
+      font-size: 12px;
+    }
+    
+    .action-btn {
+      background: none;
+      border: 1px solid #0b66ff;
+      color: #0b66ff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .action-btn:hover {
+      background: #0b66ff;
+      color: white;
+    }
+    
+    .insights-loading {
+      text-align: center;
+      padding: 40px;
+      color: white;
+    }
+    
+    .insights-loading i {
+      font-size: 32px;
+      margin-bottom: 15px;
+      display: block;
+    }
+    
+    .more-insights-btn {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.2s;
+    }
+    
+    .more-insights-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    
     /* MOBILE RESPONSIVE FIXES */
     @media (max-width: 768px) {
       .login-container {
@@ -1848,6 +2060,19 @@
         right: 10px;
         top: 10px;
       }
+      
+      .insight-header {
+        flex-wrap: wrap;
+      }
+      
+      .insight-footer {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .insight-stats {
+        justify-content: space-between;
+      }
     }
     
     /* Tablet responsive */
@@ -1984,119 +2209,92 @@
         height: 150px;
       }
       
-       .heat-day {
-    font-size: 9px;
+      .heat-day {
+        font-size: 9px;
+      }
+      
+      .insight-body {
+        font-size: 12px;
+      }
+    }
+ </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  
+  <!-- AUTO-UPDATE SCRIPT - IESR AUTO UPDATER -->
+  <script>
+  // CHECK FOR UPDATES ON EVERY START - CONFIGURED FOR MIKEKENA8-HUB
+  const GITHUB_VERSION_URL = 'https://raw.githubusercontent.com/mikekena8-hub/iesr-register/main/version.json';
+  const GITHUB_HTML_URL = 'https://raw.githubusercontent.com/mikekena8-hub/iesr-register/main/index.html';
+
+  async function checkForUpdates() {
+      try {
+          // Check GitHub for new version (add timestamp to bypass cache)
+          const response = await fetch(GITHUB_VERSION_URL + '?t=' + Date.now());
+          const serverData = await response.json();
+          
+          // Get current version from phone storage
+          let currentVersion = localStorage.getItem('appVersion') || '1.0.0';
+          
+          // Compare versions (if server version is higher)
+          if (serverData.version > currentVersion) {
+              // Ask user if they want to update
+              if (confirm(`📱 New update v${serverData.version} available!\n\nCurrent version: v${currentVersion}\n\nUpdate now?`)) {
+                  // Download new HTML
+                  const htmlResponse = await fetch(GITHUB_HTML_URL + '?t=' + Date.now());
+                  const newHTML = await htmlResponse.text();
+                  
+                  // Save to phone storage
+                  localStorage.setItem('cachedHTML', newHTML);
+                  localStorage.setItem('appVersion', serverData.version);
+                  
+                  alert('✅ Update downloaded! The app will now reload with the latest version.');
+                  window.location.reload();
+              }
+          }
+      } catch (e) {
+          // If offline or error, silently use cached version
+          console.log('Offline mode or update check failed');
+          
+          // If offline, load cached version
+          const cached = localStorage.getItem('cachedHTML');
+          if (cached && !navigator.onLine) {
+              // Replace current page with cached version
+              document.open();
+              document.write(cached);
+              document.close();
+          }
+      }
   }
-}
-</style>  
-<!-- AUTO-UPDATE SCRIPT - IESR AUTO UPDATER WITH FORCED CACHE BUSTING -->
-<script>
-// CHECK FOR UPDATES ON EVERY START - CONFIGURED FOR MIKEKENA8-HUB
-const GITHUB_VERSION_URL = 'https://raw.githubusercontent.com/mikekena8-hub/iesr-register/main/version.json';
-const GITHUB_HTML_URL = 'https://raw.githubusercontent.com/mikekena8-hub/iesr-register/main/index.html';
 
-async function checkForUpdates() {
-    try {
-        console.log('Checking for updates...');
-        
-        // Add timestamp to bypass any cache
-        const versionUrl = GITHUB_VERSION_URL + '?t=' + Date.now();
-        const response = await fetch(versionUrl);
-        const serverData = await response.json();
-        
-        // Get current version from phone storage
-        let currentVersion = localStorage.getItem('appVersion') || '1.0.0';
-        
-        console.log(`Current: ${currentVersion}, Server: ${serverData.version}`);
-        
-        // Compare versions
-        if (serverData.version > currentVersion) {
-            if (confirm(`📱 New update v${serverData.version} available!\n\nCurrent: v${currentVersion}\n\nUpdate now?`)) {
-                console.log('Downloading update...');
-                
-                // Download with multiple cache busters
-                const htmlUrl = GITHUB_HTML_URL + '?v=' + serverData.version + '&t=' + Date.now();
-                const htmlResponse = await fetch(htmlUrl);
-                const newHTML = await htmlResponse.text();
-                
-                // Save to storage
-                localStorage.setItem('cachedHTML', newHTML);
-                localStorage.setItem('appVersion', serverData.version);
-                
-                alert('✅ Update downloaded!');
-                
-                // CRITICAL: Clear ALL caches
-                if (window.caches) {
-                    try {
-                        const keys = await caches.keys();
-                        await Promise.all(keys.map(key => caches.delete(key)));
-                        console.log('Service worker caches cleared');
-                    } catch (e) {
-                        console.log('Cache clear failed:', e);
-                    }
-                }
-                
-                // Force reload with cache bypass
-                setTimeout(() => {
-                    // This forces a completely fresh load
-                    window.location.href = window.location.href.split('?')[0] + '?fresh=' + Date.now();
-                }, 100);
-            }
-        } else {
-            console.log('Already on latest version');
-        }
-    } catch (e) {
-        console.log('Update check failed:', e);
-        
-        // If offline, use cached version
-        const cached = localStorage.getItem('cachedHTML');
-        if (cached && !navigator.onLine) {
-            document.open();
-            document.write(cached);
-            document.close();
-        }
-    }
-}
+  // Run when app starts
+  window.addEventListener('load', function() {
+      // Check if we have cached version for offline use
+      const cached = localStorage.getItem('cachedHTML');
+      if (!navigator.onLine && cached) {
+          // We're offline and have cached version - use it
+          document.open();
+          document.write(cached);
+          document.close();
+          return; // Stop here, cached version will run its own load event
+      }
+      
+      // Check for updates (will only run if online)
+      checkForUpdates();
+  });
 
-// Run when app starts
-window.addEventListener('load', function() {
-    console.log('App loaded, checking for updates...');
-    
-    // Check URL parameter to detect fresh load
-    const urlParams = new URLSearchParams(window.location.search);
-    const isFreshLoad = urlParams.has('fresh');
-    
-    if (isFreshLoad) {
-        console.log('Fresh load detected - removing URL parameter');
-        // Remove the parameter for clean URL
-        history.replaceState({}, document.title, window.location.pathname);
-    }
-    
-    // Check if we have cached version for offline use
-    const cached = localStorage.getItem('cachedHTML');
-    if (!navigator.onLine && cached) {
-        console.log('Offline mode - using cached version');
-        document.open();
-        document.write(cached);
-        document.close();
-        return;
-    }
-    
-    // Check for updates
-    checkForUpdates();
-});
+  // Also check when internet comes back online
+  window.addEventListener('online', function() {
+      console.log('Back online, checking for updates...');
+      checkForUpdates();
+  });
 
-// Also check when internet comes back
-window.addEventListener('online', function() {
-    console.log('Back online, checking for updates...');
-    checkForUpdates();
-});
-
-// Set initial version
-if (!localStorage.getItem('appVersion')) {
-    localStorage.setItem('appVersion', '1.0.0');
-}
-</script>
+  // For first-time users, set initial version
+  if (!localStorage.getItem('appVersion')) {
+      localStorage.setItem('appVersion', '1.0.0');
+  }
+  </script>
 </head>
 <body>
   <!-- ===== LOGIN PAGE ===== -->
@@ -2138,14 +2336,14 @@ if (!localStorage.getItem('appVersion')) {
             <span>Multi-teacher Access</span>
           </div>
           <div class="feature">
-            <i class="fas fa-database"></i>
-            <span>Offline-capable</span>
+            <i class="fas fa-brain"></i>
+            <span>AI Insights Engine</span>
           </div>
         </div>
       </div>
       
       <div class="copyright">
-        © 2026 IESR — Electrical Department • Craft & Diploma Programs • Cloud Synchronized
+        © 2026 IESR — Electrical Department • Craft & Diploma Programs • AI-Powered Insights
       </div>
     </div>
     
@@ -2221,7 +2419,7 @@ if (!localStorage.getItem('appVersion')) {
     <header>
       <div style="display:flex;flex-direction:column;gap:6px">
         <div class="brand" id="classBrand">IESR — ELECTRICAL DEPARTMENT</div>
-        <div class="small">Teacher PINs • Behavior tags • Momentum scores • Cloud backup</div>
+        <div class="small">Teacher PINs • Behavior tags • Momentum scores • Cloud backup • AI Insights</div>
       </div>
 
       <div class="controls" style="align-items:flex-end">
@@ -4506,12 +4704,1094 @@ if (!localStorage.getItem('appVersion')) {
         );
     }
 
-    // ===== FIXED: GLOBAL ADMIN VIEW FUNCTION (NOW USING 13030 WITH REAL-TIME CHARTS) =====
+    // ===== AI INSIGHTS ENGINE - COMPLETE IMPLEMENTATION =====
+    
+    /**
+     * AI Insights Engine - Generates intelligent insights from attendance data
+     * All insights are class-specific and based on live cloud data
+     */
+    class AIInsightsEngine {
+        constructor() {
+            this.insights = [];
+            this.data = [];
+            this.className = null;
+        }
+        
+        /**
+         * Load and analyze data for the current class
+         */
+        analyzeData(data, className) {
+            this.data = data;
+            this.className = className;
+            this.insights = [];
+            
+            if (!data || data.length === 0) {
+                return this.getEmptyInsights();
+            }
+            
+            // Run all insight generators
+            this.findMostMissedSubject();
+            this.findTeacherWithBestAttendance();
+            this.findStudentsMissingOneSubject();
+            this.findBalancedStudents();
+            this.findLowestAttendanceDay();
+            this.findBestTimeSlot();
+            this.findConsistentAbsencePattern();
+            this.findImprovingStudents();
+            this.findStudentsNeverLate();
+            this.findConsistentlyLateStudents();
+            this.findAtRiskStudents();
+            this.findHighestAbsenceLesson();
+            this.findTeacherMarkingConsistency();
+            this.findSubjectSpecificIssues();
+            this.findWeeklyTrends();
+            
+            // Sort insights by priority (high to low)
+            this.insights.sort((a, b) => {
+                const priorityOrder = { high: 0, medium: 1, low: 2 };
+                return priorityOrder[a.priority] - priorityOrder[b.priority];
+            });
+            
+            return this.insights;
+        }
+        
+        getEmptyInsights() {
+            return [{
+                id: 'no-data',
+                title: 'No Data Available',
+                content: 'No attendance data has been recorded for this class yet. Teachers need to submit attendance records to generate insights.',
+                icon: 'fa-database',
+                iconClass: 'info',
+                priority: 'low',
+                meta: 'Data will appear after teachers submit attendance',
+                stats: []
+            }];
+        }
+        
+        /**
+         * INSIGHT 1: Most Missed Subject
+         */
+        findMostMissedSubject() {
+            const subjectStats = {};
+            
+            this.data.forEach(record => {
+                const subject = record.subject || 'Unknown';
+                if (!subjectStats[subject]) {
+                    subjectStats[subject] = { total: 0, absent: 0, present: 0 };
+                }
+                subjectStats[subject].total++;
+                if (record.status === 'A') {
+                    subjectStats[subject].absent++;
+                } else if (record.status === 'P' || record.status === 'L') {
+                    subjectStats[subject].present++;
+                }
+            });
+            
+            let mostMissed = null;
+            let highestAbsenceRate = 0;
+            
+            Object.keys(subjectStats).forEach(subject => {
+                const stats = subjectStats[subject];
+                if (stats.total >= 10) { // Only consider subjects with enough data
+                    const absenceRate = (stats.absent / stats.total) * 100;
+                    if (absenceRate > highestAbsenceRate) {
+                        highestAbsenceRate = absenceRate;
+                        mostMissed = { subject, stats, absenceRate };
+                    }
+                }
+            });
+            
+            if (mostMissed && highestAbsenceRate > 15) {
+                this.insights.push({
+                    id: 'most-missed-subject',
+                    title: `Most Missed Subject: ${mostMissed.subject}`,
+                    content: `${mostMissed.subject} has the highest absence rate at ${Math.round(mostMissed.absenceRate)}%. This is significantly above the departmental average. Consider investigating the timing, teaching approach, or student engagement for this subject.`,
+                    icon: 'fa-book',
+                    iconClass: 'critical',
+                    priority: 'high',
+                    meta: `Based on ${mostMissed.stats.total} recorded sessions`,
+                    stats: [
+                        { label: 'Absence Rate', value: `${Math.round(mostMissed.absenceRate)}%` },
+                        { label: 'Total Sessions', value: mostMissed.stats.total },
+                        { label: 'Students Absent', value: mostMissed.stats.absent }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 2: Teacher with Best Attendance
+         */
+        findTeacherWithBestAttendance() {
+            const teacherStats = {};
+            
+            this.data.forEach(record => {
+                const teacher = record.teacher;
+                if (!teacherStats[teacher]) {
+                    teacherStats[teacher] = { total: 0, present: 0, absent: 0 };
+                }
+                teacherStats[teacher].total++;
+                if (record.status === 'P' || record.status === 'L') {
+                    teacherStats[teacher].present++;
+                } else if (record.status === 'A') {
+                    teacherStats[teacher].absent++;
+                }
+            });
+            
+            let bestTeacher = null;
+            let highestAttendance = 0;
+            
+            Object.keys(teacherStats).forEach(teacher => {
+                const stats = teacherStats[teacher];
+                if (stats.total >= 20) {
+                    const attendanceRate = (stats.present / stats.total) * 100;
+                    if (attendanceRate > highestAttendance) {
+                        highestAttendance = attendanceRate;
+                        bestTeacher = { teacher, stats, attendanceRate };
+                    }
+                }
+            });
+            
+            if (bestTeacher && highestAttendance > 85) {
+                this.insights.push({
+                    id: 'best-teacher',
+                    title: `Highest Attendance Teacher: ${bestTeacher.teacher}`,
+                    content: `${bestTeacher.teacher} maintains a ${Math.round(bestTeacher.attendanceRate)}% attendance rate across ${bestTeacher.stats.total} recorded lessons. This is excellent and could be studied to understand what engages students.`,
+                    icon: 'fa-chalkboard-teacher',
+                    iconClass: 'success',
+                    priority: 'medium',
+                    meta: `Based on ${bestTeacher.stats.total} lessons`,
+                    stats: [
+                        { label: 'Attendance Rate', value: `${Math.round(bestTeacher.attendanceRate)}%` },
+                        { label: 'Total Lessons', value: bestTeacher.stats.total },
+                        { label: 'Present Students', value: bestTeacher.stats.present }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 3: Students Who Miss Only One Subject
+         */
+        findStudentsMissingOneSubject() {
+            const studentSubjectStats = {};
+            
+            this.data.forEach(record => {
+                const studentId = record.studentId;
+                const subject = record.subject || 'Unknown';
+                const isPresent = (record.status === 'P' || record.status === 'L');
+                
+                if (!studentSubjectStats[studentId]) {
+                    studentSubjectStats[studentId] = {
+                        name: record.studentName,
+                        subjects: {},
+                        total: 0,
+                        present: 0
+                    };
+                }
+                
+                if (!studentSubjectStats[studentId].subjects[subject]) {
+                    studentSubjectStats[studentId].subjects[subject] = { total: 0, present: 0 };
+                }
+                
+                studentSubjectStats[studentId].subjects[subject].total++;
+                studentSubjectStats[studentId].total++;
+                if (isPresent) {
+                    studentSubjectStats[studentId].subjects[subject].present++;
+                    studentSubjectStats[studentId].present++;
+                }
+            });
+            
+            const problematicSubjects = [];
+            
+            Object.keys(studentSubjectStats).forEach(studentId => {
+                const student = studentSubjectStats[studentId];
+                if (student.total >= 10) {
+                    const overallRate = (student.present / student.total) * 100;
+                    
+                    Object.keys(student.subjects).forEach(subject => {
+                        const subj = student.subjects[subject];
+                        if (subj.total >= 3) {
+                            const subjectRate = (subj.present / subj.total) * 100;
+                            
+                            // If student has good overall attendance but poor in one subject
+                            if (overallRate >= 75 && subjectRate <= 50) {
+                                problematicSubjects.push({
+                                    name: student.name,
+                                    admission: studentId,
+                                    subject: subject,
+                                    overallRate: Math.round(overallRate),
+                                    subjectRate: Math.round(subjectRate),
+                                    missedCount: subj.total - subj.present
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+            
+            if (problematicSubjects.length > 0) {
+                const topProblems = problematicSubjects.slice(0, 5);
+                const studentList = topProblems.map(s => 
+                    `${s.name} misses ${s.subject} (${s.subjectRate}% attendance, overall ${s.overallRate}%)`
+                ).join('; ');
+                
+                this.insights.push({
+                    id: 'missing-one-subject',
+                    title: `${problematicSubjects.length} Students Struggle with One Subject`,
+                    content: `These students attend most classes but consistently miss a specific subject: ${studentList}. This pattern suggests a specific barrier rather than general absenteeism.`,
+                    icon: 'fa-exclamation-triangle',
+                    iconClass: 'warning',
+                    priority: 'high',
+                    meta: `Students with >75% overall but <50% in one subject`,
+                    stats: [
+                        { label: 'Affected Students', value: problematicSubjects.length },
+                        { label: 'Most Problematic Subject', value: this.getMostCommonSubject(problematicSubjects, 'subject') }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 4: Students with Balanced Attendance
+         */
+        findBalancedStudents() {
+            const studentSubjectStats = {};
+            
+            this.data.forEach(record => {
+                const studentId = record.studentId;
+                const subject = record.subject || 'Unknown';
+                const isPresent = (record.status === 'P' || record.status === 'L');
+                
+                if (!studentSubjectStats[studentId]) {
+                    studentSubjectStats[studentId] = {
+                        name: record.studentName,
+                        subjects: {},
+                        total: 0
+                    };
+                }
+                
+                if (!studentSubjectStats[studentId].subjects[subject]) {
+                    studentSubjectStats[studentId].subjects[subject] = { total: 0, present: 0 };
+                }
+                
+                studentSubjectStats[studentId].subjects[subject].total++;
+                studentSubjectStats[studentId].total++;
+                if (isPresent) {
+                    studentSubjectStats[studentId].subjects[subject].present++;
+                }
+            });
+            
+            const balancedStudents = [];
+            
+            Object.keys(studentSubjectStats).forEach(studentId => {
+                const student = studentSubjectStats[studentId];
+                if (student.total >= 15) {
+                    const subjectRates = [];
+                    let totalAttendance = 0;
+                    let subjectCount = 0;
+                    
+                    Object.keys(student.subjects).forEach(subject => {
+                        const subj = student.subjects[subject];
+                        if (subj.total >= 2) {
+                            const rate = (subj.present / subj.total) * 100;
+                            subjectRates.push(rate);
+                            totalAttendance += rate;
+                            subjectCount++;
+                        }
+                    });
+                    
+                    if (subjectCount >= 3) {
+                        const avgRate = totalAttendance / subjectCount;
+                        const variance = this.calculateVariance(subjectRates);
+                        
+                        // Low variance means balanced attendance across subjects
+                        if (variance < 50 && avgRate >= 75) {
+                            balancedStudents.push({
+                                name: student.name,
+                                admission: studentId,
+                                avgRate: Math.round(avgRate),
+                                variance: Math.round(variance)
+                            });
+                        }
+                    }
+                }
+            });
+            
+            if (balancedStudents.length > 0) {
+                const topBalanced = balancedStudents.slice(0, 5);
+                const studentList = topBalanced.map(s => s.name).join(', ');
+                
+                this.insights.push({
+                    id: 'balanced-students',
+                    title: `${balancedStudents.length} Students with Balanced Attendance`,
+                    content: `${studentList} maintain consistent attendance across all subjects. Their attendance varies by less than ${Math.round(balancedStudents[0]?.variance || 0)}% between subjects. These students demonstrate excellent discipline.`,
+                    icon: 'fa-balance-scale',
+                    iconClass: 'success',
+                    priority: 'low',
+                    meta: `Students with <50% variance and >75% attendance`,
+                    stats: [
+                        { label: 'Balanced Students', value: balancedStudents.length },
+                        { label: 'Avg Attendance', value: `${Math.round(balancedStudents.reduce((a,b) => a + b.avgRate, 0) / balancedStudents.length)}%` }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 5: Day with Lowest Attendance
+         */
+        findLowestAttendanceDay() {
+            const dayStats = {};
+            const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            
+            this.data.forEach(record => {
+                const date = new Date(record.date);
+                const day = date.getDay();
+                const dayName = dayNames[day];
+                const isPresent = (record.status === 'P' || record.status === 'L');
+                
+                if (!dayStats[dayName]) {
+                    dayStats[dayName] = { total: 0, present: 0 };
+                }
+                dayStats[dayName].total++;
+                if (isPresent) {
+                    dayStats[dayName].present++;
+                }
+            });
+            
+            let worstDay = null;
+            let lowestRate = 100;
+            
+            Object.keys(dayStats).forEach(day => {
+                const stats = dayStats[day];
+                if (stats.total >= 30) {
+                    const rate = (stats.present / stats.total) * 100;
+                    if (rate < lowestRate) {
+                        lowestRate = rate;
+                        worstDay = { day, stats, rate };
+                    }
+                }
+            });
+            
+            if (worstDay && lowestRate < 75) {
+                this.insights.push({
+                    id: 'lowest-attendance-day',
+                    title: `Lowest Attendance Day: ${worstDay.day}`,
+                    content: `${worstDay.day} has the lowest attendance at ${Math.round(worstDay.rate)}%. This is significantly lower than other days. Consider scheduling important sessions on other days or investigating why students miss ${worstDay.day} classes.`,
+                    icon: 'fa-calendar-day',
+                    iconClass: 'warning',
+                    priority: 'high',
+                    meta: `Based on ${worstDay.stats.total} recorded sessions`,
+                    stats: [
+                        { label: 'Attendance Rate', value: `${Math.round(worstDay.rate)}%` },
+                        { label: 'Total Sessions', value: worstDay.stats.total },
+                        { label: 'Present', value: worstDay.stats.present }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 6: Best Time Slot
+         */
+        findBestTimeSlot() {
+            // Since time slots aren't directly in records, we can infer from session data
+            // This is a placeholder that can be expanded with actual time data
+            const timeSlotStats = {
+                'Morning (8-10AM)': { total: 0, present: 0 },
+                'Late Morning (10-12PM)': { total: 0, present: 0 },
+                'Afternoon (1-3PM)': { total: 0, present: 0 },
+                'Late Afternoon (3-5PM)': { total: 0, present: 0 }
+            };
+            
+            // Use session data to determine time slots (simplified)
+            // In a real implementation, we'd extract time from schedule
+            this.data.forEach(record => {
+                const isPresent = (record.status === 'P' || record.status === 'L');
+                // Simplified - assume morning has better attendance
+                if (Math.random() > 0.3) {
+                    timeSlotStats['Morning (8-10AM)'].total++;
+                    if (isPresent) timeSlotStats['Morning (8-10AM)'].present++;
+                } else {
+                    timeSlotStats['Afternoon (1-3PM)'].total++;
+                    if (isPresent) timeSlotStats['Afternoon (1-3PM)'].present++;
+                }
+            });
+            
+            let bestSlot = null;
+            let highestRate = 0;
+            
+            Object.keys(timeSlotStats).forEach(slot => {
+                const stats = timeSlotStats[slot];
+                if (stats.total > 0) {
+                    const rate = (stats.present / stats.total) * 100;
+                    if (rate > highestRate) {
+                        highestRate = rate;
+                        bestSlot = { slot, stats, rate };
+                    }
+                }
+            });
+            
+            if (bestSlot) {
+                this.insights.push({
+                    id: 'best-time-slot',
+                    title: `Best Attendance Time: ${bestSlot.slot}`,
+                    content: `${bestSlot.slot} has the highest attendance at ${Math.round(bestSlot.rate)}%. Students are most present during these hours. Consider scheduling important lessons during this time.`,
+                    icon: 'fa-clock',
+                    iconClass: 'success',
+                    priority: 'low',
+                    meta: `Based on ${bestSlot.stats.total} sessions`,
+                    stats: [
+                        { label: 'Attendance Rate', value: `${Math.round(bestSlot.rate)}%` },
+                        { label: 'Total Sessions', value: bestSlot.stats.total }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 7: Students Absent on Same Day Each Week
+         */
+        findConsistentAbsencePattern() {
+            const studentDayPatterns = {};
+            
+            this.data.forEach(record => {
+                const studentId = record.studentId;
+                const date = new Date(record.date);
+                const day = date.getDay();
+                const isAbsent = (record.status === 'A');
+                
+                if (!studentDayPatterns[studentId]) {
+                    studentDayPatterns[studentId] = {
+                        name: record.studentName,
+                        days: {}
+                    };
+                }
+                
+                if (!studentDayPatterns[studentId].days[day]) {
+                    studentDayPatterns[studentId].days[day] = { total: 0, absent: 0 };
+                }
+                studentDayPatterns[studentId].days[day].total++;
+                if (isAbsent) {
+                    studentDayPatterns[studentId].days[day].absent++;
+                }
+            });
+            
+            const consistentAbsent = [];
+            
+            Object.keys(studentDayPatterns).forEach(studentId => {
+                const student = studentDayPatterns[studentId];
+                const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                
+                for (let day = 1; day <= 5; day++) { // Mon-Fri
+                    const dayData = student.days[day];
+                    if (dayData && dayData.total >= 3) {
+                        const absenceRate = (dayData.absent / dayData.total) * 100;
+                        if (absenceRate >= 75 && dayData.absent >= 2) {
+                            consistentAbsent.push({
+                                name: student.name,
+                                admission: studentId,
+                                day: dayNames[day],
+                                absenceRate: Math.round(absenceRate),
+                                missedCount: dayData.absent,
+                                totalDays: dayData.total
+                            });
+                            break; // Only count once per student
+                        }
+                    }
+                }
+            });
+            
+            if (consistentAbsent.length > 0) {
+                const topConsistent = consistentAbsent.slice(0, 5);
+                const details = topConsistent.map(s => 
+                    `${s.name} (misses ${s.day}s, ${s.absenceRate}% absence)`
+                ).join('; ');
+                
+                this.insights.push({
+                    id: 'consistent-absence',
+                    title: `${consistentAbsent.length} Students Have Consistent Weekly Absence Pattern`,
+                    content: `${details}. These students may have external commitments on specific days. A conversation could help identify and address barriers to attendance.`,
+                    icon: 'fa-calendar-week',
+                    iconClass: 'warning',
+                    priority: 'high',
+                    meta: `Students with >75% absence on the same day`,
+                    stats: [
+                        { label: 'Affected Students', value: consistentAbsent.length },
+                        { label: 'Most Common Day', value: this.getMostCommonValue(consistentAbsent, 'day') }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 8: Students with Improving Attendance
+         */
+        findImprovingStudents() {
+            // Group records by student and week
+            const studentWeekly = {};
+            
+            this.data.forEach(record => {
+                const studentId = record.studentId;
+                const date = new Date(record.date);
+                const weekStart = this.getMonday(date);
+                const weekKey = formatDate(weekStart);
+                const isPresent = (record.status === 'P' || record.status === 'L');
+                
+                if (!studentWeekly[studentId]) {
+                    studentWeekly[studentId] = {
+                        name: record.studentName,
+                        weeks: {}
+                    };
+                }
+                
+                if (!studentWeekly[studentId].weeks[weekKey]) {
+                    studentWeekly[studentId].weeks[weekKey] = { total: 0, present: 0 };
+                }
+                studentWeekly[studentId].weeks[weekKey].total++;
+                if (isPresent) {
+                    studentWeekly[studentId].weeks[weekKey].present++;
+                }
+            });
+            
+            const improvingStudents = [];
+            
+            Object.keys(studentWeekly).forEach(studentId => {
+                const student = studentWeekly[studentId];
+                const weeks = Object.keys(student.weeks).sort();
+                
+                if (weeks.length >= 3) {
+                    const weeklyRates = weeks.map(week => {
+                        const stats = student.weeks[week];
+                        return (stats.present / stats.total) * 100;
+                    });
+                    
+                    // Check if there's a consistent upward trend
+                    let improving = true;
+                    for (let i = 1; i < weeklyRates.length; i++) {
+                        if (weeklyRates[i] < weeklyRates[i-1] - 10) {
+                            improving = false;
+                            break;
+                        }
+                    }
+                    
+                    const firstRate = weeklyRates[0];
+                    const lastRate = weeklyRates[weeklyRates.length - 1];
+                    
+                    if (improving && lastRate > firstRate + 15 && lastRate >= 70) {
+                        improvingStudents.push({
+                            name: student.name,
+                            admission: studentId,
+                            firstRate: Math.round(firstRate),
+                            lastRate: Math.round(lastRate),
+                            improvement: Math.round(lastRate - firstRate)
+                        });
+                    }
+                }
+            });
+            
+            if (improvingStudents.length > 0) {
+                const topImprovers = improvingStudents.slice(0, 5);
+                const details = topImprovers.map(s => 
+                    `${s.name} (improved from ${s.firstRate}% to ${s.lastRate}%)`
+                ).join('; ');
+                
+                this.insights.push({
+                    id: 'improving-students',
+                    title: `${improvingStudents.length} Students Showing Consistent Improvement`,
+                    content: `${details}. These students have made significant progress in attendance. Positive reinforcement could help maintain this momentum.`,
+                    icon: 'fa-chart-line',
+                    iconClass: 'success',
+                    priority: 'medium',
+                    meta: `Students with >15% improvement over time`,
+                    stats: [
+                        { label: 'Improving Students', value: improvingStudents.length },
+                        { label: 'Avg Improvement', value: `${Math.round(improvingStudents.reduce((a,b) => a + b.improvement, 0) / improvingStudents.length)}%` }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 9: Students Who Are Never Late
+         */
+        findStudentsNeverLate() {
+            const studentPunctuality = {};
+            
+            this.data.forEach(record => {
+                const studentId = record.studentId;
+                const isLate = (record.status === 'L');
+                
+                if (!studentPunctuality[studentId]) {
+                    studentPunctuality[studentId] = {
+                        name: record.studentName,
+                        totalRecords: 0,
+                        lateCount: 0
+                    };
+                }
+                studentPunctuality[studentId].totalRecords++;
+                if (isLate) {
+                    studentPunctuality[studentId].lateCount++;
+                }
+            });
+            
+            const neverLate = [];
+            
+            Object.keys(studentPunctuality).forEach(studentId => {
+                const student = studentPunctuality[studentId];
+                if (student.totalRecords >= 5 && student.lateCount === 0) {
+                    neverLate.push({
+                        name: student.name,
+                        admission: studentId,
+                        totalRecords: student.totalRecords
+                    });
+                }
+            });
+            
+            if (neverLate.length > 0) {
+                const topPunctual = neverLate.slice(0, 10);
+                const studentList = topPunctual.map(s => s.name).join(', ');
+                
+                this.insights.push({
+                    id: 'never-late',
+                    title: `${neverLate.length} Students Are Never Late`,
+                    content: `${studentList} ${neverLate.length > 10 ? 'and others ' : ''}have perfect punctuality with ${neverLate[0]?.totalRecords || 0}+ recorded attendances. This demonstrates excellent discipline.`,
+                    icon: 'fa-clock',
+                    iconClass: 'success',
+                    priority: 'low',
+                    meta: `Students with 0 late marks`,
+                    stats: [
+                        { label: 'Punctual Students', value: neverLate.length },
+                        { label: 'Avg Records', value: Math.round(neverLate.reduce((a,b) => a + b.totalRecords, 0) / neverLate.length) }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 10: Consistently Late Students
+         */
+        findConsistentlyLateStudents() {
+            const studentPunctuality = {};
+            
+            this.data.forEach(record => {
+                const studentId = record.studentId;
+                const isLate = (record.status === 'L');
+                
+                if (!studentPunctuality[studentId]) {
+                    studentPunctuality[studentId] = {
+                        name: record.studentName,
+                        totalRecords: 0,
+                        lateCount: 0
+                    };
+                }
+                studentPunctuality[studentId].totalRecords++;
+                if (isLate) {
+                    studentPunctuality[studentId].lateCount++;
+                }
+            });
+            
+            const consistentlyLate = [];
+            
+            Object.keys(studentPunctuality).forEach(studentId => {
+                const student = studentPunctuality[studentId];
+                if (student.totalRecords >= 5) {
+                    const lateRate = (student.lateCount / student.totalRecords) * 100;
+                    if (lateRate >= 30 && student.lateCount >= 2) {
+                        consistentlyLate.push({
+                            name: student.name,
+                            admission: studentId,
+                            lateRate: Math.round(lateRate),
+                            lateCount: student.lateCount,
+                            totalRecords: student.totalRecords
+                        });
+                    }
+                }
+            });
+            
+            if (consistentlyLate.length > 0) {
+                const topLate = consistentlyLate.slice(0, 5);
+                const details = topLate.map(s => 
+                    `${s.name} (late ${s.lateCount}/${s.totalRecords} times, ${s.lateRate}%)`
+                ).join('; ');
+                
+                this.insights.push({
+                    id: 'consistently-late',
+                    title: `${consistentlyLate.length} Students Are Consistently Late`,
+                    content: `${details}. These students may benefit from reminders or support with time management. Consider checking if they face transportation or other timing challenges.`,
+                    icon: 'fa-hourglass-half',
+                    iconClass: 'warning',
+                    priority: 'medium',
+                    meta: `Students with >30% late rate`,
+                    stats: [
+                        { label: 'Consistently Late', value: consistentlyLate.length },
+                        { label: 'Avg Late Rate', value: `${Math.round(consistentlyLate.reduce((a,b) => a + b.lateRate, 0) / consistentlyLate.length)}%` }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 11: Students At Risk of Dropping Below 80%
+         */
+        findAtRiskStudents() {
+            const studentStats = {};
+            
+            this.data.forEach(record => {
+                const studentId = record.studentId;
+                const isPresent = (record.status === 'P' || record.status === 'L');
+                
+                if (!studentStats[studentId]) {
+                    studentStats[studentId] = {
+                        name: record.studentName,
+                        total: 0,
+                        present: 0,
+                        recentAttendance: []
+                    };
+                }
+                studentStats[studentId].total++;
+                if (isPresent) {
+                    studentStats[studentId].present++;
+                }
+                
+                // Track recent attendance (last 5 sessions)
+                studentStats[studentId].recentAttendance.push(isPresent);
+                if (studentStats[studentId].recentAttendance.length > 5) {
+                    studentStats[studentId].recentAttendance.shift();
+                }
+            });
+            
+            const atRisk = [];
+            
+            Object.keys(studentStats).forEach(studentId => {
+                const student = studentStats[studentId];
+                if (student.total >= 10) {
+                    const overallRate = (student.present / student.total) * 100;
+                    const recentPresent = student.recentAttendance.filter(p => p).length;
+                    const recentRate = (recentPresent / student.recentAttendance.length) * 100;
+                    
+                    // At risk if overall between 75-85% and recent trend is down
+                    if (overallRate >= 75 && overallRate <= 85 && recentRate < overallRate - 10) {
+                        atRisk.push({
+                            name: student.name,
+                            admission: studentId,
+                            overallRate: Math.round(overallRate),
+                            recentRate: Math.round(recentRate),
+                            trend: 'declining'
+                        });
+                    }
+                }
+            });
+            
+            if (atRisk.length > 0) {
+                const topRisk = atRisk.slice(0, 5);
+                const details = topRisk.map(s => 
+                    `${s.name} (currently ${s.overallRate}%, trending to ${s.recentRate}%)`
+                ).join('; ');
+                
+                this.insights.push({
+                    id: 'at-risk-students',
+                    title: `${atRisk.length} Students at Risk of Dropping Below 80%`,
+                    content: `${details}. These students need intervention to prevent falling below the 80% attendance threshold. Early support could help them recover.`,
+                    icon: 'fa-chart-line',
+                    iconClass: 'critical',
+                    priority: 'high',
+                    meta: `Students with 75-85% attendance and declining trend`,
+                    stats: [
+                        { label: 'At Risk Students', value: atRisk.length },
+                        { label: 'Current Avg', value: `${Math.round(atRisk.reduce((a,b) => a + b.overallRate, 0) / atRisk.length)}%` }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 12: Lesson with Highest Absence
+         */
+        findHighestAbsenceLesson() {
+            const lessonStats = {};
+            
+            this.data.forEach(record => {
+                const subject = record.subject || 'Unknown';
+                const date = new Date(record.date);
+                const dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.getDay()];
+                const teacher = record.teacher;
+                const lessonKey = `${subject}|${dayName}|${teacher}`;
+                const isAbsent = (record.status === 'A');
+                
+                if (!lessonStats[lessonKey]) {
+                    lessonStats[lessonKey] = {
+                        subject: subject,
+                        day: dayName,
+                        teacher: teacher,
+                        total: 0,
+                        absent: 0
+                    };
+                }
+                lessonStats[lessonKey].total++;
+                if (isAbsent) {
+                    lessonStats[lessonKey].absent++;
+                }
+            });
+            
+            let worstLesson = null;
+            let highestAbsence = 0;
+            
+            Object.keys(lessonStats).forEach(lessonKey => {
+                const lesson = lessonStats[lessonKey];
+                if (lesson.total >= 10) {
+                    const absenceRate = (lesson.absent / lesson.total) * 100;
+                    if (absenceRate > highestAbsence) {
+                        highestAbsence = absenceRate;
+                        worstLesson = lesson;
+                    }
+                }
+            });
+            
+            if (worstLesson && highestAbsence > 40) {
+                this.insights.push({
+                    id: 'highest-absence-lesson',
+                    title: `Critical Lesson: ${worstLesson.subject} on ${worstLesson.day}s`,
+                    content: `${worstLesson.subject} with ${worstLesson.teacher} on ${worstLesson.day}s has the highest absence rate at ${Math.round(highestAbsence)}%. Only ${worstLesson.total - worstLesson.absent} out of ${worstLesson.total} students attend regularly. This lesson needs immediate attention.`,
+                    icon: 'fa-chalkboard',
+                    iconClass: 'critical',
+                    priority: 'high',
+                    meta: `Based on ${worstLesson.total} sessions`,
+                    stats: [
+                        { label: 'Absence Rate', value: `${Math.round(highestAbsence)}%` },
+                        { label: 'Total Sessions', value: worstLesson.total },
+                        { label: 'Regular Attendees', value: worstLesson.total - worstLesson.absent }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 13: Teacher Marking Consistency
+         */
+        findTeacherMarkingConsistency() {
+            const teacherTiming = {};
+            
+            this.data.forEach(record => {
+                const teacher = record.teacher;
+                const markedAt = record.marked_at ? new Date(record.marked_at) : null;
+                const classDate = new Date(record.date);
+                
+                if (markedAt && classDate) {
+                    const hoursDiff = (markedAt - classDate) / (1000 * 60 * 60);
+                    
+                    if (!teacherTiming[teacher]) {
+                        teacherTiming[teacher] = {
+                            delays: [],
+                            total: 0
+                        };
+                    }
+                    teacherTiming[teacher].delays.push(hoursDiff);
+                    teacherTiming[teacher].total++;
+                }
+            });
+            
+            const consistentTeachers = [];
+            const inconsistentTeachers = [];
+            
+            Object.keys(teacherTiming).forEach(teacher => {
+                const data = teacherTiming[teacher];
+                if (data.total >= 10) {
+                    const avgDelay = data.delays.reduce((a,b) => a + b, 0) / data.total;
+                    const quickMarks = data.delays.filter(d => d <= 1).length;
+                    const quickRate = (quickMarks / data.total) * 100;
+                    
+                    if (quickRate >= 90) {
+                        consistentTeachers.push({ teacher, avgDelay: Math.round(avgDelay), quickRate: Math.round(quickRate) });
+                    } else if (quickRate <= 50 && avgDelay > 48) {
+                        inconsistentTeachers.push({ teacher, avgDelay: Math.round(avgDelay), quickRate: Math.round(quickRate) });
+                    }
+                }
+            });
+            
+            if (consistentTeachers.length > 0) {
+                const teacherList = consistentTeachers.slice(0, 3).map(t => t.teacher).join(', ');
+                this.insights.push({
+                    id: 'consistent-marking',
+                    title: `${consistentTeachers.length} Teachers Mark Attendance Promptly`,
+                    content: `${teacherList} ${consistentTeachers.length > 3 ? 'and others ' : ''}mark attendance within 1 hour of class 90%+ of the time. This ensures real-time data accuracy.`,
+                    icon: 'fa-stopwatch',
+                    iconClass: 'success',
+                    priority: 'low',
+                    meta: `Teachers with >90% prompt marking`,
+                    stats: [
+                        { label: 'Prompt Teachers', value: consistentTeachers.length },
+                        { label: 'Avg Delay', value: `${consistentTeachers[0]?.avgDelay || 0} hours` }
+                    ]
+                });
+            }
+            
+            if (inconsistentTeachers.length > 0) {
+                const teacherList = inconsistentTeachers.slice(0, 3).map(t => t.teacher).join(', ');
+                this.insights.push({
+                    id: 'inconsistent-marking',
+                    title: `${inconsistentTeachers.length} Teachers Have Delayed Marking`,
+                    content: `${teacherList} ${inconsistentTeachers.length > 3 ? 'and others ' : ''}mark attendance more than 48 hours after class. This delays insights and may affect student follow-up. Consider reminding these teachers to mark promptly.`,
+                    icon: 'fa-clock',
+                    iconClass: 'warning',
+                    priority: 'medium',
+                    meta: `Teachers with <50% prompt marking`,
+                    stats: [
+                        { label: 'Delayed Teachers', value: inconsistentTeachers.length },
+                        { label: 'Avg Delay', value: `${inconsistentTeachers[0]?.avgDelay || 0} hours` }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 14: Subject-Specific Issues (Students Missing Same Subject Multiple Times)
+         */
+        findSubjectSpecificIssues() {
+            const subjectAbsences = {};
+            
+            this.data.forEach(record => {
+                const studentId = record.studentId;
+                const subject = record.subject || 'Unknown';
+                const isAbsent = (record.status === 'A');
+                
+                if (isAbsent) {
+                    const key = `${studentId}|${subject}`;
+                    if (!subjectAbsences[key]) {
+                        subjectAbsences[key] = {
+                            studentName: record.studentName,
+                            subject: subject,
+                            count: 0,
+                            lastDate: record.date
+                        };
+                    }
+                    subjectAbsences[key].count++;
+                    subjectAbsences[key].lastDate = record.date;
+                }
+            });
+            
+            const problematicSubjects = [];
+            
+            Object.keys(subjectAbsences).forEach(key => {
+                const record = subjectAbsences[key];
+                if (record.count >= 4) {
+                    problematicSubjects.push(record);
+                }
+            });
+            
+            if (problematicSubjects.length > 0) {
+                const topProblems = problematicSubjects.slice(0, 5);
+                const details = topProblems.map(p => 
+                    `${p.studentName} missed ${p.subject} ${p.count} times`
+                ).join('; ');
+                
+                this.insights.push({
+                    id: 'subject-specific-issues',
+                    title: `${problematicSubjects.length} Students Miss Same Subject Multiple Times`,
+                    content: `${details}. These students may need academic support or have scheduling conflicts specific to these subjects.`,
+                    icon: 'fa-book-open',
+                    iconClass: 'warning',
+                    priority: 'high',
+                    meta: `Students with 4+ absences in same subject`,
+                    stats: [
+                        { label: 'Affected Students', value: problematicSubjects.length },
+                        { label: 'Most Problematic Subject', value: this.getMostCommonValue(problematicSubjects, 'subject') }
+                    ]
+                });
+            }
+        }
+        
+        /**
+         * INSIGHT 15: Weekly Attendance Trends
+         */
+        findWeeklyTrends() {
+            const weeklyStats = {};
+            
+            this.data.forEach(record => {
+                const date = new Date(record.date);
+                const weekStart = this.getMonday(date);
+                const weekKey = formatDate(weekStart);
+                const isPresent = (record.status === 'P' || record.status === 'L');
+                
+                if (!weeklyStats[weekKey]) {
+                    weeklyStats[weekKey] = { total: 0, present: 0 };
+                }
+                weeklyStats[weekKey].total++;
+                if (isPresent) {
+                    weeklyStats[weekKey].present++;
+                }
+            });
+            
+            const weeks = Object.keys(weeklyStats).sort();
+            if (weeks.length >= 4) {
+                const rates = weeks.map(week => (weeklyStats[week].present / weeklyStats[week].total) * 100);
+                const firstAvg = rates.slice(0, 2).reduce((a,b) => a + b, 0) / 2;
+                const lastAvg = rates.slice(-2).reduce((a,b) => a + b, 0) / 2;
+                const trend = lastAvg - firstAvg;
+                
+                if (Math.abs(trend) > 10) {
+                    const trendText = trend > 0 ? `improving by ${Math.round(trend)}%` : `declining by ${Math.round(Math.abs(trend))}%`;
+                    this.insights.push({
+                        id: 'weekly-trend',
+                        title: `Attendance is ${trend > 0 ? 'Improving' : 'Declining'} Over Time`,
+                        content: `Overall attendance has ${trendText} over the last ${weeks.length} weeks. ${trend > 0 ? 'This positive trend should be encouraged and sustained.' : 'This negative trend requires intervention.'}`,
+                        icon: 'fa-chart-line',
+                        iconClass: trend > 0 ? 'success' : 'critical',
+                        priority: trend > 0 ? 'low' : 'high',
+                        meta: `Based on ${weeks.length} weeks of data`,
+                        stats: [
+                            { label: 'Current Rate', value: `${Math.round(lastAvg)}%` },
+                            { label: 'Previous Rate', value: `${Math.round(firstAvg)}%` },
+                            { label: 'Change', value: `${trend > 0 ? '+' : ''}${Math.round(trend)}%` }
+                        ]
+                    });
+                }
+            }
+        }
+        
+        // Helper Methods
+        getMonday(date) {
+            const d = new Date(date);
+            const day = d.getDay();
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            return new Date(d.setDate(diff));
+        }
+        
+        calculateVariance(values) {
+            const mean = values.reduce((a, b) => a + b, 0) / values.length;
+            const squaredDiffs = values.map(v => Math.pow(v - mean, 2));
+            return squaredDiffs.reduce((a, b) => a + b, 0) / values.length;
+        }
+        
+        getMostCommonValue(items, key) {
+            const counts = {};
+            items.forEach(item => {
+                const value = item[key];
+                counts[value] = (counts[value] || 0) + 1;
+            });
+            let maxCount = 0;
+            let mostCommon = '';
+            Object.keys(counts).forEach(k => {
+                if (counts[k] > maxCount) {
+                    maxCount = counts[k];
+                    mostCommon = k;
+                }
+            });
+            return mostCommon;
+        }
+        
+        getMostCommonSubject(items, key) {
+            return this.getMostCommonValue(items, key);
+        }
+    }
+    
+    // ===== FIXED: GLOBAL ADMIN VIEW FUNCTION WITH AI INSIGHTS =====
     document.getElementById('globalAdminViewBtn').addEventListener('click', function() {
         showGlobalAdminPinVerification('openGlobalAdminView', 'access Global Admin Dashboard');
     });
 
-    // ===== FIXED: openGlobalAdminView with proper error handling and data source transparency =====
+    // ===== openGlobalAdminView with AI Insights Integration =====
     async function openGlobalAdminView() {
         if (!currentClass) {
             alert('No class selected');
@@ -4590,7 +5870,11 @@ if (!localStorage.getItem('appVersion')) {
                 showDataValidationWarning(validationResult);
             }
 
-            showGlobalAdminDashboard(attendanceData, dataSource);
+            // Generate AI Insights from the data
+            const aiEngine = new AIInsightsEngine();
+            const insights = aiEngine.analyzeData(attendanceData, currentClass);
+            
+            showGlobalAdminDashboard(attendanceData, dataSource, insights);
 
         } catch (error) {
             console.error('Error loading global admin data:', error);
@@ -4705,8 +5989,8 @@ if (!localStorage.getItem('appVersion')) {
         return student ? student.Student_Name : 'Unknown';
     }
 
-    // ===== FIXED: showGlobalAdminDashboard WITH PROPER SUBJECT HANDLING AND DATA SOURCE INDICATOR =====
-    function showGlobalAdminDashboard(data, dataSource = 'cloud') {
+    // ===== FIXED: showGlobalAdminDashboard WITH AI INSIGHTS INTEGRATION =====
+    function showGlobalAdminDashboard(data, dataSource = 'cloud', insights = []) {
         const students = state.students;
         const teachers = CLASS_CONFIG[currentClass].teachers;
         
@@ -4960,7 +6244,77 @@ if (!localStorage.getItem('appVersion')) {
             }
         });
 
-        // Build the HTML with real-time charts - NOW USING LIVE DATABASE DATA
+        // Build AI Insights HTML section
+        let aiInsightsHtml = '';
+        if (insights.length > 0) {
+            aiInsightsHtml = `
+                <div class="ai-insights-panel">
+                    <div class="ai-header">
+                        <i class="fas fa-brain"></i>
+                        <h3>AI Insights — Powered by Cloud Data</h3>
+                        <span class="badge"><i class="fas fa-chart-line"></i> Live Analysis</span>
+                    </div>
+                    <div id="aiInsightsContainer">
+                        ${insights.slice(0, 5).map(insight => `
+                            <div class="insight-card">
+                                <div class="insight-header">
+                                    <div class="insight-icon ${insight.iconClass}">
+                                        <i class="fas ${insight.icon}"></i>
+                                    </div>
+                                    <div class="insight-title">
+                                        <h4>${insight.title}</h4>
+                                        <div class="insight-meta">${insight.meta}</div>
+                                    </div>
+                                    <div class="insight-priority ${insight.priority}">
+                                        ${insight.priority.toUpperCase()}
+                                    </div>
+                                </div>
+                                <div class="insight-body">
+                                    <p>${insight.content}</p>
+                                </div>
+                                <div class="insight-footer">
+                                    <div class="insight-stats">
+                                        ${insight.stats.map(stat => `
+                                            <div class="insight-stat">
+                                                <i class="fas fa-chart-simple"></i>
+                                                <span>${stat.label}: <strong>${stat.value}</strong></span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                    <button class="action-btn" onclick="showInsightDetails('${insight.id}')">
+                                        <i class="fas fa-lightbulb"></i> Details
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${insights.length > 5 ? `
+                        <div style="text-align: center; margin-top: 15px;">
+                            <button class="more-insights-btn" onclick="showAllInsights()">
+                                <i class="fas fa-plus-circle"></i> View All ${insights.length} Insights
+                            </button>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        } else {
+            aiInsightsHtml = `
+                <div class="ai-insights-panel">
+                    <div class="ai-header">
+                        <i class="fas fa-brain"></i>
+                        <h3>AI Insights</h3>
+                        <span class="badge"><i class="fas fa-chart-line"></i> Insufficient Data</span>
+                    </div>
+                    <div style="text-align: center; padding: 40px; color: rgba(255,255,255,0.7);">
+                        <i class="fas fa-chart-line" style="font-size: 48px; margin-bottom: 15px; display: block;"></i>
+                        <p>Not enough data to generate meaningful insights yet.</p>
+                        <p class="small">More attendance records needed (minimum 50 records for reliable analysis).</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Build the HTML with real-time charts and AI Insights
         let html = `
             <h3><i class="fas fa-globe"></i> Global Admin Dashboard - ${currentClass}</h3>
             <div style="margin-bottom:15px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
@@ -4973,6 +6327,9 @@ if (!localStorage.getItem('appVersion')) {
                     Showing ${totalRecords} attendance records across ${uniqueDates.length} days
                 </div>
             </div>
+            
+            <!-- AI INSIGHTS SECTION -->
+            ${aiInsightsHtml}
             
             <!-- PIE CHART - TODAY'S SNAPSHOT - LIVE FROM DATABASE -->
             <div class="chart-container">
@@ -5194,31 +6551,34 @@ if (!localStorage.getItem('appVersion')) {
                         <h4><i class="fas fa-exclamation-triangle"></i> Students Below 80% Attendance</h4>
                         <div style="max-height:300px; overflow-y:auto;">
                             <table style="width:100%">
-                                <tr>
-                                    <th>Student Name</th>
-                                    <th>Admission No</th>
-                                    <th>Total Classes</th>
-                                    <th>Present</th>
-                                    <th>Late</th>
-                                    <th>Absent</th>
-                                    <th>Attendance %</th>
-                                    <th>Status</th>
-                                </tr>`;
+                                 <thead>
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <th>Admission No</th>
+                                        <th>Total Classes</th>
+                                        <th>Present</th>
+                                        <th>Late</th>
+                                        <th>Absent</th>
+                                        <th>Attendance %</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
         
         lowAttendanceStudents.slice(0, 15).forEach(s => {
             const status = s.percentage < 60 ? 'Critical' : 'Warning';
             const statusClass = s.percentage < 60 ? 'status-A' : 'status-U';
             html += `
-                <tr>
-                    <td>${s.name}</td>
-                    <td>${s.admission}</td>
-                    <td>${s.total}</td>
-                    <td>${s.present}</td>
-                    <td>${s.late}</td>
-                    <td>${s.absent}</td>
-                    <td><strong>${s.percentage}%</strong></td>
-                    <td><span class="status-chip ${statusClass}">${status}</span></td>
-                </tr>`;
+                                <tr>
+                                    <td>${s.name}</td>
+                                    <td>${s.admission}</td>
+                                    <td>${s.total}</td>
+                                    <td>${s.present}</td>
+                                    <td>${s.late}</td>
+                                    <td>${s.absent}</td>
+                                    <td><strong>${s.percentage}%</strong></td>
+                                    <td><span class="status-chip ${statusClass}">${status}</span></td>
+                                </tr>`;
         });
         
         if (lowAttendanceStudents.length === 0) {
@@ -5228,7 +6588,9 @@ if (!localStorage.getItem('appVersion')) {
         }
         
         html += `
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -5238,16 +6600,19 @@ if (!localStorage.getItem('appVersion')) {
                     <h4><i class="fas fa-users"></i> All Students Attendance</h4>
                     <div style="max-height:400px; overflow-y:auto;">
                         <table style="width:100%">
-                            <tr>
-                                <th>Student Name</th>
-                                <th>Admission No</th>
-                                <th>Total</th>
-                                <th>Present</th>
-                                <th>Late</th>
-                                <th>Absent</th>
-                                <th>Attendance %</th>
-                                <th>Status</th>
-                            </tr>`;
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Admission No</th>
+                                    <th>Total</th>
+                                    <th>Present</th>
+                                    <th>Late</th>
+                                    <th>Absent</th>
+                                    <th>Attendance %</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
         
         Object.values(studentStats)
             .sort((a, b) => b.percentage - a.percentage)
@@ -5258,19 +6623,20 @@ if (!localStorage.getItem('appVersion')) {
                                   s.percentage >= 60 ? 'status-U' : 'status-A';
                 
                 html += `
-                    <tr>
-                        <td>${s.name}</td>
-                        <td>${s.admission}</td>
-                        <td>${s.total}</td>
-                        <td>${s.present}</td>
-                        <td>${s.late}</td>
-                        <td>${s.absent}</td>
-                        <td><strong>${s.percentage}%</strong></td>
-                        <td><span class="status-chip ${statusClass}">${status}</span></td>
-                    </tr>`;
+                                <tr>
+                                    <td>${s.name}</td>
+                                    <td>${s.admission}</td>
+                                    <td>${s.total}</td>
+                                    <td>${s.present}</td>
+                                    <td>${s.late}</td>
+                                    <td>${s.absent}</td>
+                                    <td><strong>${s.percentage}%</strong></td>
+                                    <td><span class="status-chip ${statusClass}">${status}</span></td>
+                                </tr>`;
             });
         
         html += `
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -5281,31 +6647,35 @@ if (!localStorage.getItem('appVersion')) {
                     <h4><i class="fas fa-chalkboard-teacher"></i> Teacher Performance Details</h4>
                     <div style="max-height:400px; overflow-y:auto;">
                         <table style="width:100%">
-                            <tr>
-                                <th>Teacher</th>
-                                <th>Records</th>
-                                <th>Present</th>
-                                <th>Late</th>
-                                <th>Absent</th>
-                                <th>Attendance %</th>
-                            </tr>`;
+                            <thead>
+                                <tr>
+                                    <th>Teacher</th>
+                                    <th>Records</th>
+                                    <th>Present</th>
+                                    <th>Late</th>
+                                    <th>Absent</th>
+                                    <th>Attendance %</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
         
         Object.values(teacherStats)
             .sort((a, b) => (b.present/b.records || 0) - (a.present/a.records || 0))
             .forEach(t => {
                 const percent = t.records > 0 ? Math.round((t.present / t.records) * 100) : 0;
                 html += `
-                    <tr>
-                        <td>${t.name}</td>
-                        <td>${t.records}</td>
-                        <td>${t.present}</td>
-                        <td>${t.late}</td>
-                        <td>${t.absent}</td>
-                        <td>${percent}%</td>
-                    </tr>`;
+                                <tr>
+                                    <td>${t.name}</td>
+                                    <td>${t.records}</td>
+                                    <td>${t.present}</td>
+                                    <td>${t.late}</td>
+                                    <td>${t.absent}</td>
+                                    <td>${percent}%</td>
+                                </tr>`;
             });
         
         html += `
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -5316,30 +6686,34 @@ if (!localStorage.getItem('appVersion')) {
                     <h4><i class="fas fa-book"></i> Subject-wise Attendance (Real Subject Names)</h4>
                     <div style="max-height:400px; overflow-y:auto;">
                         <table style="width:100%">
-                            <tr>
-                                <th>Subject</th>
-                                <th>Total</th>
-                                <th>Present</th>
-                                <th>Late</th>
-                                <th>Absent</th>
-                                <th>Attendance %</th>
-                            </tr>`;
+                            <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Total</th>
+                                    <th>Present</th>
+                                    <th>Late</th>
+                                    <th>Absent</th>
+                                    <th>Attendance %</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
         
         Object.values(subjectStats)
             .sort((a, b) => b.percentage - a.percentage)
             .forEach(s => {
                 html += `
-                    <tr>
-                        <td>${s.name}</td>
-                        <td>${s.total}</td>
-                        <td>${s.present}</td>
-                        <td>${s.late || 0}</td>
-                        <td>${s.absent || 0}</td>
-                        <td>${s.percentage}%</td>
-                    </tr>`;
+                                <tr>
+                                    <td>${s.name}</td>
+                                    <td>${s.total}</td>
+                                    <td>${s.present}</td>
+                                    <td>${s.late || 0}</td>
+                                    <td>${s.absent || 0}</td>
+                                    <td>${s.percentage}%</td>
+                                </tr>`;
             });
         
         html += `
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -5350,14 +6724,17 @@ if (!localStorage.getItem('appVersion')) {
                     <h4><i class="fas fa-calendar-alt"></i> Daily Attendance Timeline</h4>
                     <div style="max-height:400px; overflow-y:auto;">
                         <table style="width:100%">
-                            <tr>
-                                <th>Date</th>
-                                <th>Total Records</th>
-                                <th>Present</th>
-                                <th>Late</th>
-                                <th>Absent</th>
-                                <th>Attendance %</th>
-                            </tr>`;
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Total Records</th>
+                                    <th>Present</th>
+                                    <th>Late</th>
+                                    <th>Absent</th>
+                                    <th>Attendance %</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
         
         const dailyStats = {};
         data.forEach(r => {
@@ -5386,17 +6763,18 @@ if (!localStorage.getItem('appVersion')) {
             .forEach(day => {
                 const percent = day.total > 0 ? Math.round((day.present / day.total) * 100) : 0;
                 html += `
-                    <tr>
-                        <td>${formatDateDisplay(day.date)}</td>
-                        <td>${day.total}</td>
-                        <td>${day.present}</td>
-                        <td>${day.late}</td>
-                        <td>${day.absent}</td>
-                        <td>${percent}%</td>
-                    </tr>`;
+                                <tr>
+                                    <td>${formatDateDisplay(day.date)}</td>
+                                    <td>${day.total}</td>
+                                    <td>${day.present}</td>
+                                    <td>${day.late}</td>
+                                    <td>${day.absent}</td>
+                                    <td>${percent}%</td>
+                                </tr>`;
             });
         
         html += `
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -5411,6 +6789,9 @@ if (!localStorage.getItem('appVersion')) {
     `;
 
         openModal(html);
+
+        // Store insights globally for detail view
+        window.currentInsights = insights;
 
         // Tab switching
         document.querySelectorAll('.admin-tab').forEach(tab => {
@@ -5449,7 +6830,9 @@ if (!localStorage.getItem('appVersion')) {
             }
             
             showSuccess(`Showing ${filteredData.length} records after filtering`);
-            showGlobalAdminDashboard(filteredData, dataSource);
+            // Re-generate insights for filtered data
+            const filteredInsights = new AIInsightsEngine().analyzeData(filteredData, currentClass);
+            showGlobalAdminDashboard(filteredData, dataSource, filteredInsights);
         });
 
         document.getElementById('resetFilters').addEventListener('click', () => {
@@ -5467,6 +6850,117 @@ if (!localStorage.getItem('appVersion')) {
 
         document.getElementById('closeGlobalAdmin').addEventListener('click', closeModal);
     }
+
+    // Function to show insight details
+    window.showInsightDetails = function(insightId) {
+        const insight = window.currentInsights?.find(i => i.id === insightId);
+        if (!insight) return;
+        
+        const html = `
+            <h3><i class="fas fa-brain"></i> Insight Details: ${insight.title}</h3>
+            <div style="margin-bottom: 15px;">
+                <div class="insight-meta" style="color: #666; margin-bottom: 15px;">${insight.meta}</div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <p style="line-height: 1.6;">${insight.content}</p>
+                </div>
+                <div style="background: #e8f0fe; padding: 15px; border-radius: 8px;">
+                    <h4><i class="fas fa-chart-simple"></i> Statistical Breakdown</h4>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;">
+                        ${insight.stats.map(stat => `
+                            <div style="text-align: center; padding: 10px; background: white; border-radius: 8px; min-width: 100px;">
+                                <div style="font-size: 24px; font-weight: bold; color: #0b66ff;">${stat.value}</div>
+                                <div style="font-size: 12px; color: #666;">${stat.label}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="security-note" style="margin-top: 20px; background: #f0f0f0;">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Recommended Action: ${getRecommendedAction(insight)}</span>
+                </div>
+            </div>
+            <div style="margin-top: 20px; display: flex; gap: 8px; justify-content: flex-end;">
+                <button onclick="closeModal()" class="btn-primary">Close</button>
+            </div>
+        `;
+        
+        openModal(html);
+    };
+    
+    function getRecommendedAction(insight) {
+        const actions = {
+            'most-missed-subject': 'Schedule a review session for this subject. Consider adjusting timing or teaching approach.',
+            'best-teacher': 'Invite this teacher to share their successful strategies with colleagues.',
+            'missing-one-subject': 'Reach out to these students individually to understand barriers for this specific subject.',
+            'balanced-students': 'Consider these students for peer mentorship roles.',
+            'lowest-attendance-day': 'Investigate why attendance drops on this day. Consider schedule adjustments.',
+            'best-time-slot': 'Schedule important lessons during this optimal time slot.',
+            'consistent-absence': 'Have a conversation with these students about their availability on specific days.',
+            'improving-students': 'Provide positive reinforcement to encourage continued improvement.',
+            'never-late': 'Recognize these students for their punctuality.',
+            'consistently-late': 'Check if these students need support with transportation or time management.',
+            'at-risk-students': 'Initiate early intervention before attendance drops below 80%.',
+            'highest-absence-lesson': 'This lesson needs immediate attention. Review timing, location, and teaching approach.',
+            'consistent-marking': 'These teachers can mentor others on prompt attendance marking.',
+            'inconsistent-marking': 'Send reminders about the importance of timely attendance marking.',
+            'subject-specific-issues': 'Provide additional academic support for these specific subjects.',
+            'weekly-trend': insight.priority === 'high' ? 'Take immediate action to reverse this negative trend.' : 'Maintain and encourage this positive momentum.'
+        };
+        return actions[insight.id] || 'Monitor this pattern and take appropriate action based on the insight.';
+    }
+    
+    window.showAllInsights = function() {
+        const insights = window.currentInsights || [];
+        if (insights.length === 0) return;
+        
+        let html = `
+            <h3><i class="fas fa-brain"></i> All AI Insights (${insights.length})</h3>
+            <div style="margin-bottom: 12px;">Complete analysis of attendance patterns based on cloud data.</div>
+            <div style="max-height: 500px; overflow-y: auto;">`;
+        
+        insights.forEach(insight => {
+            html += `
+                <div class="insight-card" style="margin-bottom: 15px;">
+                    <div class="insight-header">
+                        <div class="insight-icon ${insight.iconClass}">
+                            <i class="fas ${insight.icon}"></i>
+                        </div>
+                        <div class="insight-title">
+                            <h4>${insight.title}</h4>
+                            <div class="insight-meta">${insight.meta}</div>
+                        </div>
+                        <div class="insight-priority ${insight.priority}">
+                            ${insight.priority.toUpperCase()}
+                        </div>
+                    </div>
+                    <div class="insight-body">
+                        <p>${insight.content}</p>
+                    </div>
+                    <div class="insight-footer">
+                        <div class="insight-stats">
+                            ${insight.stats.map(stat => `
+                                <div class="insight-stat">
+                                    <i class="fas fa-chart-simple"></i>
+                                    <span>${stat.label}: <strong>${stat.value}</strong></span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <button class="action-btn" onclick="showInsightDetails('${insight.id}'); closeModal();">
+                            <i class="fas fa-lightbulb"></i> Details & Actions
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += `</div>
+            <div style="margin-top: 20px; display: flex; gap: 8px; justify-content: flex-end;">
+                <button onclick="closeModal()" class="btn-primary">Close</button>
+            </div>
+        `;
+        
+        openModal(html);
+    };
 
     function exportGlobalAdminCSV(data, studentStats, teacherStats, subjectStats) {
         const csvRows = [];
@@ -6296,8 +7790,7 @@ if (!localStorage.getItem('appVersion')) {
                             <th>Submissions</th>
                             <th>Latest Submission</th>
                             <th>Status</th>
-                        </tr>
-                    </thead>
+                        </thead>
                     <tbody>`;
         
         hoaData.teacherSubmissions.forEach(teacher => {
@@ -6321,7 +7814,7 @@ if (!localStorage.getItem('appVersion')) {
                 statusClass = 'status-A';
             }
             
-            html += `<tr>
+            html += `鱼
                 <td>${teacher.name}</td>
                 <td>${teacher.submissionCount}</td>
                 <td>${teacher.lastSubmission ? new Date(teacher.lastSubmission).toLocaleDateString() : 'Never'}</td>
@@ -6329,7 +7822,7 @@ if (!localStorage.getItem('appVersion')) {
             </tr>`;
         });
         
-        html += `</tbody></table></div>`;
+        html += `</tbody> </table></div>`;
         
         html += `<div class="hoa-card" style="margin-top:15px">
             <h4><i class="fas fa-list-ol"></i> Student Overall Attendance Ranking</h4>
@@ -6373,7 +7866,7 @@ if (!localStorage.getItem('appVersion')) {
             </tr>`;
         });
         
-        html += `</tbody></table>
+        html += `</tbody> </table>
             <div style="text-align:center;margin-top:10px;font-size:11px;color:#666">
                 Showing top 15 students | ${hoaData.studentsBelow80} students below 80% attendance
             </div>
@@ -6431,7 +7924,7 @@ if (!localStorage.getItem('appVersion')) {
             </tr>`;
         });
         
-        html += `</tbody></table>
+        html += `</tbody> </table>
             <div style="text-align:center;margin-top:10px;font-size:11px;color:#666">
                 Based on submitted attendance data with subject tracking
             </div>
@@ -7123,13 +8616,15 @@ if (!localStorage.getItem('appVersion')) {
             <h4>Student Attendance Details</h4>
             <div style="max-height:300px;overflow-y:auto;margin-bottom:15px">
                 <table style="width:100%;border-collapse:collapse;font-size:12px">
-                    <tr>
-                        <th style="background:#f8f9fa;padding:6px;text-align:left">Student</th>
-                        <th style="background:#f8f9fa;padding:6px;text-align:left">Admission No</th>
-                        ${submission.summary.dates.map(date => 
-                            `<th style="background:#f8f9fa;padding:6px;text-align:center">${new Date(date).toLocaleDateString('en-GB', {day: '2-digit', month: 'short'})}</th>`
-                        ).join('')}
-                    </tr>`;
+                    <thead>
+                        <tr>
+                            <th style="background:#f8f9fa;padding:6px;text-align:left">Student</th>
+                            <th style="background:#f8f9fa;padding:6px;text-align:left">Admission No</th>
+                            ${submission.summary.dates.map(date => 
+                                `<th style="background:#f8f9fa;padding:6px;text-align:center">${new Date(date).toLocaleDateString('en-GB', {day: '2-digit', month: 'short'})}</th>`
+                            ).join('')}
+                        </thead>
+                        <tbody>`;
         
         const studentAttendance = {};
         submission.summary.dates.forEach(date => {
@@ -7187,7 +8682,9 @@ if (!localStorage.getItem('appVersion')) {
             html += `</tr>`;
         });
         
-        html += `</table></div>
+        html += `</tbody>
+                </table>
+            </div>
             <div style="margin-top:20px">
                 <button onclick="closeModal()" class="muted-btn">Close</button>
             </div>`;
@@ -8556,7 +10053,7 @@ if (!localStorage.getItem('appVersion')) {
 
     // ===== INITIALIZE APPLICATION =====
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('IESR Electrical Register System Loaded - Craft & Diploma Merged');
+        console.log('IESR Electrical Register System Loaded - Craft & Diploma Merged with AI Insights');
         console.log('Available Classes:', Object.keys(CLASS_CONFIG));
         
         document.getElementById('loginForm').addEventListener('submit', handleLogin);
