@@ -1988,84 +1988,80 @@
         font-size: 9px;
       }
     }
- </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-  
-  <!-- AUTO-UPDATE SCRIPT - IESR AUTO UPDATER -->
-  <script>
-  // CHECK FOR UPDATES ON EVERY START - CONFIGURED FOR MIKEKENA8-HUB
-  const GITHUB_VERSION_URL = 'https://raw.githubusercontent.com/mikekena8-hub/iesr-register/main/version.json';
-  const GITHUB_HTML_URL = 'https://raw.githubusercontent.com/mikekena8-hub/iesr-register/main/index.html';
+ <!-- AUTO-UPDATE SCRIPT - IESR AUTO UPDATER WITH CACHE BUSTING -->
+<script>
+// CHECK FOR UPDATES ON EVERY START - CONFIGURED FOR MIKEKENA8-HUB
+const GITHUB_VERSION_URL = 'https://raw.githubusercontent.com/mikekena8-hub/iesr-register/main/version.json';
+const GITHUB_HTML_URL = 'https://raw.githubusercontent.com/mikekena8-hub/iesr-register/main/index.html?v=' + Date.now();
 
-  async function checkForUpdates() {
-      try {
-          // Check GitHub for new version (add timestamp to bypass cache)
-          const response = await fetch(GITHUB_VERSION_URL + '?t=' + Date.now());
-          const serverData = await response.json();
-          
-          // Get current version from phone storage
-          let currentVersion = localStorage.getItem('appVersion') || '1.0.0';
-          
-          // Compare versions (if server version is higher)
-          if (serverData.version > currentVersion) {
-              // Ask user if they want to update
-              if (confirm(`📱 New update v${serverData.version} available!\n\nCurrent version: v${currentVersion}\n\nUpdate now?`)) {
-                  // Download new HTML
-                  const htmlResponse = await fetch(GITHUB_HTML_URL + '?t=' + Date.now());
-                  const newHTML = await htmlResponse.text();
-                  
-                  // Save to phone storage
-                  localStorage.setItem('cachedHTML', newHTML);
-                  localStorage.setItem('appVersion', serverData.version);
-                  
-                  alert('✅ Update downloaded! The app will now reload with the latest version.');
-                  window.location.reload();
-              }
-          }
-      } catch (e) {
-          // If offline or error, silently use cached version
-          console.log('Offline mode or update check failed');
-          
-          // If offline, load cached version
-          const cached = localStorage.getItem('cachedHTML');
-          if (cached && !navigator.onLine) {
-              // Replace current page with cached version
-              document.open();
-              document.write(cached);
-              document.close();
-          }
-      }
-  }
+async function checkForUpdates() {
+    try {
+        // Check GitHub for new version (add timestamp to bypass cache)
+        const response = await fetch(GITHUB_VERSION_URL + '?t=' + Date.now());
+        const serverData = await response.json();
+        
+        // Get current version from phone storage
+        let currentVersion = localStorage.getItem('appVersion') || '1.0.0';
+        
+        // Compare versions (if server version is higher)
+        if (serverData.version > currentVersion) {
+            // Ask user if they want to update
+            if (confirm(`📱 New update v${serverData.version} available!\n\nCurrent version: v${currentVersion}\n\nUpdate now?`)) {
+                // Download new HTML with cache-busting parameter
+                const htmlResponse = await fetch(GITHUB_HTML_URL);
+                const newHTML = await htmlResponse.text();
+                
+                // Save to phone storage
+                localStorage.setItem('cachedHTML', newHTML);
+                localStorage.setItem('appVersion', serverData.version);
+                
+                alert('✅ Update downloaded! The app will now reload with the latest version.');
+                // Force reload from server, bypassing cache
+                window.location.reload(true);
+            }
+        }
+    } catch (e) {
+        // If offline or error, silently use cached version
+        console.log('Offline mode or update check failed');
+        
+        // If offline, load cached version
+        const cached = localStorage.getItem('cachedHTML');
+        if (cached && !navigator.onLine) {
+            // Replace current page with cached version
+            document.open();
+            document.write(cached);
+            document.close();
+        }
+    }
+}
 
-  // Run when app starts
-  window.addEventListener('load', function() {
-      // Check if we have cached version for offline use
-      const cached = localStorage.getItem('cachedHTML');
-      if (!navigator.onLine && cached) {
-          // We're offline and have cached version - use it
-          document.open();
-          document.write(cached);
-          document.close();
-          return; // Stop here, cached version will run its own load event
-      }
-      
-      // Check for updates (will only run if online)
-      checkForUpdates();
-  });
+// Run when app starts
+window.addEventListener('load', function() {
+    // Check if we have cached version for offline use
+    const cached = localStorage.getItem('cachedHTML');
+    if (!navigator.onLine && cached) {
+        // We're offline and have cached version - use it
+        document.open();
+        document.write(cached);
+        document.close();
+        return; // Stop here, cached version will run its own load event
+    }
+    
+    // Check for updates (will only run if online)
+    checkForUpdates();
+});
 
-  // Also check when internet comes back online
-  window.addEventListener('online', function() {
-      console.log('Back online, checking for updates...');
-      checkForUpdates();
-  });
+// Also check when internet comes back online
+window.addEventListener('online', function() {
+    console.log('Back online, checking for updates...');
+    checkForUpdates();
+});
 
-  // For first-time users, set initial version
-  if (!localStorage.getItem('appVersion')) {
-      localStorage.setItem('appVersion', '1.0.0');
-  }
-  </script>
+// For first-time users, set initial version
+if (!localStorage.getItem('appVersion')) {
+    localStorage.setItem('appVersion', '1.0.0');
+}
+</script>
 </head>
 <body>
   <!-- ===== LOGIN PAGE ===== -->
