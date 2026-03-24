@@ -43,8 +43,9 @@
       background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       padding: 20px;
     }
     
@@ -2403,6 +2404,152 @@
     .dot-yellow { background:#ffc107; }
     .dot-red    { background:#dc3545; }
     .dot-gray   { background:#adb5bd; }
+
+    /* ===== TIMETABLE DASHBOARD STYLES ===== */
+    #timetableDashboard {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      animation: ttd-fadein 0.5s ease;
+    }
+    @keyframes ttd-fadein { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
+
+    .ttd-wrap {
+      background: linear-gradient(135deg,#0b1a3b 0%,#0f2560 60%,#1a237e 100%);
+      border-radius: 18px;
+      padding: 22px 26px 20px;
+      box-shadow: 0 8px 40px rgba(11,102,255,0.18);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .ttd-wrap::before {
+      content:'';position:absolute;top:-40%;right:-20%;width:60%;height:160%;
+      background:radial-gradient(ellipse,rgba(11,102,255,0.15) 0%,transparent 70%);
+      pointer-events:none;
+    }
+
+    .ttd-header {
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:16px;gap:12px;flex-wrap:wrap;
+    }
+    .ttd-title-area { display:flex;align-items:center;gap:12px; }
+    .ttd-icon {
+      width:42px;height:42px;background:rgba(11,102,255,0.3);border-radius:10px;
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,0.15);
+    }
+    .ttd-icon i { color:#6ba3ff;font-size:18px; }
+    .ttd-title-text h3 { color:#fff;font-size:15px;font-weight:700;margin:0 0 2px; }
+    .ttd-title-text p { color:rgba(255,255,255,0.55);font-size:11px;margin:0;letter-spacing:0.03em; }
+
+    .ttd-date-nav { display:flex;align-items:center;gap:8px; }
+    .ttd-nav-btn {
+      width:30px;height:30px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+      border-radius:8px;color:rgba(255,255,255,0.7);cursor:pointer;
+      display:flex;align-items:center;justify-content:center;font-size:12px;
+      transition:all 0.15s;
+    }
+    .ttd-nav-btn:hover { background:rgba(11,102,255,0.35);color:#fff; }
+    .ttd-date-label {
+      color:#fff;font-size:12px;font-weight:600;padding:5px 12px;
+      background:rgba(255,255,255,0.08);border-radius:8px;
+      border:1px solid rgba(255,255,255,0.12);white-space:nowrap;
+    }
+
+    /* Summary cards */
+    .ttd-summary {
+      display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;
+    }
+    @media(max-width:640px){.ttd-summary{grid-template-columns:repeat(2,1fr);}}
+    .ttd-stat {
+      background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+      border-radius:12px;padding:12px 14px;text-align:center;
+      transition:transform 0.15s;cursor:default;
+    }
+    .ttd-stat:hover { transform:translateY(-2px);background:rgba(255,255,255,0.09); }
+    .ttd-stat-val { font-size:26px;font-weight:800;color:#fff;line-height:1; }
+    .ttd-stat-lbl { font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px;text-transform:uppercase;letter-spacing:0.05em; }
+    .ttd-stat-icon { font-size:13px;margin-bottom:6px; }
+
+    /* Category sections */
+    .ttd-section-label {
+      font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+      color:rgba(255,255,255,0.4);margin:14px 0 8px;padding-left:2px;
+    }
+    .ttd-section-label span {
+      background:rgba(255,255,255,0.07);border-radius:4px;padding:2px 8px;
+    }
+
+    /* Class cards grid */
+    .ttd-classes-grid {
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;
+    }
+    .ttd-class-card {
+      background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+      border-radius:13px;padding:14px;position:relative;overflow:hidden;
+      transition:all 0.2s;
+    }
+    .ttd-class-card::before {
+      content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+      background:var(--card-accent,rgba(255,255,255,0.2));border-radius:3px 0 0 3px;
+    }
+    .ttd-class-card:hover { background:rgba(255,255,255,0.08);transform:translateY(-1px); }
+    .ttd-class-card.craft-card { --card-accent:linear-gradient(180deg,#ff8c00,#ffc107); }
+    .ttd-class-card.diploma-card { --card-accent:linear-gradient(180deg,#0b66ff,#6f42c1); }
+
+    .ttd-card-top { display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px; }
+    .ttd-class-code { font-size:11px;font-weight:800;color:#fff;letter-spacing:0.04em; }
+    .ttd-class-name { font-size:9.5px;color:rgba(255,255,255,0.45);margin-top:1px; }
+    .ttd-status-badge {
+      font-size:8.5px;font-weight:700;padding:3px 7px;border-radius:20px;
+      text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap;
+    }
+    .badge-live { background:rgba(40,167,69,0.25);color:#5dde82;border:1px solid rgba(40,167,69,0.4); }
+    .badge-upcoming { background:rgba(255,193,7,0.2);color:#ffd454;border:1px solid rgba(255,193,7,0.35); }
+    .badge-done { background:rgba(108,117,125,0.2);color:rgba(255,255,255,0.35);border:1px solid rgba(108,117,125,0.3); }
+    .badge-none { background:rgba(108,117,125,0.1);color:rgba(255,255,255,0.25);border:1px solid rgba(108,117,125,0.2); }
+
+    /* Pulsing dot for LIVE */
+    .live-dot {
+      display:inline-block;width:6px;height:6px;border-radius:50%;background:#5dde82;
+      margin-right:4px;animation:pulse-dot 1.2s infinite;vertical-align:middle;
+    }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+    /* Sessions list */
+    .ttd-sessions { margin-top:8px;display:flex;flex-direction:column;gap:5px; }
+    .ttd-session {
+      background:rgba(255,255,255,0.04);border-radius:8px;padding:6px 9px;
+      border-left:2px solid rgba(255,255,255,0.1);transition:border-color 0.2s;
+    }
+    .ttd-session.active-session {
+      border-left-color:#5dde82;background:rgba(40,167,69,0.08);
+    }
+    .ttd-session-time { font-size:9px;color:rgba(255,255,255,0.4);margin-bottom:1px; }
+    .ttd-session-subj { font-size:10.5px;font-weight:600;color:#e8eef8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .ttd-session-lect { font-size:9px;color:rgba(255,255,255,0.45);margin-top:1px; }
+    .ttd-session-lect i { margin-right:3px;font-size:8px; }
+    .ttd-no-sessions { font-size:10px;color:rgba(255,255,255,0.3);text-align:center;padding:8px 0; }
+    .ttd-students-count { font-size:9px;color:rgba(255,255,255,0.35);margin-top:7px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.07); }
+    .ttd-students-count i { margin-right:3px; }
+
+    /* Weekend msg */
+    .ttd-weekend {
+      text-align:center;padding:30px 20px;
+      color:rgba(255,255,255,0.4);font-size:14px;
+    }
+    .ttd-weekend i { font-size:32px;margin-bottom:10px;display:block;color:rgba(255,255,255,0.2); }
+
+    /* Toggle button */
+    .ttd-toggle-btn {
+      display:inline-flex;align-items:center;gap:6px;
+      background:rgba(11,102,255,0.18);border:1px solid rgba(11,102,255,0.35);
+      color:rgba(255,255,255,0.8);font-size:11px;padding:5px 12px;border-radius:7px;
+      cursor:pointer;transition:all 0.15s;font-family:inherit;
+    }
+    .ttd-toggle-btn:hover { background:rgba(11,102,255,0.3);color:#fff; }
+
+    .ttd-body { transition:all 0.3s; }
+    .ttd-body.collapsed { display:none; }
  </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -2416,67 +2563,43 @@
 
   async function checkForUpdates() {
       try {
-          // Check GitHub for new version (add timestamp to bypass cache)
           const response = await fetch(GITHUB_VERSION_URL + '?t=' + Date.now());
+          if (!response.ok) return;
           const serverData = await response.json();
-          
-          // Get current version from phone storage
           let currentVersion = localStorage.getItem('appVersion') || '1.0.0';
           
-          // Compare versions (if server version is higher)
           if (serverData.version > currentVersion) {
-              // Ask user if they want to update
-              if (confirm(`📱 New update v${serverData.version} available!\n\nCurrent version: v${currentVersion}\n\nUpdate now?`)) {
-                  // Download new HTML
+              if (confirm(`📱 New update v${serverData.version} available!\n\nCurrent version: v${currentVersion}\n\nUpdate now? (Page will reload)`)) {
                   const htmlResponse = await fetch(GITHUB_HTML_URL + '?t=' + Date.now());
                   const newHTML = await htmlResponse.text();
-                  
-                  // Save to phone storage
                   localStorage.setItem('cachedHTML', newHTML);
                   localStorage.setItem('appVersion', serverData.version);
-                  
-                  alert('✅ Update downloaded! The app will now reload with the latest version.');
+                  alert('✅ Update downloaded! Reloading...');
                   window.location.reload();
               }
           }
       } catch (e) {
-          // If offline or error, silently use cached version
-          console.log('Offline mode or update check failed');
-          
-          // If offline, load cached version
-          const cached = localStorage.getItem('cachedHTML');
-          if (cached && !navigator.onLine) {
-              // Replace current page with cached version
-              document.open();
-              document.write(cached);
-              document.close();
-          }
+          console.log('Update check failed (offline or network error)');
       }
   }
 
-  // Run when app starts
   window.addEventListener('load', function() {
-      // Check if we have cached version for offline use
-      const cached = localStorage.getItem('cachedHTML');
-      if (!navigator.onLine && cached) {
-          // We're offline and have cached version - use it
-          document.open();
-          document.write(cached);
-          document.close();
-          return; // Stop here, cached version will run its own load event
+      // FIXED: Never use document.write to replace page — it destroys running state
+      // Only check for updates when online; use cached version passively via service worker pattern
+      if (navigator.onLine) {
+          checkForUpdates();
       }
-      
-      // Check for updates (will only run if online)
-      checkForUpdates();
   });
 
-  // Also check when internet comes back online
+  // FIXED: Do NOT call document.write on 'online' event — it destroys the active session
   window.addEventListener('online', function() {
-      console.log('Back online, checking for updates...');
-      checkForUpdates();
+      console.log('Back online');
+      // Only check for updates if we are on the login screen (no class loaded)
+      if (!localStorage.getItem('iesr_active_session')) {
+          checkForUpdates();
+      }
   });
 
-  // For first-time users, set initial version
   if (!localStorage.getItem('appVersion')) {
       localStorage.setItem('appVersion', '1.0.0');
   }
@@ -2484,6 +2607,11 @@
 </head>
 <body>
   <!-- ===== LOGIN PAGE ===== -->
+  <!-- TIMETABLE DASHBOARD (above login container, full-width) -->
+  <div id="timetableDashboard" style="width:100%;max-width:1200px;margin:16px auto 0 auto;display:none;">
+    <!-- built by JS -->
+  </div>
+
   <div class="login-container" id="loginContainer">
     <div class="welcome-panel">
       <div class="logo-container">
@@ -3009,38 +3137,50 @@
 
           request.onupgradeneeded = (event) => {
             const db = event.target.result;
+            const oldVersion = event.oldVersion;
 
-            // Drop existing stores to recreate with updated schema
-            if (db.objectStoreNames.contains('attendance')) {
-              db.deleteObjectStore('attendance');
+            // FIXED: Only drop stores when schema actually changed (v1→v4 requires new uniqueRecord index with sessionId)
+            // For brand new DB (oldVersion === 0), create fresh. For upgrades, migrate carefully.
+            if (oldVersion < 4) {
+              // Only drop and recreate attendance if schema changed (added sessionId to uniqueRecord index)
+              if (db.objectStoreNames.contains('attendance')) {
+                db.deleteObjectStore('attendance');
+              }
+              if (db.objectStoreNames.contains('syncQueue')) {
+                db.deleteObjectStore('syncQueue');
+              }
+              // Students store schema hasn't changed — only recreate if missing
+              if (!db.objectStoreNames.contains('students')) {
+                const studentStore = db.createObjectStore('students', { keyPath: 'admissionNo' });
+                studentStore.createIndex('class', 'class', { unique: false });
+              }
             }
-            if (db.objectStoreNames.contains('syncQueue')) {
-              db.deleteObjectStore('syncQueue');
+
+            // v4: attendance store — unique key includes sessionId for multi-session support
+            if (!db.objectStoreNames.contains('attendance')) {
+              const attendanceStore = db.createObjectStore('attendance', { keyPath: 'id' });
+              attendanceStore.createIndex('uniqueRecord', ['class', 'teacher', 'studentId', 'date', 'sessionId'], { unique: true });
+              attendanceStore.createIndex('class', 'class', { unique: false });
+              attendanceStore.createIndex('teacher', 'teacher', { unique: false });
+              attendanceStore.createIndex('date', 'date', { unique: false });
+              attendanceStore.createIndex('studentId', 'studentId', { unique: false });
+              attendanceStore.createIndex('subject', 'subject', { unique: false });
+              attendanceStore.createIndex('sessionId', 'sessionId', { unique: false });
+              attendanceStore.createIndex('syncStatus', 'syncStatus', { unique: false });
             }
-            if (db.objectStoreNames.contains('students')) {
-              db.deleteObjectStore('students');
+
+            // Sync queue
+            if (!db.objectStoreNames.contains('syncQueue')) {
+              const syncStore = db.createObjectStore('syncQueue', { keyPath: 'id', autoIncrement: true });
+              syncStore.createIndex('status', 'status', { unique: false });
+              syncStore.createIndex('uniqueRecordId', 'uniqueRecordId', { unique: true });
             }
 
-            // v4: attendance store — unique key now includes sessionId to allow multiple sessions per day
-            const attendanceStore = db.createObjectStore('attendance', { keyPath: 'id' });
-            // UPDATED: composite unique index now includes sessionId
-            attendanceStore.createIndex('uniqueRecord', ['class', 'teacher', 'studentId', 'date', 'sessionId'], { unique: true });
-            attendanceStore.createIndex('class', 'class', { unique: false });
-            attendanceStore.createIndex('teacher', 'teacher', { unique: false });
-            attendanceStore.createIndex('date', 'date', { unique: false });
-            attendanceStore.createIndex('studentId', 'studentId', { unique: false });
-            attendanceStore.createIndex('subject', 'subject', { unique: false });
-            attendanceStore.createIndex('sessionId', 'sessionId', { unique: false });
-            attendanceStore.createIndex('syncStatus', 'syncStatus', { unique: false });
-
-            // Create sync queue
-            const syncStore = db.createObjectStore('syncQueue', { keyPath: 'id', autoIncrement: true });
-            syncStore.createIndex('status', 'status', { unique: false });
-            syncStore.createIndex('uniqueRecordId', 'uniqueRecordId', { unique: true });
-
-            // Create students store
-            const studentStore = db.createObjectStore('students', { keyPath: 'admissionNo' });
-            studentStore.createIndex('class', 'class', { unique: false });
+            // Students store (if somehow missing)
+            if (!db.objectStoreNames.contains('students')) {
+              const studentStore = db.createObjectStore('students', { keyPath: 'admissionNo' });
+              studentStore.createIndex('class', 'class', { unique: false });
+            }
           };
         });
       }
@@ -3555,7 +3695,12 @@
     let unlockedTeacher = null;
     let hasUnsavedChanges = false;
     let selectedStudentAdmission = null;
-    let adminSubmissions = JSON.parse(localStorage.getItem('iesr_admin_submissions') || '{}');
+    // FIXED: adminSubmissions is now always read fresh from localStorage (no stale cache)
+    function getAdminSubmissions() {
+        try { return JSON.parse(localStorage.getItem('iesr_admin_submissions') || '{}'); } catch(e) { return {}; }
+    }
+    // Keep backward-compat variable — but always re-read for writes
+    let adminSubmissions = getAdminSubmissions();
     
     const indexedDBStorage = new IndexedDBStorage();
     const googleSync = new GoogleSheetsSync();
@@ -4330,46 +4475,61 @@
       
       document.getElementById('loginContainer').style.display = 'none';
       document.getElementById('registerContainer').style.display = 'block';
+      var ttd = document.getElementById('timetableDashboard');
+      if (ttd) ttd.style.display = 'none';
       
       document.getElementById('currentUserName').textContent = `${CLASS_CONFIG[className].displayName} - Select Teacher`;
       
       initializeClassSystem();
     }
 
-    // ===== SUBJECT TRACKING FUNCTION - FIXED TO RETURN REAL SUBJECT NAMES =====
+    // ===== SUBJECT TRACKING FUNCTION - FIXED: returns correct subject per teacher and time =====
     function getCurrentSubject(teacher, date) {
-      if (!teacher || !date) return 'Unknown';
-      
-      const dateObj = new Date(date);
-      const dayMap = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-      const dayName = dayMap[dateObj.getDay()];
-      
-      // First check teacher-specific sessions
-      const teacherSessions = state.sessions.filter(s => 
-        (s.LECTURER === teacher || s.LECTURER.includes(teacher) || s.LECTURER === 'ALL LECTURERS') &&
-        s.DAY === dayName
-      );
-      
-      if (teacherSessions.length > 0) {
-        // Return the first matching subject
-        return teacherSessions[0].SUBJECT;
-      }
-      
-      // If no teacher-specific session, check if any other teacher teaches this class
-      // and if there's a session for this teacher on this day
-      const classSessions = state.sessions.filter(s => s.DAY === dayName);
-      if (classSessions.length > 0) {
-        // Try to find a session that might match by teacher name pattern
-        for (let session of classSessions) {
-          if (session.LECTURER.includes(teacher) || teacher.includes(session.LECTURER)) {
-            return session.SUBJECT;
-          }
+        if (!teacher || !date) return 'Unknown';
+        
+        const dateObj = new Date(date + 'T12:00:00'); // noon to avoid timezone edge
+        const dayMap = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+        const dayName = dayMap[dateObj.getDay()];
+        
+        if (!state.sessions || !state.sessions.length) return 'Unknown Subject';
+
+        // Find sessions matching this teacher on this day
+        const teacherSessions = state.sessions.filter(s => {
+            if (!s.DAY || s.DAY.toUpperCase() !== dayName) return false;
+            if (!s.LECTURER) return false;
+            const lec = s.LECTURER.toUpperCase();
+            const tch = teacher.toUpperCase();
+            return lec === 'ALL LECTURERS' || lec.includes(tch) || tch.includes(lec);
+        });
+        
+        if (teacherSessions.length === 0) return 'Unknown Subject';
+        
+        // If today, prefer the currently-active or most-recently-ended session
+        const todayStr = formatDate(new Date());
+        if (date === todayStr) {
+            timeSlotManager.loadSessions(state.sessions);
+            const currentMins = timeSlotManager.getCurrentMinutes();
+            // Find active session first
+            for (const s of teacherSessions) {
+                const range = timeSlotManager.parseTimeRange(s.TIME);
+                if (range && currentMins >= range.start && currentMins <= range.end) {
+                    return s.SUBJECT;
+                }
+            }
+            // Fall back to most recently ended
+            let bestDiff = Infinity, bestSub = teacherSessions[0].SUBJECT;
+            for (const s of teacherSessions) {
+                const range = timeSlotManager.parseTimeRange(s.TIME);
+                if (range && currentMins > range.end) {
+                    const diff = currentMins - range.end;
+                    if (diff < bestDiff) { bestDiff = diff; bestSub = s.SUBJECT; }
+                }
+            }
+            return bestSub;
         }
-        // If still no match, return the first session's subject
-        return classSessions[0].SUBJECT;
-      }
-      
-      return 'Unknown Subject';
+
+        // For non-today dates, return the first matching teacher session
+        return teacherSessions[0].SUBJECT;
     }
 
     // ===== CLASS SYSTEM INITIALIZATION =====
@@ -4389,7 +4549,8 @@
       loadSessionsFromStorage();
       
       if (!state.students.length) {
-        state.students = CLASS_CONFIG[currentClass].embeddedStudents.map(s => ({
+        const embedded = (CLASS_CONFIG[currentClass] && CLASS_CONFIG[currentClass].embeddedStudents) || [];
+        state.students = embedded.map(s => ({
           ...s,
           tags: s.tags || []
         }));
@@ -4410,12 +4571,12 @@
       const ws = getMonday(new Date());
       document.getElementById('weekStart').value = formatDate(ws);
       
-      const today = new Date();
       const currentDayIndex = getCurrentDayIndex();
       document.getElementById('daySelect').value = String(currentDayIndex);
       
       const wk = currentWeekStartStr();
-      loadAttendanceForWeek(wk);
+      // FIXED: attendance is loaded but teacher not unlocked yet — init to empty, actual load happens in unlockTeacherRegister
+      state.attendance[wk] = state.attendance[wk] || {};
       renderRegister();
       renderTeacherSchedule();
       calculateIntelligence();
@@ -4424,12 +4585,13 @@
     }
     
     function populateTeacherDropdown() {
-      if (!currentClass) return;
+      if (!currentClass || !CLASS_CONFIG[currentClass]) return;
       
       const teacherSelect = document.getElementById('teacherSelectDropdown');
       teacherSelect.innerHTML = '<option value="">-- Select Teacher --</option>';
       
-      CLASS_CONFIG[currentClass].teachers.forEach(teacher => {
+      const teachers = CLASS_CONFIG[currentClass].teachers || [];
+      teachers.forEach(teacher => {
         const option = document.createElement('option');
         option.value = teacher;
         option.textContent = teacher;
@@ -4438,25 +4600,35 @@
     }
 
     // ===== ENCRYPTED STORAGE FUNCTIONS =====
+    // FIXED: Keys are plain (deterministic), only VALUES are encrypted
     function getStudentStorageKey() {
-        return EncryptionSystem.encrypt(`iesr_students_${state.className}`);
+        return `iesr_students_${state.className}`;
     }
     
     function getSessionsStorageKey() {
-        return EncryptionSystem.encrypt(`iesr_sessions_${state.className}`);
+        return `iesr_sessions_${state.className}`;
     }
     
     function loadStudentsFromStorage() {
         try {
+            // Try encrypted value first, fall back to plain JSON for migration
             const key = getStudentStorageKey();
             const raw = localStorage.getItem(key);
             if (raw) {
-                const decrypted = EncryptionSystem.decrypt(raw);
-                if (decrypted) {
-                    state.students = JSON.parse(decrypted);
+                let parsed = null;
+                try {
+                    const decrypted = EncryptionSystem.decrypt(raw);
+                    if (decrypted) parsed = JSON.parse(decrypted);
+                } catch(e) {}
+                if (!parsed) {
+                    try { parsed = JSON.parse(raw); } catch(e) {}
+                }
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    state.students = parsed;
                 }
             }
         } catch (e) {
+            console.warn('loadStudents error', e);
         }
     }
     
@@ -4479,17 +4651,25 @@
             const key = getSessionsStorageKey();
             const raw = localStorage.getItem(key);
             if (raw) {
-                const decrypted = EncryptionSystem.decrypt(raw);
-                if (decrypted) {
-                    state.sessions = JSON.parse(decrypted);
-                } else {
-                    state.sessions = CLASS_CONFIG[currentClass].defaultSessions;
+                let parsed = null;
+                try {
+                    const decrypted = EncryptionSystem.decrypt(raw);
+                    if (decrypted) parsed = JSON.parse(decrypted);
+                } catch(e) {}
+                if (!parsed) {
+                    try { parsed = JSON.parse(raw); } catch(e) {}
                 }
-            } else {
-                state.sessions = CLASS_CONFIG[currentClass].defaultSessions;
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    state.sessions = parsed;
+                    return;
+                }
             }
+            // Fall back to default sessions
+            state.sessions = (CLASS_CONFIG[currentClass] && CLASS_CONFIG[currentClass].defaultSessions) ? 
+                [...CLASS_CONFIG[currentClass].defaultSessions] : [];
         } catch (e) { 
-            state.sessions = CLASS_CONFIG[currentClass].defaultSessions; 
+            state.sessions = (CLASS_CONFIG[currentClass] && CLASS_CONFIG[currentClass].defaultSessions) ? 
+                [...CLASS_CONFIG[currentClass].defaultSessions] : [];
         }
     }
     
@@ -4506,7 +4686,11 @@
     // ===== DATE FUNCTIONS =====
     function formatDate(d) { 
         const date = new Date(d);
-        return date.toISOString().split('T')[0]; 
+        // FIXED: Use local date parts to avoid UTC timezone off-by-one (critical for UTC+3 Nairobi)
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
     }
     
     function formatDateDisplay(d) { 
@@ -4528,8 +4712,9 @@
     }
     
     function currentWeekStartStr() {
-        const wsVal = document.getElementById('weekStart').value;
-        const ws = wsVal ? new Date(wsVal) : getMonday(new Date());
+        const el = document.getElementById('weekStart');
+        const wsVal = el ? el.value : '';
+        const ws = wsVal ? new Date(wsVal + 'T12:00:00') : new Date();
         const monday = getMonday(ws);
         return formatDate(monday);
     }
@@ -4545,14 +4730,15 @@
         if (!unlockedTeacher) return false;
         
         try {
-            // Save to localStorage first
-            const storageKey = EncryptionSystem.encrypt(`iesr_${state.className}_${unlockedTeacher}_${weekStartStr}`);
+            // Save to localStorage — plain key, encrypted value
+            const storageKey = `iesr_att_${state.className}_${unlockedTeacher}_${weekStartStr}`;
             const encrypted = EncryptionSystem.encrypt(JSON.stringify(state.attendance[weekStartStr] || {}));
             localStorage.setItem(storageKey, encrypted);
             
             // Prepare records for IndexedDB and Google Sheets
             const attendanceData = state.attendance[weekStartStr] || {};
-            const weekStart = new Date(weekStartStr);
+            // FIXED: noon anchor for consistent local dates in Nairobi UTC+3
+            const weekStart = new Date(weekStartStr + 'T12:00:00');
             const dates = [0, 1, 2, 3, 4].map(i => formatDate(addDays(weekStart, i)));
             
             const records = [];
@@ -4622,7 +4808,18 @@
             return true;
         } catch (e) {
             console.error('saveAttendanceForWeek error:', e);
-            showSuccess('Error saving data: ' + e.message);
+            // FIXED: show proper error notification, not success
+            const notification = document.getElementById('successNotification');
+            const msgEl = document.getElementById('successMessage');
+            if (notification && msgEl) {
+                msgEl.textContent = '⚠️ Error saving data: ' + e.message;
+                notification.style.background = '#dc3545';
+                notification.style.display = 'flex';
+                setTimeout(() => { 
+                    notification.style.display = 'none'; 
+                    notification.style.background = ''; 
+                }, 4000);
+            }
             return false;
         }
     }
@@ -4633,15 +4830,19 @@
             return;
         }
         try {
-            const storageKey = EncryptionSystem.encrypt(`iesr_${state.className}_${unlockedTeacher}_${weekStartStr}`);
+            // FIXED: plain key for storage, encrypted value
+            const storageKey = `iesr_att_${state.className}_${unlockedTeacher}_${weekStartStr}`;
             const data = localStorage.getItem(storageKey);
             if (data) {
-                const decrypted = EncryptionSystem.decrypt(data);
-                if (decrypted) {
-                    state.attendance[weekStartStr] = JSON.parse(decrypted);
-                } else {
-                    state.attendance[weekStartStr] = {};
+                let parsed = null;
+                try {
+                    const decrypted = EncryptionSystem.decrypt(data);
+                    if (decrypted) parsed = JSON.parse(decrypted);
+                } catch(e) {}
+                if (!parsed) {
+                    try { parsed = JSON.parse(data); } catch(e) {}
                 }
+                state.attendance[weekStartStr] = parsed || {};
             } else {
                 state.attendance[weekStartStr] = {};
             }
@@ -4651,7 +4852,10 @@
     }
     
     function ensureWeekLoaded(weekStartStr) {
-        if (!state.attendance[weekStartStr]) loadAttendanceForWeek(weekStartStr);
+        // FIXED: if not yet loaded, initialize synchronously to empty — async load happens at proper await points
+        if (!state.attendance[weekStartStr]) {
+            state.attendance[weekStartStr] = {};
+        }
     }
 
     // ===== ADMIN PIN VERIFICATION (UPDATED FOR 2003) =====
@@ -4673,7 +4877,7 @@
     
     function verifyAdminPin() {
         const pin = document.getElementById('adminPinInput').value.trim();
-        const callback = document.getElementById('adminPinModal').dataset.callback;
+        const callbackName = document.getElementById('adminPinModal').dataset.callback;
         
         if (!pin) {
             showAdminPinError("Please enter Admin PIN");
@@ -4684,11 +4888,21 @@
         
         if (enteredHash === ADMIN_PINS.hash_2003 || enteredHash === ADMIN_PINS.hash_9209) {
             hideAdminPinVerification();
-            if (callback) {
-                window[callback]();
-            }
+            // FIXED: safely invoke callback — check window scope then direct function map
+            const callbackMap = {
+                'addStudent': addStudent,
+                'editSelectedStudent': editSelectedStudent,
+                'deleteSelectedStudent': deleteSelectedStudent,
+                'showClearWeekConfirmation': showClearWeekConfirmation,
+                'showClearAllWeeksConfirmation': showClearAllWeeksConfirmation,
+                'openAdminSubmissions': openAdminSubmissions,
+                'openHoaHodViewAfterAuth': openHoaHodViewAfterAuth
+            };
+            const fn = callbackMap[callbackName] || window[callbackName];
+            if (typeof fn === 'function') fn();
+            else console.warn('Admin PIN callback not found:', callbackName);
         } else {
-            showAdminPinError("Invalid Admin PIN");
+            showAdminPinError("Invalid Admin PIN. Please try again.");
         }
     }
     
@@ -4716,7 +4930,7 @@
     
     function verifyGlobalAdminPin() {
         const pin = document.getElementById('globalAdminPinInput').value.trim();
-        const callback = document.getElementById('globalAdminPinModal').dataset.callback;
+        const callbackName = document.getElementById('globalAdminPinModal').dataset.callback;
         
         if (!pin) {
             showGlobalAdminPinError("Please enter Global Admin PIN");
@@ -4728,9 +4942,14 @@
         // GLOBAL ADMIN: 13030 only
         if (enteredHash === ADMIN_PINS.hash_13030) {
             hideGlobalAdminPinVerification();
-            if (callback) {
-                window[callback]();
-            }
+            // FIXED: safely invoke callback
+            const callbackMap = {
+                'openGlobalAdminView': openGlobalAdminView,
+                'openConflictLogViewer': openConflictLogViewer
+            };
+            const fn = callbackMap[callbackName] || window[callbackName];
+            if (typeof fn === 'function') fn();
+            else console.warn('Global admin callback not found:', callbackName);
         } else {
             showGlobalAdminPinError("Invalid Global Admin PIN - Access Denied");
         }
@@ -4742,9 +4961,10 @@
     }
 
     // ===== SUBMISSION PIN VERIFICATION (NO LONGER NEEDED, KEPT FOR COMPATIBILITY) =====
-    function showSubmissionPinVerification(callback) {
-        if (callback) {
-            window[callback]();
+    function showSubmissionPinVerification(callbackName) {
+        // FIXED: was window[callback]() — now uses safe direct call (passthrough, no PIN needed)
+        if (callbackName && typeof window[callbackName] === 'function') {
+            window[callbackName]();
         }
     }
     
@@ -4758,6 +4978,7 @@
     }
 
     // ===== DOUBLE VERIFICATION SYSTEM =====
+    // FIXED: unlockTeacherBtn listener is safe here — element exists in DOM at parse time (inside registerContainer which is in DOM but hidden)
     document.getElementById('unlockTeacherBtn').addEventListener('click', function(e) {
         e.preventDefault();
         const selectedTeacher = document.getElementById('teacherSelectDropdown').value;
@@ -4788,12 +5009,7 @@
         document.getElementById('verifyError').style.display = 'none';
     }
 
-    document.getElementById('cancelVerifyBtn').addEventListener('click', hideDoubleVerification);
-    
-    document.getElementById('confirmVerifyBtn').addEventListener('click', async function(e) {
-        e.preventDefault();
-        await handleTeacherUnlock();
-    });
+    // NOTE: cancelVerifyBtn, confirmVerifyBtn, verifyTeacherPin keypress are attached in DOMContentLoaded to avoid duplicates
 
     async function handleTeacherUnlock() {
         const teacherName = document.getElementById('doubleVerifyModal').dataset.teacher;
@@ -4816,10 +5032,12 @@
         
         await new Promise(resolve => setTimeout(resolve, 300));
         
-        const correctPinHash = CLASS_CONFIG[currentClass].teacherPins[teacherName];
+        // FIXED: guard against null currentClass or missing teacher
+        const teacherPins = (CLASS_CONFIG[currentClass] && CLASS_CONFIG[currentClass].teacherPins) || {};
+        const correctPinHash = teacherPins[teacherName];
         const enteredPinHash = EncryptionSystem.hashPin(teacherPin);
         
-        if (enteredPinHash === correctPinHash) {
+        if (correctPinHash && enteredPinHash === correctPinHash) {
             await unlockTeacherRegister(teacherName);
             
             verifyBtn.innerHTML = originalText;
@@ -4841,13 +5059,6 @@
         document.getElementById('verifyError').style.display = 'block';
     }
 
-    document.getElementById('verifyTeacherPin').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            document.getElementById('confirmVerifyBtn').click();
-        }
-    });
-
     // ===== CONFIRMATION MODAL SYSTEM =====
     function showConfirmation(title, message, callback) {
         document.getElementById('confirmationTitle').textContent = title;
@@ -4863,10 +5074,19 @@
     
     document.getElementById('confirmNoBtn').addEventListener('click', hideConfirmation);
     document.getElementById('confirmYesBtn').addEventListener('click', function() {
-        const callback = document.getElementById('confirmationModal').dataset.callback;
+        const callbackName = document.getElementById('confirmationModal').dataset.callback;
         hideConfirmation();
-        if (callback) {
-            window[callback]();
+        // FIXED: safely resolve callback from name or direct function reference
+        if (callbackName) {
+            const callbackMap = {
+                'confirmLockRegister': confirmLockRegister,
+                'confirmLogout': confirmLogout,
+                'confirmDeleteStudent': confirmDeleteStudent,
+                'clearSelectedWeek': clearSelectedWeek,
+                'clearAllWeeksCmd': clearAllWeeksCmd
+            };
+            const fn = callbackMap[callbackName] || window[callbackName];
+            if (typeof fn === 'function') fn();
         }
     });
 
@@ -6029,21 +6249,26 @@
                     if (recordsMissingSubject.length > 0) {
                         console.warn(`Warning: ${recordsMissingSubject.length} records are missing subject data`);
                         
-                        // Try to fix missing subjects from localStorage as fallback
+                        // FIXED: use plain localStorage key prefix to find records and patch missing subjects
                         for (let record of recordsMissingSubject) {
-                            // Search in localStorage for the original record with subject
-                            const prefix = EncryptionSystem.encrypt(`iesr_${currentClass}_${record.teacher}_`).substring(0, 30);
-                            
+                            const prefix = `iesr_att_${currentClass}_${record.teacher}_`;
                             Object.keys(localStorage).forEach(storageKey => {
                                 if (storageKey.startsWith(prefix)) {
                                     try {
                                         const encryptedData = localStorage.getItem(storageKey);
-                                        const decrypted = EncryptionSystem.decrypt(encryptedData);
-                                        if (decrypted) {
-                                            const weekData = JSON.parse(decrypted);
-                                            const key = `${record.studentId}|${record.date}`;
-                                            if (weekData[key] && weekData[key].subject) {
-                                                record.subject = weekData[key].subject;
+                                        let weekData = null;
+                                        try {
+                                            const decrypted = EncryptionSystem.decrypt(encryptedData);
+                                            if (decrypted) weekData = JSON.parse(decrypted);
+                                        } catch(e) {}
+                                        if (!weekData) { try { weekData = JSON.parse(encryptedData); } catch(e) {} }
+                                        if (weekData) {
+                                            // Try session key then legacy key
+                                            const sessionKey = `${record.studentId}|${record.date}|${record.sessionId || 'DEFAULT'}`;
+                                            const legacyKey = `${record.studentId}|${record.date}`;
+                                            const rec = weekData[sessionKey] || weekData[legacyKey];
+                                            if (rec && rec.subject) {
+                                                record.subject = rec.subject;
                                             }
                                         }
                                     } catch (e) {}
@@ -6203,7 +6428,8 @@
     // ===== FIXED: showGlobalAdminDashboard WITH AI INSIGHTS INTEGRATION =====
     function showGlobalAdminDashboard(data, dataSource = 'cloud', insights = []) {
         const students = state.students;
-        const teachers = CLASS_CONFIG[currentClass].teachers;
+        // FIXED: null guard for CLASS_CONFIG access
+        const teachers = (CLASS_CONFIG[currentClass] && CLASS_CONFIG[currentClass].teachers) || [];
         
         const totalRecords = data.length;
         const presentCount = data.filter(r => r.status === 'P' || r.status === 'L').length;
@@ -6526,6 +6752,29 @@
         }
 
         // Build the HTML with real-time charts and AI Insights
+        // FIXED: Safe helper functions to replace dangerous inline IIFEs
+        function _buildConflictAttemptsHtml(cls) {
+            try {
+                const log = getConflictLog().filter(e => e.class === cls);
+                if (!log.length) return '<div style="padding:30px;text-align:center;color:#6c757d"><i class="fas fa-check-circle" style="font-size:36px;color:#28a745"></i><h4 style="margin-top:12px">No conflict attempts recorded</h4></div>';
+                return '<table class="compliance-table"><thead><tr><th>Date</th><th>Time</th><th>Attempted By</th><th>Active Session</th><th>Subject</th></tr></thead><tbody>'
+                    + log.slice(0,50).map(e=>`<tr><td>${e.date||''}</td><td>${e.time||''}</td><td style="color:#dc3545;font-weight:700">${e.attemptingTeacher||''}</td><td>${e.scheduledTeacher||''}</td><td>${e.subject||''}</td></tr>`).join('')
+                    + '</tbody></table>';
+            } catch(err) { return '<p style="color:#dc3545">Error loading conflict log.</p>'; }
+        }
+        function _buildUnmarkedFlagsHtml(cls) {
+            try {
+                const flags = Object.values(getUnmarkedFlags()).filter(f => f.classKey === cls || f.class === cls);
+                if (!flags.length) return '<div style="padding:30px;text-align:center;color:#6c757d"><i class="fas fa-check-circle" style="font-size:36px;color:#28a745"></i><h4 style="margin-top:12px">No unmarked session flags</h4></div>';
+                return '<table class="compliance-table"><thead><tr><th>Teacher</th><th>Date</th><th>Subject</th><th>Completion</th><th>Type</th></tr></thead><tbody>'
+                    + flags.map(f=>`<tr><td style="color:#dc3545;font-weight:700">${f.teacher||''}</td><td>${f.date||''}</td><td>${f.subject||''}</td><td>${f.pct!==undefined?f.pct+'%':'—'}</td><td><span class="unmarked-flag">${f.type==='CONFLICT_ATTEMPT'?'⚔️ CONFLICT':'📋 INCOMPLETE'}</span></td></tr>`).join('')
+                    + '</tbody></table>';
+            } catch(err) { return '<p style="color:#dc3545">Error loading unmarked flags.</p>'; }
+        }
+        function _buildComplianceTabSafe() {
+            try { return buildComplianceTab(); } catch(err) { return '<p style="color:#dc3545">Error loading compliance data.</p>'; }
+        }
+
         let html = `
             <h3><i class="fas fa-globe"></i> Global Admin Dashboard - ${currentClass}</h3>
             <div style="margin-bottom:15px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
@@ -7008,25 +7257,13 @@
                 </div>
 
                 <div id="csTab-attempts" style="margin-top:12px">
-                    ${(function(){
-                        const log = getConflictLog().filter(e => e.class === currentClass);
-                        if (!log.length) return '<div style="padding:30px;text-align:center;color:#6c757d"><i class="fas fa-check-circle" style="font-size:36px;color:#28a745"></i><h4 style="margin-top:12px">No conflict attempts recorded</h4></div>';
-                        return '<table class="compliance-table"><thead><tr><th>Date</th><th>Time</th><th>Attempted By</th><th>Active Session</th><th>Subject</th></tr></thead><tbody>'
-                            + log.slice(0,50).map(e=>`<tr><td>${e.date||''}</td><td>${e.time||''}</td><td style="color:#dc3545;font-weight:700">${e.attemptingTeacher||''}</td><td>${e.scheduledTeacher||''}</td><td>${e.subject||''}</td></tr>`).join('')
-                            + '</tbody></table>';
-                    })()}
+                    ${_buildConflictAttemptsHtml(currentClass)}
                 </div>
                 <div id="csTab-unmarked" style="display:none;margin-top:12px">
-                    ${(function(){
-                        const flags = Object.values(getUnmarkedFlags()).filter(f => f.classKey === currentClass || f.class === currentClass);
-                        if (!flags.length) return '<div style="padding:30px;text-align:center;color:#6c757d"><i class="fas fa-check-circle" style="font-size:36px;color:#28a745"></i><h4 style="margin-top:12px">No unmarked session flags</h4></div>';
-                        return '<table class="compliance-table"><thead><tr><th>Teacher</th><th>Date</th><th>Subject</th><th>Completion</th><th>Type</th></tr></thead><tbody>'
-                            + flags.map(f=>`<tr><td style="color:#dc3545;font-weight:700">${f.teacher||''}</td><td>${f.date||''}</td><td>${f.subject||''}</td><td>${f.pct!==undefined?f.pct+'%':'—'}</td><td><span class="unmarked-flag">${f.type==='CONFLICT_ATTEMPT'?'⚔️ CONFLICT':'📋 INCOMPLETE'}</span></td></tr>`).join('')
-                            + '</tbody></table>';
-                    })()}
+                    ${_buildUnmarkedFlagsHtml(currentClass)}
                 </div>
                 <div id="csTab-compliance" style="display:none;margin-top:12px">
-                    ${buildComplianceTab()}
+                    ${_buildComplianceTabSafe()}
                 </div>
             </div>
         </div>
@@ -7043,17 +7280,19 @@
         // Store insights globally for detail view
         window.currentInsights = insights;
 
-        // Tab switching
-        document.querySelectorAll('.admin-tab').forEach(tab => {
+        // FIXED: Scope tab switching to #modalContent only to avoid colliding with other .admin-tab elements
+        const modalEl = document.getElementById('modalContent');
+        modalEl.querySelectorAll('.admin-tab[data-tab]').forEach(tab => {
             tab.addEventListener('click', () => {
-                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                modalEl.querySelectorAll('.admin-tab[data-tab]').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 
                 const tabName = tab.dataset.tab;
-                document.querySelectorAll('.tab-content').forEach(content => {
+                modalEl.querySelectorAll('.tab-content').forEach(content => {
                     content.style.display = 'none';
                 });
-                document.getElementById(`tab-${tabName}`).style.display = 'block';
+                const tabEl = document.getElementById(`tab-${tabName}`);
+                if (tabEl) tabEl.style.display = 'block';
             });
         });
 
@@ -7080,13 +7319,16 @@
             }
             
             showSuccess(`Showing ${filteredData.length} records after filtering`);
-            // Re-generate insights for filtered data
+            // Re-generate insights for filtered data — close current modal and show filtered view
+            closeModal();
             const filteredInsights = new AIInsightsEngine().analyzeData(filteredData, currentClass);
             showGlobalAdminDashboard(filteredData, dataSource, filteredInsights);
         });
 
         document.getElementById('resetFilters').addEventListener('click', () => {
-            openGlobalAdminView();
+            closeModal();
+            // Small delay to avoid modal stack issues
+            setTimeout(() => openGlobalAdminView(), 50);
         });
 
         document.getElementById('exportGlobalCSV').addEventListener('click', () => {
@@ -7095,7 +7337,7 @@
 
         document.getElementById('refreshGlobalAdmin').addEventListener('click', () => {
             closeModal();
-            openGlobalAdminView();
+            setTimeout(() => openGlobalAdminView(), 50);
         });
 
         document.getElementById('closeGlobalAdmin').addEventListener('click', closeModal);
@@ -7270,6 +7512,8 @@
         try {
             unlockedTeacher = teacherName;
             state.currentTeacher = teacherName;
+            // FIXED: reset stale student selection on teacher switch
+            selectedStudentAdmission = null;
             
             document.getElementById('currentUserName').textContent = `${teacherName}`;
             document.getElementById('userBadge').innerHTML = `
@@ -7321,9 +7565,10 @@
         }
     }
     
-    function confirmLockRegister() {
+    async function confirmLockRegister() {
         const wk = currentWeekStartStr();
-        saveAttendanceForWeek(wk);
+        // FIXED: await the save before clearing state so data is persisted before teacher clears
+        await saveAttendanceForWeek(wk);
         
         unlockedTeacher = null;
         state.currentTeacher = null;
@@ -7381,7 +7626,8 @@
      */
     function buildSessionId(session) {
         if (!session) return 'DEFAULT';
-        const timeClean = (session.TIME || '').replace(/[^0-9APM:]/g, '').substring(0, 7);
+        // FIXED: normalize time to uppercase before stripping, so both "08:00AM" and "08:00am" produce same ID
+        const timeClean = (session.TIME || '').toUpperCase().replace(/[^0-9APM:]/g, '').substring(0, 9);
         const teachClean = (session.LECTURER || 'ALL').replace(/[^A-Z0-9]/gi, '').toUpperCase().substring(0, 10);
         const subClean = (session.SUBJECT || 'SUB').replace(/[^A-Z0-9]/gi, '').toUpperCase().substring(0, 12);
         const dayClean = (session.DAY || 'MON').toUpperCase().substring(0, 3);
@@ -7394,7 +7640,8 @@
      */
     function getTeacherSessionsForDate(teacherName, dateStr) {
         if (!state.sessions || !state.sessions.length) return [];
-        const dateObj = new Date(dateStr);
+        // FIXED: append T12:00:00 to avoid UTC midnight timezone shift (critical for UTC+3 Nairobi)
+        const dateObj = new Date(dateStr + 'T12:00:00');
         const dayNames = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
         const dayName = dayNames[dateObj.getDay()];
         
@@ -7415,7 +7662,8 @@
      */
     function getAllSessionsForDate(dateStr) {
         if (!state.sessions || !state.sessions.length) return [];
-        const dateObj = new Date(dateStr);
+        // FIXED: noon anchor to prevent UTC timezone off-by-one
+        const dateObj = new Date(dateStr + 'T12:00:00');
         const dayNames = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
         const dayName = dayNames[dateObj.getDay()];
         return state.sessions
@@ -7438,9 +7686,8 @@
         const sessions = getTeacherSessionsForDate(teacherName, dateStr);
         if (!sessions.length) return null;
         
-        // Check if date is today
-        const today = new Date();
-        const todayStr = today.toISOString().split('T')[0];
+        // FIXED: use formatDate for consistent local-timezone date comparison
+        const todayStr = formatDate(new Date());
         if (dateStr !== todayStr) return null;
 
         timeSlotManager.loadSessions(state.sessions);
@@ -7598,16 +7845,17 @@
         
         const weekStartStr = currentWeekStartStr();
         ensureWeekLoaded(weekStartStr);
-        const weekStart = new Date(weekStartStr);
+        const weekStart = new Date(weekStartStr + 'T12:00:00');
         const dates = [0, 1, 2, 3, 4].map(i => addDays(weekStart, i));
         const dateFmts = dates.map(d => formatDate(d));
         const dateLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
         
-        const today = new Date();
         const currentDayIndex = getCurrentDayIndex();
         const activeDayIndex = Math.min(currentDayIndex, 4);
         
-        document.getElementById('daySelect').value = activeDayIndex;
+        // FIXED: Do NOT force-reset daySelect on every render — respect user's manual selection.
+        // Only read the current selected value.
+        const selectedDayIndex = parseInt(document.getElementById('daySelect').value, 10);
 
         // Build session map per day: dayIndex → array of sessions with sessionId
         // Only sessions for the current teacher
@@ -7654,8 +7902,8 @@
 
         let html = `<table style="font-size:12px"><thead>${headerRow1}${headerRow2}</thead><tbody>`;
         
-        const dayIndexForTags = parseInt(document.getElementById('daySelect').value, 10);
-        const tagDateStr = dateFmts[dayIndexForTags];
+        // FIXED: use already-computed selectedDayIndex
+        const tagDateStr = dateFmts[selectedDayIndex] || dateFmts[activeDayIndex];
 
         state.students.forEach((s, idx) => {
             const studentStats = state.intelligence.studentStats[s.Admission_No] || { present: 0, absent: 0, total: 0, percentage: 0 };
@@ -7864,7 +8112,7 @@
         
         const weekStartStr = currentWeekStartStr();
         ensureWeekLoaded(weekStartStr);
-        const weekStart = new Date(weekStartStr);
+        const weekStart = new Date(weekStartStr + 'T12:00:00');
         const dates = [0, 1, 2, 3, 4].map(i => formatDate(addDays(weekStart, i)));
         
         // Count across all session keys
@@ -7910,7 +8158,8 @@
         
         const weekStartStr = currentWeekStartStr();
         ensureWeekLoaded(weekStartStr);
-        const base = new Date(weekStartStr);
+        // FIXED: noon anchor for correct local date
+        const base = new Date(weekStartStr + 'T12:00:00');
         const targetDateStr = formatDate(addDays(base, dayIndex));
 
         // ===== TIME-BASED AUTHORIZATION CHECK =====
@@ -8175,7 +8424,8 @@
     
     function getTeacherAttendanceData(teacherName) {
         const allRecords = [];
-        const prefix = EncryptionSystem.encrypt(`iesr_${currentClass}_${teacherName}_`).substring(0, 30);
+        // FIXED: use plain key prefix matching
+        const prefix = `iesr_att_${currentClass}_${teacherName}_`;
         
         // Use a Set to track unique records — now includes sessionId to allow multiple sessions per day
         const uniqueKeys = new Set();
@@ -8598,11 +8848,14 @@
     }
     
     function calculateHoaHodDataFromSubmissions() {
+        // FIXED: null guard for CLASS_CONFIG access
+        const configEntry = CLASS_CONFIG[currentClass] || { teachers: [] };
+        
         const hoaData = {
             overallPercentage: 0,
             totalMarkedLessons: 0,
             totalStudents: state.students.length,
-            totalTeachers: CLASS_CONFIG[currentClass].teachers.length,
+            totalTeachers: configEntry.teachers.length,
             teacherSubmissions: [],
             studentRanking: [],
             studentsBelow80: 0,
@@ -8611,10 +8864,13 @@
             subjectFlags: []
         };
         
+        // FIXED: always reload submissions from localStorage before computing HOA data
+        adminSubmissions = getAdminSubmissions();
         const classSubmissions = adminSubmissions[currentClass] || [];
         
+        // FIXED: Restored missing teacherStats initialization block
         const teacherStats = {};
-        CLASS_CONFIG[currentClass].teachers.forEach(teacher => {
+        configEntry.teachers.forEach(teacher => {
             teacherStats[teacher] = {
                 name: teacher,
                 submissionCount: 0,
@@ -8982,7 +9238,7 @@
         
         const weekStartStr = currentWeekStartStr();
         const dayIndex = parseInt(document.getElementById('daySelect').value, 10);
-        const base = new Date(weekStartStr);
+        const base = new Date(weekStartStr + 'T12:00:00');
         const targetDateStr = formatDate(addDays(base, dayIndex));
         
         let html = `<h3>Behavior Tags - ${targetDateStr}</h3>
@@ -9034,7 +9290,7 @@
         document.getElementById('save_day_tags').addEventListener('click', () => {
             const weekStartStr = currentWeekStartStr();
             const dayIndex = parseInt(document.getElementById('daySelect').value, 10);
-            const base = new Date(weekStartStr);
+            const base = new Date(weekStartStr + 'T12:00:00');
             const targetDateStr = formatDate(addDays(base, dayIndex));
             
             state.students.forEach((s, i) => {
@@ -9107,6 +9363,8 @@
 
     // ===== VIEW ADMIN SUBMISSIONS =====
     function openAdminSubmissions() {
+        // FIXED: always reload from localStorage to get latest data
+        adminSubmissions = getAdminSubmissions();
         const classSubmissions = adminSubmissions[currentClass] || [];
         
         if (classSubmissions.length === 0) {
@@ -9350,6 +9608,8 @@
     
     window.deleteSubmission = function(submissionId) {
         if (confirm('Are you sure you want to delete this submission?')) {
+            // FIXED: re-read fresh before deleting to avoid overwriting other changes
+            adminSubmissions = getAdminSubmissions();
             const classSubmissions = adminSubmissions[currentClass] || [];
             adminSubmissions[currentClass] = classSubmissions.filter(s => s.id !== submissionId);
             localStorage.setItem('iesr_admin_submissions', JSON.stringify(adminSubmissions));
@@ -9459,7 +9719,7 @@
         
         const weekStartStr = currentWeekStartStr();
         ensureWeekLoaded(weekStartStr);
-        const weekStart = new Date(weekStartStr);
+        const weekStart = new Date(weekStartStr + 'T12:00:00');
         const dates = [0, 1, 2, 3, 4].map(i => addDays(weekStart, i));
         const dateFmts = dates.map(d => formatDate(d));
         
@@ -9858,13 +10118,20 @@
         });
         
         weekStarts.forEach(weekStart => {
-            const storageKey = EncryptionSystem.encrypt(`iesr_${currentClass}_${unlockedTeacher}_${weekStart}`);
+            // FIXED: use plain key (consistent with save/load functions)
+            const storageKey = `iesr_att_${currentClass}_${unlockedTeacher}_${weekStart}`;
             try {
                 const data = localStorage.getItem(storageKey);
                 if (data) {
-                    const decrypted = EncryptionSystem.decrypt(data);
-                    if (decrypted) {
-                        const weekData = JSON.parse(decrypted);
+                    let weekData = null;
+                    // Try encrypted value first, then plain JSON (migration compat)
+                    try {
+                        const decrypted = EncryptionSystem.decrypt(data);
+                        if (decrypted) weekData = JSON.parse(decrypted);
+                    } catch(e) {}
+                    if (!weekData) { try { weekData = JSON.parse(data); } catch(e) {} }
+                    
+                    if (weekData) {
                         Object.keys(weekData).forEach(key => {
                             const parts = key.split('|');
                             if (parts.length < 2) return;
@@ -9874,7 +10141,7 @@
                             // Skip tag/note keys
                             if (sessionIdPart === 'tags' || sessionIdPart === 'notes') return;
                             const record = weekData[key];
-                            if (record.status && record.status !== 'U' && record.marked_by === unlockedTeacher) {
+                            if (record && record.status && record.status !== 'U' && record.marked_by === unlockedTeacher) {
                                 const mapKey = `${admissionNo}|${dateStr}`;
                                 // For summary: if any session has Absent, mark Absent; else Present wins
                                 if (!teacherAttendanceMap[mapKey]) {
@@ -9885,6 +10152,27 @@
                             }
                         });
                     }
+                }
+                // Also check current in-memory state if this is the current week
+                const currentWk = currentWeekStartStr();
+                if (weekStart === currentWk && state.attendance[currentWk]) {
+                    Object.keys(state.attendance[currentWk]).forEach(key => {
+                        const parts = key.split('|');
+                        if (parts.length < 2) return;
+                        const admissionNo = parts[0];
+                        const dateStr = parts[1];
+                        const sessionIdPart = parts[2] || 'DEFAULT';
+                        if (sessionIdPart === 'tags' || sessionIdPart === 'notes') return;
+                        const record = state.attendance[currentWk][key];
+                        if (record && record.status && record.status !== 'U') {
+                            const mapKey = `${admissionNo}|${dateStr}`;
+                            if (!teacherAttendanceMap[mapKey]) {
+                                teacherAttendanceMap[mapKey] = record.status;
+                            } else if (record.status === 'A') {
+                                teacherAttendanceMap[mapKey] = 'A';
+                            }
+                        }
+                    });
                 }
             } catch (e) {
                 console.warn(`Could not load week ${weekStart}:`, e);
@@ -9964,7 +10252,7 @@
             const weekData = state.attendance[weekStartStr] || {};
             
             const totals = { P: 0, A: 0, U: 0, L: 0 };
-            const weekStart = new Date(weekStartStr);
+            const weekStart = new Date(weekStartStr + 'T12:00:00');
             const dates = [0, 1, 2, 3, 4].map(i => formatDate(addDays(weekStart, i)));
             
             // Count records across all session keys
@@ -10111,10 +10399,11 @@
         }
         
         const wk = currentWeekStartStr();
-        loadAttendanceForWeek(wk);
-        renderRegister();
-        calculateIntelligence();
-        showSuccess('Register updated with latest data!');
+        loadAttendanceForWeek(wk).then(() => {
+            renderRegister();
+            calculateIntelligence();
+            showSuccess('Register updated with latest data!');
+        });
     }
     
     function addStudent() {
@@ -10232,6 +10521,7 @@
     
     function confirmDeleteStudent() {
         state.students = state.students.filter(s => s.Admission_No !== selectedStudentAdmission);
+        selectedStudentAdmission = null; // FIXED: reset stale selection after delete
         saveStudentsToStorage();
         renderRegister();
         calculateIntelligence();
@@ -10243,11 +10533,9 @@
             state.sessions.splice(index, 1);
             saveSessionsToStorage();
             renderTeacherSchedule();
-            document.getElementById('modalContent').querySelectorAll('div').forEach(div => {
-                if (div.textContent.includes('Edit Teacher Schedule')) {
-                    openEditScheduleModal();
-                }
-            });
+            // FIXED: directly re-open edit modal instead of fragile DOM text search
+            closeModal();
+            setTimeout(() => openEditScheduleModal(), 50);
         }
     };
 
@@ -10265,9 +10553,13 @@
         const dayIndex = parseInt(document.getElementById('daySelect').value, 10);
         const currentDay = dayMap[dayIndex] || 'MON';
         
-        const teacherSessions = state.sessions.filter(s =>
-            s.LECTURER === teacher || s.LECTURER === 'ALL LECTURERS'
-        );
+        // FIXED: use inclusive matching (includes) not exact equality for multi-lecturer sessions
+        const teacherUpper = teacher.toUpperCase();
+        const teacherSessions = state.sessions.filter(s => {
+            if (!s.LECTURER) return false;
+            const lec = s.LECTURER.toUpperCase();
+            return lec === 'ALL LECTURERS' || lec.includes(teacherUpper) || teacherUpper.includes(lec);
+        });
         
         if (!teacherSessions.length) {
             container.innerHTML = `<div class="subtle">No schedule found for ${teacher}</div>`;
@@ -10303,7 +10595,7 @@
         
         const weekStartStr = currentWeekStartStr();
         ensureWeekLoaded(weekStartStr);
-        const weekStart = new Date(weekStartStr);
+        const weekStart = new Date(weekStartStr + 'T12:00:00');
         const dates = [0, 1, 2, 3, 4].map(i => formatDate(addDays(weekStart, i)));
         const wkData = state.attendance[weekStartStr] || {};
         
@@ -10448,14 +10740,13 @@
     
     function shouldLockDay(dayIndex) {
         const weekStartStr = currentWeekStartStr();
-        const base = new Date(weekStartStr);
+        // FIXED: noon anchor to prevent UTC timezone off-by-one in Nairobi
+        const base = new Date(weekStartStr + 'T12:00:00');
         const targetDate = addDays(base, dayIndex);
-        const today = new Date();
-        
-        today.setHours(0, 0, 0, 0);
-        targetDate.setHours(0, 0, 0, 0);
-        
-        return targetDate < today && targetDate.toDateString() !== today.toDateString();
+        const targetStr = formatDate(targetDate);
+        const todayStr = formatDate(new Date());
+        // Lock any date strictly before today
+        return targetStr < todayStr;
     }
 
     // ===== CLEAR FUNCTIONS =====
@@ -10468,7 +10759,8 @@
         const weekStartStr = currentWeekStartStr();
         ensureWeekLoaded(weekStartStr);
         const dayIndex = parseInt(document.getElementById('daySelect').value, 10);
-        const base = new Date(weekStartStr);
+        // FIXED: noon anchor for consistent local date
+        const base = new Date(weekStartStr + 'T12:00:00');
         const targetDateStr = formatDate(addDays(base, dayIndex));
         
         const wkData = state.attendance[weekStartStr];
@@ -10495,7 +10787,8 @@
         
         const weekStartStr = currentWeekStartStr();
         try {
-            const storageKey = EncryptionSystem.encrypt(`iesr_${state.className}_${unlockedTeacher}_${weekStartStr}`);
+            // FIXED: use plain key to match save key
+            const storageKey = `iesr_att_${state.className}_${unlockedTeacher}_${weekStartStr}`;
             localStorage.removeItem(storageKey);
             delete state.attendance[weekStartStr];
         } catch (e) { }
@@ -10507,10 +10800,11 @@
     
     async function clearAllWeeksCmd() {
         try {
-            const prefix = EncryptionSystem.encrypt(`iesr_${state.className}_`);
+            // FIXED: use plain prefix matching to find all attendance keys for this class
+            const prefix = `iesr_att_${state.className}_`;
             
             Object.keys(localStorage).forEach(k => {
-                if (k.startsWith(prefix.substring(0, 20))) {
+                if (k.startsWith(prefix)) {
                     localStorage.removeItem(k);
                 }
             });
@@ -10564,10 +10858,10 @@
         
         document.getElementById('markAll').addEventListener('click', markAllPresentForSelectedDay);
         
-        document.getElementById('saveWeek').addEventListener('click', () => {
+        document.getElementById('saveWeek').addEventListener('click', async () => {
             const wk = currentWeekStartStr();
-            saveAttendanceForWeek(wk);
-            showSuccess('Week saved successfully!');
+            await saveAttendanceForWeek(wk);
+            // saveAttendanceForWeek already calls markSaved() and showSuccess() internally
         });
         
         document.getElementById('printBtn').addEventListener('click', () => { 
@@ -10590,9 +10884,9 @@
             showSuccess('HTML downloaded successfully!');
         });
         
-        document.getElementById('weekStart').addEventListener('change', () => {
+        document.getElementById('weekStart').addEventListener('change', async () => {
             const wk = currentWeekStartStr();
-            loadAttendanceForWeek(wk);
+            await loadAttendanceForWeek(wk);
             renderRegister();
             calculateIntelligence();
         });
@@ -10607,10 +10901,10 @@
         document.getElementById('editScheduleBtn').addEventListener('click', openEditScheduleModal);
         document.getElementById('updateRegisterBtn').addEventListener('click', updateRegister);
         
-        document.getElementById('saveNowBtn').addEventListener('click', function() {
+        document.getElementById('saveNowBtn').addEventListener('click', async function() {
             const wk = currentWeekStartStr();
-            saveAttendanceForWeek(wk);
-            markSaved();
+            await saveAttendanceForWeek(wk);
+            // saveAttendanceForWeek already calls markSaved() internally
         });
         
         document.getElementById('logoutBtn').addEventListener('click', function() {
@@ -10708,6 +11002,8 @@
         
         document.getElementById('registerContainer').style.display = 'none';
         document.getElementById('loginContainer').style.display = 'flex';
+        var ttd = document.getElementById('timetableDashboard');
+        if (ttd) ttd.style.display = 'block';
         document.getElementById('loginForm').reset();
         document.getElementById('errorMessage').classList.remove('show');
         hideUnsavedWarning();
@@ -10748,7 +11044,7 @@
 
     // ===== INITIALIZE APPLICATION =====
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('IESR Electrical Register System Loaded - Craft & Diploma Merged with AI Insights');
+        console.log('IESR Electrical Register System v2 Loaded — Full Refactor Applied');
         console.log('Available Classes:', Object.keys(CLASS_CONFIG));
         
         document.getElementById('loginForm').addEventListener('submit', handleLogin);
@@ -10756,9 +11052,257 @@
             e.preventDefault();
             handleLogin(e);
         });
-        
+
+        // FIXED: Attach PIN modal keyboard listeners here (DOMContentLoaded) — elements always exist
+        document.getElementById('verifyTeacherPin').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') { e.preventDefault(); document.getElementById('confirmVerifyBtn').click(); }
+        });
+        document.getElementById('cancelVerifyBtn').addEventListener('click', hideDoubleVerification);
+        document.getElementById('confirmVerifyBtn').addEventListener('click', async function(e) {
+            e.preventDefault();
+            await handleTeacherUnlock();
+        });
+
         attachEventListeners();
+
+        // ===== TIMETABLE DASHBOARD INIT =====
+        initTimetableDashboard();
     });
+
+    // ===================================================================
+    // ===== TIMETABLE DASHBOARD ENGINE =====
+    // ===================================================================
+    (function() {
+      const DAY_MAP = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+      const DAY_LABELS = {MON:'Monday',TUE:'Tuesday',WED:'Wednesday',THU:'Thursday',FRI:'Friday',SAT:'Saturday',SUN:'Sunday'};
+      const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+      let dashboardDate = new Date();
+      let dashboardCollapsed = false;
+
+      // Parse a time string like "08:00AM TO 10:00AM" → {start: minutes, end: minutes}
+      function parseTimeRange(timeStr) {
+        if (!timeStr) return null;
+        const m = timeStr.match(/(\d+):(\d+)(AM|PM)\s+TO\s+(\d+):(\d+)(AM|PM)/i);
+        if (!m) return null;
+        const toMin = (h, mn, ampm) => {
+          let hh = parseInt(h,10);
+          if (ampm.toUpperCase()==='PM' && hh!==12) hh+=12;
+          if (ampm.toUpperCase()==='AM' && hh===12) hh=0;
+          return hh*60 + parseInt(mn,10);
+        };
+        return { start: toMin(m[1],m[2],m[3]), end: toMin(m[4],m[5],m[6]) };
+      }
+
+      function getDayTimetableData(date) {
+        const dayStr = DAY_MAP[date.getDay()];
+        const result = { craft:[], diploma:[], dayStr };
+        if (dayStr==='SAT'||dayStr==='SUN') return result;
+
+        Object.keys(CLASS_CONFIG).forEach(classKey => {
+          const cfg = CLASS_CONFIG[classKey];
+          const sessions = cfg.defaultSessions || [];
+          const daySessions = sessions.filter(s => s.DAY === dayStr);
+          const isCraft = classKey.startsWith('CEE') || (classKey.includes('L5'));
+          const entry = {
+            code: classKey,
+            displayName: cfg.displayName || classKey,
+            sessions: daySessions,
+            studentCount: (cfg.embeddedStudents||[]).length,
+            isCraft
+          };
+          if (isCraft) result.craft.push(entry);
+          else result.diploma.push(entry);
+        });
+        return result;
+      }
+
+      function nowMinutes() {
+        const n = new Date();
+        return n.getHours()*60 + n.getMinutes();
+      }
+
+      function isToday(date) {
+        const t = new Date();
+        return date.getFullYear()===t.getFullYear() && date.getMonth()===t.getMonth() && date.getDate()===t.getDate();
+      }
+
+      function getClassStatus(sessions) {
+        if (!sessions || sessions.length===0) return 'none';
+        if (!isToday(dashboardDate)) return 'none';
+        const now = nowMinutes();
+        for (const s of sessions) {
+          const r = parseTimeRange(s.TIME);
+          if (r && now >= r.start && now < r.end) return 'live';
+        }
+        for (const s of sessions) {
+          const r = parseTimeRange(s.TIME);
+          if (r && now < r.start) return 'upcoming';
+        }
+        return 'done';
+      }
+
+      function isActiveSession(timeStr) {
+        if (!isToday(dashboardDate)) return false;
+        const r = parseTimeRange(timeStr);
+        if (!r) return false;
+        const now = nowMinutes();
+        return now >= r.start && now < r.end;
+      }
+
+      function formatDate(date) {
+        const d = DAY_MAP[date.getDay()];
+        const dn = DAY_LABELS[d] || d;
+        const day = date.getDate();
+        const suffix = ['th','st','nd','rd'][(day%10<4&&(day<11||day>13))?day%10:0]||'th';
+        return `${dn.toUpperCase()}, ${MONTH_NAMES[date.getMonth()].toUpperCase()} ${day}${suffix}, ${date.getFullYear()}`;
+      }
+
+      function getStats(data) {
+        const allEntries = [...data.craft, ...data.diploma];
+        let totalStudents=0, totalSessions=0, teacherSet=new Set();
+        allEntries.forEach(e => {
+          totalStudents += e.studentCount;
+          totalSessions += e.sessions.length;
+          e.sessions.forEach(s => { if(s.LECTURER) s.LECTURER.split('/').forEach(t=>teacherSet.add(t.trim())); });
+        });
+        return { totalStudents, totalSessions, activeTeachers:teacherSet.size, totalClasses:allEntries.length };
+      }
+
+      function buildStatCard(icon, color, val, lbl) {
+        return `<div class="ttd-stat">
+          <div class="ttd-stat-icon" style="color:${color}"><i class="${icon}"></i></div>
+          <div class="ttd-stat-val">${val}</div>
+          <div class="ttd-stat-lbl">${lbl}</div>
+        </div>`;
+      }
+
+      function buildClassCard(entry) {
+        const status = getClassStatus(entry.sessions);
+        let badgeHtml = '';
+        if (status==='live') badgeHtml = `<span class="ttd-status-badge badge-live"><span class="live-dot"></span>LIVE</span>`;
+        else if (status==='upcoming') badgeHtml = `<span class="ttd-status-badge badge-upcoming">⏱ UPCOMING</span>`;
+        else if (status==='done') badgeHtml = `<span class="ttd-status-badge badge-done">✓ DONE</span>`;
+        else badgeHtml = `<span class="ttd-status-badge badge-none">—</span>`;
+
+        const cardClass = entry.isCraft ? 'craft-card' : 'diploma-card';
+        const shortCode = entry.code.length > 18 ? entry.code.substring(0,18)+'…' : entry.code;
+
+        let sessionsHtml = '';
+        if (entry.sessions.length===0) {
+          sessionsHtml = '<div class="ttd-no-sessions">No sessions today</div>';
+        } else {
+          sessionsHtml = '<div class="ttd-sessions">' + entry.sessions.map(s => {
+            const active = isActiveSession(s.TIME);
+            return `<div class="ttd-session${active?' active-session':''}">
+              <div class="ttd-session-time">${s.TIME||''}</div>
+              <div class="ttd-session-subj">${s.SUBJECT||'—'}</div>
+              <div class="ttd-session-lect"><i class="fas fa-user-tie"></i>${s.LECTURER||'Staff TBD'}</div>
+            </div>`;
+          }).join('') + '</div>';
+        }
+
+        return `<div class="ttd-class-card ${cardClass}">
+          <div class="ttd-card-top">
+            <div>
+              <div class="ttd-class-code">${shortCode}</div>
+              <div class="ttd-class-name">${entry.isCraft?'Craft Certificate':'Diploma Engineering'}</div>
+            </div>
+            ${badgeHtml}
+          </div>
+          ${sessionsHtml}
+          <div class="ttd-students-count"><i class="fas fa-users"></i>${entry.studentCount} students enrolled</div>
+        </div>`;
+      }
+
+      function buildDashboard() {
+        const data = getDayTimetableData(dashboardDate);
+        const stats = getStats(data);
+        const todayLabel = isToday(dashboardDate) ? 'TODAY' : formatDate(dashboardDate);
+        const isWeekend = (data.dayStr==='SAT'||data.dayStr==='SUN');
+
+        let bodyHtml = '';
+        if (isWeekend) {
+          bodyHtml = `<div class="ttd-weekend">
+            <i class="fas fa-moon"></i>
+            <div>No classes scheduled on weekends.</div>
+            <div style="font-size:11px;margin-top:6px;color:rgba(255,255,255,0.25)">Use navigation arrows to view weekday schedules</div>
+          </div>`;
+        } else {
+          const summaryHtml = `<div class="ttd-summary">
+            ${buildStatCard('fas fa-users','#5dde82',stats.totalStudents,'Total Students')}
+            ${buildStatCard('fas fa-chalkboard-teacher','#6ba3ff',stats.activeTeachers,'Active Teachers')}
+            ${buildStatCard('fas fa-calendar-check','#ffd454',stats.totalSessions,'Sessions Today')}
+            ${buildStatCard('fas fa-school','#ff8c54',stats.totalClasses,'Classes Running')}
+          </div>`;
+
+          const craftHtml = data.craft.length > 0
+            ? `<div class="ttd-section-label"><span>🔧 Craft Certificate Programs</span></div>
+               <div class="ttd-classes-grid">${data.craft.map(buildClassCard).join('')}</div>`
+            : '';
+          const diplomaHtml = data.diploma.length > 0
+            ? `<div class="ttd-section-label"><span>🎓 Diploma in Electrical Engineering</span></div>
+               <div class="ttd-classes-grid">${data.diploma.map(buildClassCard).join('')}</div>`
+            : '';
+
+          bodyHtml = summaryHtml + craftHtml + diplomaHtml;
+        }
+
+        return `<div class="ttd-wrap">
+          <div class="ttd-header">
+            <div class="ttd-title-area">
+              <div class="ttd-icon"><i class="fas fa-table"></i></div>
+              <div class="ttd-title-text">
+                <h3>Department Timetable Dashboard</h3>
+                <p>${formatDate(dashboardDate)}${isToday(dashboardDate)?' &nbsp;•&nbsp; LIVE VIEW':''}</p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <div class="ttd-date-nav">
+                <button class="ttd-nav-btn" onclick="timetableNavDate(-1)" title="Previous day"><i class="fas fa-chevron-left"></i></button>
+                ${isToday(dashboardDate)?'<span class="ttd-date-label">Today</span>':'<button class="ttd-nav-btn" onclick="timetableNavDate(0)" style="width:auto;padding:0 10px;font-size:10px;">Today</button>'}
+                <button class="ttd-nav-btn" onclick="timetableNavDate(1)" title="Next day"><i class="fas fa-chevron-right"></i></button>
+              </div>
+              <button class="ttd-toggle-btn" onclick="timetableToggle()">
+                <i class="fas fa-${dashboardCollapsed?'expand-alt':'compress-alt'}"></i>
+                ${dashboardCollapsed?'Expand':'Collapse'}
+              </button>
+            </div>
+          </div>
+          <div class="ttd-body${dashboardCollapsed?' collapsed':''}" id="ttdBody">
+            ${bodyHtml}
+          </div>
+        </div>`;
+      }
+
+      window.initTimetableDashboard = function() {
+        const el = document.getElementById('timetableDashboard');
+        if (!el) return;
+        el.style.display = 'block';
+        el.innerHTML = buildDashboard();
+        // Refresh every 60 seconds for live status
+        setInterval(() => {
+          if (document.getElementById('loginContainer') && document.getElementById('loginContainer').style.display !== 'none') {
+            const fresh = new Date();
+            if (!isToday(dashboardDate)) return; // don't auto-update if navigated away
+            el.innerHTML = buildDashboard();
+          }
+        }, 60000);
+      };
+
+      window.timetableNavDate = function(delta) {
+        if (delta === 0) { dashboardDate = new Date(); }
+        else { dashboardDate = new Date(dashboardDate); dashboardDate.setDate(dashboardDate.getDate() + delta); }
+        const el = document.getElementById('timetableDashboard');
+        if (el) el.innerHTML = buildDashboard();
+      };
+
+      window.timetableToggle = function() {
+        dashboardCollapsed = !dashboardCollapsed;
+        const el = document.getElementById('timetableDashboard');
+        if (el) el.innerHTML = buildDashboard();
+      };
+    })();
 
     // ===================================================================
     // ===== TIME-BASED TEACHER CONFLICT PREVENTION SYSTEM =====
@@ -11165,9 +11709,8 @@
     function validateMarkingAuthorization(teacherName, dateStr) {
         if (!teacherName) return { allowed: false, reason: 'No teacher unlocked.', window: 'NONE' };
 
-        // Only allow marking TODAY's date
-        const today = new Date();
-        const todayStr = today.toISOString().split('T')[0];
+        // FIXED: use formatDate for consistent local-timezone today string
+        const todayStr = formatDate(new Date());
 
         if (dateStr > todayStr) {
             return {
@@ -11238,10 +11781,10 @@
         if (!unlockedTeacher || !state.sessions) return;
 
         timeSlotManager.loadSessions(state.sessions);
-        const now = new Date();
         const currentMins = timeSlotManager.getCurrentMinutes();
         const todaySessions = timeSlotManager.getTodaySessions();
-        const todayStr = now.toISOString().split('T')[0];
+        // FIXED: use formatDate for consistent local-timezone today string
+        const todayStr = formatDate(new Date());
 
         for (const session of todaySessions) {
             if (!session.LECTURER || !session.LECTURER.toUpperCase().includes(unlockedTeacher.toUpperCase())) continue;
@@ -11251,14 +11794,12 @@
             // Check if session ended 1-10 minutes ago
             const minsAgo = currentMins - range.end;
             if (minsAgo >= 1 && minsAgo <= 10) {
-                // Check marking completeness — use session-aware key
                 const weekStart = currentWeekStartStr();
                 const wkData = state.attendance[weekStart] || {};
                 const total = state.students.length;
                 const sessionId = buildSessionId(session);
                 let marked = 0;
                 state.students.forEach(s => {
-                    // Check session-keyed first, then legacy
                     const sessionKey = buildAttendanceKey(s.Admission_No, todayStr, sessionId);
                     const legacyKey = `${s.Admission_No}|${todayStr}`;
                     const rec = wkData[sessionKey] || wkData[legacyKey];
@@ -11268,20 +11809,13 @@
                 const pct = total > 0 ? Math.round((marked / total) * 100) : 100;
                 if (pct < 80) {
                     const unmkd = total - marked;
-                    // Show a reminder notification
                     showSuccess(`⚠️ REMINDER: ${session.SUBJECT} ended ${minsAgo} min ago. ${unmkd} students still unmarked (${pct}%). Mark now before next session!`);
-                    // Flag in admin
                     setUnmarkedFlag(state.className, unlockedTeacher, todayStr, session.SUBJECT, pct);
                 }
-                break; // only one reminder at a time
+                break;
             }
         }
     }
-
-    /**
-     * Enhanced unlockTeacherRegister — starts auth checker after unlock
-     */
-    const _origUnlockTeacherRegister = typeof unlockTeacherRegister !== 'undefined' ? unlockTeacherRegister : null;
 
     // ===== CONFLICT LOG VIEWER (for Global Admin) =====
     function openConflictLogViewer() {
@@ -11350,8 +11884,9 @@
 
     function buildComplianceTab() {
         if (!currentClass || !CLASS_CONFIG[currentClass]) return '<p>No class loaded.</p>';
-        const teachers = CLASS_CONFIG[currentClass].teachers;
-        const today = new Date().toISOString().split('T')[0];
+        const teachers = (CLASS_CONFIG[currentClass].teachers) || [];
+        // FIXED: use formatDate for consistent local-timezone today
+        const today = formatDate(new Date());
         const weekStart = currentWeekStartStr();
         const wkData = state.attendance[weekStart] || {};
         const total = state.students.length;
