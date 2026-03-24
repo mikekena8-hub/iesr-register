@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -2217,6 +2218,191 @@
         font-size: 12px;
       }
     }
+    /* ===== TIME-BASED CONFLICT PREVENTION STYLES ===== */
+    .time-auth-banner {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 8px 16px 0 16px;
+      border: 1px solid transparent;
+      animation: slideDown 0.3s ease;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .time-auth-banner.active-session {
+      background: #d4edda;
+      color: #155724;
+      border-color: #c3e6cb;
+    }
+    .time-auth-banner.break-period {
+      background: #fff3cd;
+      color: #856404;
+      border-color: #ffeeba;
+    }
+    .time-auth-banner.locked-session {
+      background: #f8d7da;
+      color: #721c24;
+      border-color: #f5c6cb;
+    }
+    .time-auth-banner.after-hours {
+      background: #cce5ff;
+      color: #004085;
+      border-color: #b8daff;
+    }
+    /* ===== MULTI-SESSION REGISTER STYLES ===== */
+    .session-header-group {
+      background: #f0f4ff;
+      text-align: center;
+      font-weight: 700;
+      font-size: 11px;
+      border-bottom: 2px solid #0b66ff;
+      padding: 4px 3px 2px 3px;
+      vertical-align: bottom;
+      white-space: nowrap;
+      min-width: 60px;
+    }
+    .session-header-group.active {
+      background: #d0e8ff;
+    }
+    .session-sub-header {
+      background: #e8f0ff;
+      font-size: 10px;
+      color: #444;
+      text-align: center;
+      padding: 2px 3px;
+      border-right: 1px solid #d0ddf7;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .session-sub-header.active {
+      background: #c0d8f8;
+    }
+    .session-cell {
+      text-align: center;
+      padding: 4px 3px;
+      border-right: 1px dashed #e0e8f5;
+      vertical-align: middle;
+      min-width: 44px;
+    }
+    .session-cell:last-child {
+      border-right: none;
+    }
+    .session-day-group {
+      border-left: 2px solid #0b66ff;
+    }
+    .session-selector-modal {
+      background: #f7fafc;
+      border: 1px solid #e0e8f5;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+    .session-selector-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      margin-bottom: 6px;
+      background: white;
+      border: 1px solid #e0e8f5;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .session-selector-option:hover {
+      background: #eef8ff;
+      border-color: #0b66ff;
+    }
+    .session-selector-option.already-marked {
+      opacity: 0.6;
+      cursor: default;
+    }
+    .session-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .session-badge.marked { background: #d4edda; color: #155724; }
+    .session-badge.unmarked { background: #fff3cd; color: #856404; }
+    /* END MULTI-SESSION STYLES */
+
+    .time-auth-banner.before-class {
+      background: #e2d9f3;
+      color: #432874;
+      border-color: #d1c4e9;
+    }
+    .time-auth-banner i { font-size: 18px; }
+    .time-auth-banner .banner-text { flex: 1; }
+    .time-auth-banner .countdown {
+      font-size: 12px;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-top: 3px;
+    }
+
+    .conflict-log-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #dc3545;
+      color: white;
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .marking-window-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    .mw-during  { background:#d4edda; color:#155724; }
+    .mw-break   { background:#fff3cd; color:#856404; }
+    .mw-after   { background:#cce5ff; color:#004085; }
+    .mw-before  { background:#e2d9f3; color:#432874; }
+    .mw-locked  { background:#f8d7da; color:#721c24; }
+
+    /* Unmarked session flag in admin */
+    .unmarked-flag {
+      display: inline-block;
+      background: #ffc107;
+      color: #333;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .day-locked {
+      background: #f0f0f0 !important;
+      color: #999 !important;
+      cursor: not-allowed !important;
+    }
+    .compliance-table { width:100%; border-collapse:collapse; font-size:13px; }
+    .compliance-table th { background:#f8f9fa; padding:8px 10px; text-align:left; border-bottom:2px solid #dee2e6; }
+    .compliance-table td { padding:8px 10px; border-bottom:1px solid #e9ecef; }
+    .compliance-dot { width:12px; height:12px; border-radius:50%; display:inline-block; margin-right:6px; vertical-align:middle; }
+    .dot-green  { background:#28a745; }
+    .dot-yellow { background:#ffc107; }
+    .dot-red    { background:#dc3545; }
+    .dot-gray   { background:#adb5bd; }
  </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -2415,6 +2601,16 @@
       </div>
     </div>
 
+    <!-- TIME-BASED AUTH STATUS BANNER -->
+    <div class="time-auth-banner" id="timeAuthBanner">
+      <i class="fas fa-clock" id="timeAuthIcon"></i>
+      <div class="banner-text">
+        <div id="timeAuthMain">Checking authorization...</div>
+        <div class="countdown" id="timeAuthSub"></div>
+      </div>
+      <div id="markingWindowBadge"></div>
+    </div>
+
     <!-- MAIN REGISTER INTERFACE -->
     <header>
       <div style="display:flex;flex-direction:column;gap:6px">
@@ -2487,6 +2683,10 @@
           <!-- Global Admin View Button -->
           <button id="globalAdminViewBtn" class="global-admin-btn">
             <i class="fas fa-globe"></i> Global Admin
+          </button>
+          <!-- Conflict Log Button (Global Admin only) -->
+          <button id="conflictLogBtn" class="global-admin-btn" style="background:#5a0080 !important" onclick="showGlobalAdminPinVerification('openConflictLogViewer','view Conflict Log')">
+            <i class="fas fa-shield-alt"></i> Conflict Log
           </button>
         </div>
       </div>
@@ -2784,11 +2984,11 @@
     // ===== GLOBAL CONSTANTS =====
    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxolIUza94tkFL5u0ejiBbFfZ6bmsbe2sSId1WsKJHOK6g3DR7Glmf5UuZUIeJ8nD_Hmw/exec';
 
-    // ===== INDEXEDDB STORAGE CLASS (UPDATED TO PREVENT DUPLICATES) =====
+    // ===== INDEXEDDB STORAGE CLASS (UPDATED v4 — SESSION-AWARE UNIQUE KEY) =====
     class IndexedDBStorage {
       constructor() {
         this.dbName = 'IESR_Database';
-        this.version = 3; // Incremented version for schema update
+        this.version = 4; // v4: sessionId added to unique composite key for multi-session support
         this.db = null;
       }
 
@@ -2803,14 +3003,14 @@
 
           request.onsuccess = (event) => {
             this.db = event.target.result;
-            console.log('IndexedDB initialized successfully');
+            console.log('IndexedDB initialized successfully (v4 multi-session)');
             resolve();
           };
 
           request.onupgradeneeded = (event) => {
             const db = event.target.result;
 
-            // Drop existing stores if they exist to recreate with proper schema
+            // Drop existing stores to recreate with updated schema
             if (db.objectStoreNames.contains('attendance')) {
               db.deleteObjectStore('attendance');
             }
@@ -2821,14 +3021,16 @@
               db.deleteObjectStore('students');
             }
 
-            // Create attendance store with UNIQUE composite key
+            // v4: attendance store — unique key now includes sessionId to allow multiple sessions per day
             const attendanceStore = db.createObjectStore('attendance', { keyPath: 'id' });
-            attendanceStore.createIndex('uniqueRecord', ['class', 'teacher', 'studentId', 'date'], { unique: true });
+            // UPDATED: composite unique index now includes sessionId
+            attendanceStore.createIndex('uniqueRecord', ['class', 'teacher', 'studentId', 'date', 'sessionId'], { unique: true });
             attendanceStore.createIndex('class', 'class', { unique: false });
             attendanceStore.createIndex('teacher', 'teacher', { unique: false });
             attendanceStore.createIndex('date', 'date', { unique: false });
             attendanceStore.createIndex('studentId', 'studentId', { unique: false });
             attendanceStore.createIndex('subject', 'subject', { unique: false });
+            attendanceStore.createIndex('sessionId', 'sessionId', { unique: false });
             attendanceStore.createIndex('syncStatus', 'syncStatus', { unique: false });
 
             // Create sync queue
@@ -2854,24 +3056,26 @@
           const attendanceStore = transaction.objectStore('attendance');
           const syncStore = transaction.objectStore('syncQueue');
 
-          // Generate unique composite key
-          const uniqueRecordId = `${record.class}|${record.teacher}|${record.studentId}|${record.date}`;
+          // v4: Generate unique composite key — includes sessionId for multi-session support
+          const sessionId = record.sessionId || 'DEFAULT';
+          const uniqueRecordId = record.uniqueRecordId || `${record.class}|${record.teacher}|${record.studentId}|${record.date}|${sessionId}`;
           
-          // Check if record already exists
+          // Check if record already exists — now lookup includes sessionId
           const index = attendanceStore.index('uniqueRecord');
-          const getRequest = index.get([record.class, record.teacher, record.studentId, record.date]);
+          const getRequest = index.get([record.class, record.teacher, record.studentId, record.date, sessionId]);
 
           getRequest.onsuccess = () => {
             const existingRecord = getRequest.result;
             
             if (existingRecord) {
               // UPDATE existing record instead of creating duplicate
-              console.log(`Updating existing attendance record for ${record.studentId} on ${record.date}`);
+              console.log(`Updating existing record for ${record.studentId} on ${record.date} session ${sessionId}`);
               
               const updateRecord = {
                 ...existingRecord,
                 status: record.status,
                 subject: record.subject || existingRecord.subject,
+                sessionId: sessionId,
                 marked_at: new Date().toISOString(),
                 syncStatus: 'pending'
               };
@@ -2879,7 +3083,6 @@
               const putRequest = attendanceStore.put(updateRecord);
               
               putRequest.onsuccess = () => {
-                // Add to sync queue with unique constraint
                 const syncRecord = {
                   uniqueRecordId: uniqueRecordId,
                   recordId: updateRecord.id,
@@ -2889,20 +3092,17 @@
                   createdAt: new Date().toISOString()
                 };
                 
-                // Check if sync record already exists
                 const syncIndex = syncStore.index('uniqueRecordId');
                 const syncGetRequest = syncIndex.get(uniqueRecordId);
                 
                 syncGetRequest.onsuccess = () => {
                   if (syncGetRequest.result) {
-                    // Update existing sync record
                     const existingSync = syncGetRequest.result;
                     existingSync.data = updateRecord;
                     existingSync.status = 'pending';
                     existingSync.retryCount = 0;
                     syncStore.put(existingSync);
                   } else {
-                    // Add new sync record
                     syncStore.add(syncRecord);
                   }
                 };
@@ -2913,7 +3113,7 @@
               putRequest.onerror = (error) => reject(error);
             } else {
               // CREATE new record
-              console.log(`Creating new attendance record for ${record.studentId} on ${record.date}`);
+              console.log(`Creating new record for ${record.studentId} on ${record.date} session ${sessionId}`);
               
               const newRecord = {
                 id: uniqueRecordId,
@@ -2922,6 +3122,7 @@
                 studentId: record.studentId,
                 studentName: record.studentName,
                 date: record.date,
+                sessionId: sessionId,
                 subject: record.subject,
                 status: record.status,
                 marked_at: record.marked_at || new Date().toISOString(),
@@ -4339,7 +4540,7 @@
         return dayOfWeek === 0 ? 4 : Math.min(dayOfWeek - 1, 4);
     }
 
-    // ===== FIXED: ENCRYPTED ATTENDANCE STORAGE WITH SUBJECT STORED AT MARKING TIME =====
+    // ===== FIXED: ENCRYPTED ATTENDANCE STORAGE WITH SUBJECT STORED AT MARKING TIME + SESSION SUPPORT =====
     async function saveAttendanceForWeek(weekStartStr) {
         if (!unlockedTeacher) return false;
         
@@ -4356,44 +4557,54 @@
             
             const records = [];
             let skippedSports = 0;
-            
-            // Use for...of loops instead of forEach to avoid return issues
-            for (let student of state.students) {
-                for (let date of dates) {
-                    const key = `${student.Admission_No}|${date}`;
-                    const record = attendanceData[key];
-                    
-                    if (record && record.status && record.status !== 'U') {
-                        // CRITICAL FIX: Use the subject that was stored at marking time, NOT recalculated
-                        // This ensures historical data remains accurate even if schedule changes
-                        const subject = record.subject || getCurrentSubject(unlockedTeacher, date);
-                        
-                        // Skip SPORTS records - use CONTINUE, NOT RETURN
-                        if (subject === 'SPORTS' || subject.includes('SPORTS')) {
-                            skippedSports++;
-                            continue; // Skip this record, continue to next
-                        }
-                        
-                        records.push({
-                            class: state.className,
-                            teacher: unlockedTeacher,
-                            subject: subject, // This is now stored permanently at marking time
-                            date: date,
-                            studentId: student.Admission_No,
-                            studentName: student.Student_Name,
-                            status: record.status,
-                            marked_at: record.marked_at || new Date().toISOString(),
-                            weekStart: weekStartStr
-                        });
-                    }
+
+            // Collect all attendance records from state (session-keyed and legacy)
+            for (const [key, record] of Object.entries(attendanceData)) {
+                if (!record || !record.status || record.status === 'U') continue;
+                // Skip tag and note keys
+                if (key.includes('|tags') || key.includes('|notes')) continue;
+
+                const parts = key.split('|');
+                if (parts.length < 2) continue;
+                const admNo = parts[0];
+                const dateStr = parts[1];
+
+                // Verify this date is in this week
+                if (!dates.includes(dateStr)) continue;
+
+                const student = state.students.find(s => s.Admission_No === admNo);
+                if (!student) continue;
+
+                const subject = record.subject || getCurrentSubject(unlockedTeacher, dateStr);
+                
+                if (subject === 'SPORTS' || subject.includes('SPORTS')) {
+                    skippedSports++;
+                    continue;
                 }
+
+                const sessionId = record.sessionId || parts[2] || 'DEFAULT';
+                // Build a unique record ID that includes sessionId
+                const uniqueRecordId = `${state.className}_${unlockedTeacher}_${admNo}_${dateStr}_${sessionId}`;
+
+                records.push({
+                    class: state.className,
+                    teacher: unlockedTeacher,
+                    subject: subject,
+                    date: dateStr,
+                    sessionId: sessionId,
+                    studentId: admNo,
+                    studentName: student.Student_Name,
+                    status: record.status,
+                    marked_at: record.marked_at || new Date().toISOString(),
+                    weekStart: weekStartStr,
+                    uniqueRecordId: uniqueRecordId
+                });
             }
             
             if (records.length > 0) {
                 console.log(`✅ SAVING ${records.length} RECORDS TO DATABASE! (Skipped ${skippedSports} SPORTS records)`);
                 await indexedDBStorage.saveAttendanceBatch(records);
                 
-                // Try to sync immediately
                 googleSync.syncPendingData().catch(e => 
                   console.warn('Background sync failed:', e)
                 );
@@ -6509,6 +6720,9 @@
                 <div class="admin-tab" data-tab="teachers">Teachers</div>
                 <div class="admin-tab" data-tab="subjects">Subjects</div>
                 <div class="admin-tab" data-tab="timeline">Timeline</div>
+                <div class="admin-tab" data-tab="conflict" style="background:#5a0080;color:white;border-color:#5a0080">
+                    <i class="fas fa-shield-alt"></i> Conflict Log
+                </div>
             </div>
             
             <div id="adminTabContent">
@@ -6779,6 +6993,42 @@
                     </div>
                 </div>
             </div>
+
+            <!-- CONFLICT LOG TAB -->
+            <div class="tab-content" id="tab-conflict" style="display:none;">
+                <div style="margin-bottom:15px;padding:12px;background:#f3e5f5;border-radius:8px;border-left:4px solid #5a0080">
+                    <strong><i class="fas fa-shield-alt" style="color:#5a0080"></i> Teacher Conflict & Compliance Monitoring</strong>
+                    <p style="font-size:13px;color:#555;margin-top:6px">Shows unauthorized marking attempts, incomplete session flags, and today's marking compliance per teacher.</p>
+                </div>
+
+                <div class="admin-tabs" id="conflictSubTabs" style="margin-bottom:0">
+                    <div class="admin-tab active" onclick="switchConflictSubTab('attempts',this)">Conflict Attempts</div>
+                    <div class="admin-tab" onclick="switchConflictSubTab('unmarked',this)">Unmarked Flags</div>
+                    <div class="admin-tab" onclick="switchConflictSubTab('compliance',this)">Today's Compliance</div>
+                </div>
+
+                <div id="csTab-attempts" style="margin-top:12px">
+                    ${(function(){
+                        const log = getConflictLog().filter(e => e.class === currentClass);
+                        if (!log.length) return '<div style="padding:30px;text-align:center;color:#6c757d"><i class="fas fa-check-circle" style="font-size:36px;color:#28a745"></i><h4 style="margin-top:12px">No conflict attempts recorded</h4></div>';
+                        return '<table class="compliance-table"><thead><tr><th>Date</th><th>Time</th><th>Attempted By</th><th>Active Session</th><th>Subject</th></tr></thead><tbody>'
+                            + log.slice(0,50).map(e=>`<tr><td>${e.date||''}</td><td>${e.time||''}</td><td style="color:#dc3545;font-weight:700">${e.attemptingTeacher||''}</td><td>${e.scheduledTeacher||''}</td><td>${e.subject||''}</td></tr>`).join('')
+                            + '</tbody></table>';
+                    })()}
+                </div>
+                <div id="csTab-unmarked" style="display:none;margin-top:12px">
+                    ${(function(){
+                        const flags = Object.values(getUnmarkedFlags()).filter(f => f.classKey === currentClass || f.class === currentClass);
+                        if (!flags.length) return '<div style="padding:30px;text-align:center;color:#6c757d"><i class="fas fa-check-circle" style="font-size:36px;color:#28a745"></i><h4 style="margin-top:12px">No unmarked session flags</h4></div>';
+                        return '<table class="compliance-table"><thead><tr><th>Teacher</th><th>Date</th><th>Subject</th><th>Completion</th><th>Type</th></tr></thead><tbody>'
+                            + flags.map(f=>`<tr><td style="color:#dc3545;font-weight:700">${f.teacher||''}</td><td>${f.date||''}</td><td>${f.subject||''}</td><td>${f.pct!==undefined?f.pct+'%':'—'}</td><td><span class="unmarked-flag">${f.type==='CONFLICT_ATTEMPT'?'⚔️ CONFLICT':'📋 INCOMPLETE'}</span></td></tr>`).join('')
+                            + '</tbody></table>';
+                    })()}
+                </div>
+                <div id="csTab-compliance" style="display:none;margin-top:12px">
+                    ${buildComplianceTab()}
+                </div>
+            </div>
         </div>
         
         <div style="margin-top:20px;display:flex;gap:8px;justify-content:flex-end; flex-wrap:wrap;">
@@ -7046,7 +7296,11 @@
             await loadAttendanceForWeek(wk);
             renderRegister();
             calculateIntelligence();
-            
+
+            // ===== START TIME-BASED AUTH CHECKER =====
+            timeSlotManager.loadSessions(state.sessions);
+            startAuthChecker();
+
         } catch (error) {
             console.error('Failed to unlock register:', error);
             alert('Failed to unlock register. Please try again.');
@@ -7112,11 +7366,214 @@
         document.getElementById('teacherSummaryTitle').textContent = 'Weekly Summary';
         document.getElementById('summaryBox').textContent = 'Students: 0 | Present: 0 | Absent: 0 | Unmarked: 0';
         document.getElementById('intelligencePanel').style.display = 'none';
+
+        // ===== STOP TIME-BASED AUTH CHECKER =====
+        stopAuthChecker();
         
         hideUnsavedWarning();
     }
 
-    // ===== FIXED: SINGLE CLICK ATTENDANCE MARKING WITH SUBJECT STORAGE =====
+    // ===== MULTI-SESSION HELPER FUNCTIONS =====
+
+    /**
+     * Build a unique session ID from a session object.
+     * Format: TEACHER_SUBJECT_DAY_STARTTIME (safe for use as object key)
+     */
+    function buildSessionId(session) {
+        if (!session) return 'DEFAULT';
+        const timeClean = (session.TIME || '').replace(/[^0-9APM:]/g, '').substring(0, 7);
+        const teachClean = (session.LECTURER || 'ALL').replace(/[^A-Z0-9]/gi, '').toUpperCase().substring(0, 10);
+        const subClean = (session.SUBJECT || 'SUB').replace(/[^A-Z0-9]/gi, '').toUpperCase().substring(0, 12);
+        const dayClean = (session.DAY || 'MON').toUpperCase().substring(0, 3);
+        return `${teachClean}_${subClean}_${dayClean}_${timeClean}`;
+    }
+
+    /**
+     * Get all sessions for the given teacher on a specific date (by day name).
+     * Returns array of session objects with sessionId added.
+     */
+    function getTeacherSessionsForDate(teacherName, dateStr) {
+        if (!state.sessions || !state.sessions.length) return [];
+        const dateObj = new Date(dateStr);
+        const dayNames = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+        const dayName = dayNames[dateObj.getDay()];
+        
+        return state.sessions
+            .filter(s => {
+                const lecturerMatch = !s.LECTURER ||
+                    s.LECTURER.toUpperCase() === 'ALL LECTURERS' ||
+                    s.LECTURER.toUpperCase().includes(teacherName.toUpperCase()) ||
+                    teacherName.toUpperCase().includes(s.LECTURER.toUpperCase());
+                return lecturerMatch && s.DAY && s.DAY.toUpperCase() === dayName;
+            })
+            .map(s => ({ ...s, sessionId: buildSessionId(s) }));
+    }
+
+    /**
+     * Get all sessions for ALL teachers on a specific date (for register header building).
+     * Returns array of { sessionId, TIME, SUBJECT, LECTURER } sorted by start time.
+     */
+    function getAllSessionsForDate(dateStr) {
+        if (!state.sessions || !state.sessions.length) return [];
+        const dateObj = new Date(dateStr);
+        const dayNames = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+        const dayName = dayNames[dateObj.getDay()];
+        return state.sessions
+            .filter(s => s.DAY && s.DAY.toUpperCase() === dayName)
+            .map(s => ({ ...s, sessionId: buildSessionId(s) }))
+            .sort((a, b) => {
+                const ra = timeSlotManager.parseTimeRange(a.TIME);
+                const rb = timeSlotManager.parseTimeRange(b.TIME);
+                return (ra ? ra.start : 0) - (rb ? rb.start : 0);
+            });
+    }
+
+    /**
+     * Determine which session should be used for marking right now.
+     * Returns a session object (with sessionId) or null.
+     * If there's one active session for this teacher: returns it.
+     * If none active: returns null (caller will prompt).
+     */
+    function detectActiveSessionForTeacher(teacherName, dateStr) {
+        const sessions = getTeacherSessionsForDate(teacherName, dateStr);
+        if (!sessions.length) return null;
+        
+        // Check if date is today
+        const today = new Date();
+        const todayStr = today.toISOString().split('T')[0];
+        if (dateStr !== todayStr) return null;
+
+        timeSlotManager.loadSessions(state.sessions);
+        const currentMins = timeSlotManager.getCurrentMinutes();
+
+        // Find session that is currently active
+        for (const s of sessions) {
+            const range = timeSlotManager.parseTimeRange(s.TIME);
+            if (range && currentMins >= range.start && currentMins <= range.end) {
+                return s;
+            }
+        }
+        // Find session that just ended (within 30 min grace)
+        let bestGrace = null;
+        let bestDiff = 999;
+        for (const s of sessions) {
+            const range = timeSlotManager.parseTimeRange(s.TIME);
+            if (range && currentMins > range.end) {
+                const diff = currentMins - range.end;
+                if (diff <= 30 && diff < bestDiff) {
+                    bestDiff = diff;
+                    bestGrace = s;
+                }
+            }
+        }
+        return bestGrace;
+    }
+
+    /**
+     * Show a session selection modal so teacher can pick which session to mark.
+     * onSelect(session) is called with the chosen session.
+     */
+    function showSessionSelectionModal(teacherName, dateStr, weekStartStr, onSelect) {
+        const sessions = getTeacherSessionsForDate(teacherName, dateStr);
+        if (!sessions.length) {
+            // No sessions found — allow marking without session tag
+            onSelect({ sessionId: 'NOSESSION', TIME: 'N/A', SUBJECT: getCurrentSubject(teacherName, dateStr), LECTURER: teacherName });
+            return;
+        }
+        if (sessions.length === 1) {
+            // Only one session today — no need to ask
+            onSelect(sessions[0]);
+            return;
+        }
+
+        // Build modal
+        let html = `<div style="padding:10px">
+            <h3 style="margin-bottom:12px"><i class="fas fa-calendar-check"></i> Select Session to Mark</h3>
+            <p style="font-size:13px;color:#555;margin-bottom:14px">
+                You have <strong>${sessions.length} sessions</strong> on ${dateStr}. 
+                Select which session you are marking attendance for:
+            </p>
+            <div class="session-selector-modal">`;
+        
+        sessions.forEach((s, idx) => {
+            // Check if this session has marks already
+            const markedCount = state.students.filter(st => {
+                const key = `${st.Admission_No}|${dateStr}|${s.sessionId}`;
+                const rec = state.attendance[weekStartStr] && state.attendance[weekStartStr][key];
+                return rec && rec.status && rec.status !== 'U';
+            }).length;
+            const alreadyMarked = markedCount > 0;
+            
+            html += `<div class="session-selector-option ${alreadyMarked ? 'already-marked' : ''}" 
+                data-session-idx="${idx}" style="cursor:${alreadyMarked ? 'default' : 'pointer'}">
+                <div style="flex:1">
+                    <div style="font-weight:700;font-size:14px">
+                        <i class="fas fa-clock"></i> ${s.TIME}
+                    </div>
+                    <div style="color:#555;font-size:13px;margin-top:3px">${s.SUBJECT}</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+                    <span class="session-badge ${alreadyMarked ? 'marked' : 'unmarked'}">
+                        ${alreadyMarked ? `✓ ${markedCount} marked` : '○ Not yet marked'}
+                    </span>
+                    ${!alreadyMarked ? `<button class="btn-primary" style="font-size:11px;padding:4px 10px" onclick="window._sessionModalSelect(${idx})">
+                        <i class="fas fa-check"></i> Select
+                    </button>` : `<button class="btn-primary" style="font-size:11px;padding:4px 10px;background:#28a745" onclick="window._sessionModalSelect(${idx})">
+                        <i class="fas fa-edit"></i> Update
+                    </button>`}
+                </div>
+            </div>`;
+        });
+
+        html += `</div>
+            <button onclick="closeModal()" class="muted-btn" style="margin-top:8px">Cancel</button>
+        </div>`;
+
+        window._sessionModalSelect = function(idx) {
+            closeModal();
+            delete window._sessionModalSelect;
+            onSelect(sessions[idx]);
+        };
+
+        openModal(html);
+    }
+
+    // ===== SESSION-AWARE ATTENDANCE KEY BUILDER =====
+    /**
+     * Build the attendance storage key for a student/date/session.
+     * New format: `${admissionNo}|${date}|${sessionId}`
+     * Backward compat: also check old key `${admissionNo}|${date}` if no session records found.
+     */
+    function buildAttendanceKey(admissionNo, dateStr, sessionId) {
+        if (!sessionId || sessionId === 'DEFAULT') {
+            return `${admissionNo}|${dateStr}`;
+        }
+        return `${admissionNo}|${dateStr}|${sessionId}`;
+    }
+
+    /**
+     * Get all attendance records for a student on a date (across all sessions).
+     * Returns array of { sessionId, key, rec }.
+     */
+    function getStudentDayRecords(admissionNo, dateStr, weekStartStr) {
+        const wkData = state.attendance[weekStartStr] || {};
+        const results = [];
+        
+        // Collect all keys matching this student and date
+        Object.keys(wkData).forEach(k => {
+            if (k.startsWith(`${admissionNo}|${dateStr}`)) {
+                const parts = k.split('|');
+                // parts[2] is sessionId (may be undefined for legacy keys)
+                const sessionId = parts[2] || 'DEFAULT';
+                if (sessionId === 'tags' || sessionId === 'notes') return; // skip tag/note keys
+                results.push({ sessionId, key: k, rec: wkData[k] });
+            }
+        });
+
+        return results;
+    }
+
+    // ===== ENHANCED RENDER REGISTER — MULTI-SESSION AWARE =====
     function renderRegister() {
         const container = document.getElementById('registerArea');
         
@@ -7143,70 +7600,137 @@
         ensureWeekLoaded(weekStartStr);
         const weekStart = new Date(weekStartStr);
         const dates = [0, 1, 2, 3, 4].map(i => addDays(weekStart, i));
-        const dateLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((d, i) => `${d} ${dates[i].toLocaleDateString()}`);
+        const dateFmts = dates.map(d => formatDate(d));
+        const dateLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
         
         const today = new Date();
         const currentDayIndex = getCurrentDayIndex();
         const activeDayIndex = Math.min(currentDayIndex, 4);
         
         document.getElementById('daySelect').value = activeDayIndex;
-        
-        let html = '<table><thead><tr><th class="sticky">#</th><th class="sticky">Admission No</th><th class="sticky">Student Name</th>';
-        
+
+        // Build session map per day: dayIndex → array of sessions with sessionId
+        // Only sessions for the current teacher
+        const daySessions = dateFmts.map(dateStr => getTeacherSessionsForDate(unlockedTeacher, dateStr));
+
+        // Build table header — row 1: day groups, row 2: session sub-headers
+        let headerRow1 = '<tr><th class="sticky" rowspan="2">#</th><th class="sticky" rowspan="2">Adm No</th><th class="sticky" rowspan="2">Student Name</th>';
+        let headerRow2 = '<tr>';
+
         for (let i = 0; i < 5; i++) {
-            const activeClass = (i === activeDayIndex) ? 'active' : '';
-            const dayLocked = shouldLockDay(i) ? 'day-locked' : '';
-            html += `<th class="sticky ${activeClass} ${dayLocked} date-col">${dateLabels[i]}</th>`;
+            const dateStr = dateFmts[i];
+            const sessions = daySessions[i];
+            const isActive = (i === activeDayIndex);
+            const isLocked = shouldLockDay(i);
+            const activeClass = isActive ? 'active' : '';
+            const sessionCount = sessions.length || 1;
+            const dayLabel = `${dateLabels[i]} ${dates[i].toLocaleDateString('en-GB', {day:'2-digit',month:'2-digit'})}`;
+
+            headerRow1 += `<th class="sticky session-header-group ${activeClass} session-day-group" colspan="${sessionCount}" title="${dateStr}">
+                ${dayLabel}${isLocked ? ' 🔒' : ''}
+            </th>`;
+
+            if (sessions.length > 1) {
+                sessions.forEach(s => {
+                    const subLabel = (s.TIME || '').replace(/ TO /i, '–').replace(/AM|PM/gi, m => m.toLowerCase());
+                    headerRow2 += `<th class="sticky session-sub-header ${activeClass}" title="${s.SUBJECT} (${s.LECTURER})">
+                        ${subLabel}<br><span style="color:#0b66ff;font-size:9px">${(s.SUBJECT||'').substring(0,16)}</span>
+                    </th>`;
+                });
+            } else if (sessions.length === 1) {
+                const s = sessions[0];
+                const subLabel = (s.TIME || '').replace(/ TO /i, '–').replace(/AM|PM/gi, m => m.toLowerCase());
+                headerRow2 += `<th class="sticky session-sub-header ${activeClass}" title="${s.SUBJECT}">
+                    ${subLabel}
+                </th>`;
+            } else {
+                // No sessions on this day for teacher
+                headerRow2 += `<th class="sticky session-sub-header ${activeClass}">—</th>`;
+            }
         }
+
+        headerRow1 += '<th class="sticky" rowspan="2">Notes</th></tr>';
+        headerRow2 += '</tr>';
+
+        let html = `<table style="font-size:12px"><thead>${headerRow1}${headerRow2}</thead><tbody>`;
         
-        html += '<th class="sticky">Notes</th></tr></thead><tbody>';
-        
+        const dayIndexForTags = parseInt(document.getElementById('daySelect').value, 10);
+        const tagDateStr = dateFmts[dayIndexForTags];
+
         state.students.forEach((s, idx) => {
             const studentStats = state.intelligence.studentStats[s.Admission_No] || { present: 0, absent: 0, total: 0, percentage: 0 };
             const warning = studentStats.percentage < 80 ? '<span class="warning-badge">⚠️ < 80%</span>' : '';
             
             const safeAdm = String(s.Admission_No).replace(/'/g, "\\'");
-            html += `<tr data-student='${safeAdm}'>`;
-            html += `<td>${idx + 1}</td>`;
-            html += `<td>${s.Admission_No}</td>`;
-            html += `<td>${s.Student_Name} ${warning}`;
-            
-            const weekStartStr = currentWeekStartStr();
-            const dayIndex = parseInt(document.getElementById('daySelect').value, 10);
-            const base = new Date(weekStartStr);
-            const targetDateStr = formatDate(addDays(base, dayIndex));
-            const tagKey = `${s.Admission_No}|${targetDateStr}|tags`;
+            const tagKey = `${s.Admission_No}|${tagDateStr}|tags`;
             const currentTags = (state.attendance[weekStartStr] && state.attendance[weekStartStr][tagKey]?.tags) || [];
             
+            let tagHtml = '';
             if (currentTags.length > 0) {
-                html += '<div style="margin-top:4px">';
+                tagHtml = '<div style="margin-top:3px">';
                 currentTags.forEach(tag => {
                     const tagInfo = BEHAVIOR_TAG_TYPES[tag];
-                    if (tagInfo) {
-                        html += `<span class="day-tag ${tagInfo.class}" style="font-size:10px">
-                            ${tagInfo.icon} ${tagInfo.name}
-                        </span>`;
-                    }
+                    if (tagInfo) tagHtml += `<span class="day-tag ${tagInfo.class}" style="font-size:9px">${tagInfo.icon} ${tagInfo.name}</span>`;
                 });
-                html += '</div>';
+                tagHtml += '</div>';
             }
-            
-            html += `</td>`;
+
+            html += `<tr data-student='${safeAdm}'>`;
+            html += `<td>${idx + 1}</td>`;
+            html += `<td style="font-size:11px">${s.Admission_No}</td>`;
+            html += `<td>${s.Student_Name} ${warning}${tagHtml}</td>`;
             
             for (let i = 0; i < 5; i++) {
-                const key = `${s.Admission_No}|${formatDate(dates[i])}`;
-                const rec = (state.attendance[weekStartStr] && state.attendance[weekStartStr][key]) || { status: 'U' };
-                const cls = rec.status === 'P' ? 'present' : (rec.status === 'A' ? 'absent' : '');
-                const symbol = rec.status === 'P' ? '<span style="color:green;font-weight:bold">✓</span>' :
-                    (rec.status === 'A' ? '<span style="color:red;font-weight:bold">✗</span>' : 
-                     rec.status === 'L' ? '<span style="color:#7a1b4a;font-weight:bold">L</span>' : '—');
-                const activeClass = (i === activeDayIndex) ? 'active' : '';
-                const dayLocked = shouldLockDay(i) ? 'day-locked' : '';
-                
-                if (shouldLockDay(i)) {
-                    html += `<td class="${activeClass} ${dayLocked}">${symbol}</td>`;
+                const dateStr = dateFmts[i];
+                const sessions = daySessions[i];
+                const isLocked = shouldLockDay(i);
+                const isActive = (i === activeDayIndex);
+                const activeClass = isActive ? 'active' : '';
+
+                if (sessions.length === 0) {
+                    // No sessions for teacher on this day
+                    html += `<td class="session-cell ${activeClass}" style="color:#bbb;text-align:center">—</td>`;
+                    continue;
+                }
+
+                if (sessions.length === 1) {
+                    const sess = sessions[0];
+                    const key = buildAttendanceKey(s.Admission_No, dateStr, sess.sessionId);
+                    // Also try legacy key for backward compat
+                    const legacyKey = `${s.Admission_No}|${dateStr}`;
+                    const rec = (state.attendance[weekStartStr] && (state.attendance[weekStartStr][key] || state.attendance[weekStartStr][legacyKey])) || { status: 'U' };
+                    const cls = rec.status === 'P' ? 'present' : (rec.status === 'A' ? 'absent' : '');
+                    const symbol = rec.status === 'P' ? '<span style="color:green;font-weight:bold">✓</span>' :
+                        rec.status === 'A' ? '<span style="color:red;font-weight:bold">✗</span>' :
+                        rec.status === 'L' ? '<span style="color:#7a1b4a;font-weight:bold">L</span>' : '—';
+
+                    if (isLocked) {
+                        html += `<td class="session-cell ${activeClass} day-locked">${symbol}</td>`;
+                    } else {
+                        html += `<td class="session-cell ${activeClass}"><button class='status-btn ${cls}' 
+                            data-key='${key}' data-legacy-key='${legacyKey}' data-date='${dateStr}' 
+                            data-student='${s.Admission_No}' data-session-id='${sess.sessionId}'
+                            data-subject='${(sess.SUBJECT||'').replace(/'/g,"\\'")}' >${symbol}</button></td>`;
+                    }
                 } else {
-                    html += `<td class="${activeClass}"><button class='status-btn ${cls}' data-key='${key}' data-date='${formatDate(dates[i])}' data-student='${s.Admission_No}'>${symbol}</button></td>`;
+                    // Multiple sessions — one sub-cell per session
+                    sessions.forEach(sess => {
+                        const key = buildAttendanceKey(s.Admission_No, dateStr, sess.sessionId);
+                        const rec = (state.attendance[weekStartStr] && state.attendance[weekStartStr][key]) || { status: 'U' };
+                        const cls = rec.status === 'P' ? 'present' : (rec.status === 'A' ? 'absent' : '');
+                        const symbol = rec.status === 'P' ? '<span style="color:green;font-weight:bold">✓</span>' :
+                            rec.status === 'A' ? '<span style="color:red;font-weight:bold">✗</span>' :
+                            rec.status === 'L' ? '<span style="color:#7a1b4a;font-weight:bold">L</span>' : '—';
+
+                        if (isLocked) {
+                            html += `<td class="session-cell ${activeClass} day-locked">${symbol}</td>`;
+                        } else {
+                            html += `<td class="session-cell ${activeClass}"><button class='status-btn ${cls}' 
+                                data-key='${key}' data-date='${dateStr}' 
+                                data-student='${s.Admission_No}' data-session-id='${sess.sessionId}'
+                                data-subject='${(sess.SUBJECT||'').replace(/'/g,"\\'")}' >${symbol}</button></td>`;
+                        }
+                    });
                 }
             }
             
@@ -7227,37 +7751,86 @@
             });
         });
         
+        // ===== MULTI-SESSION STATUS BUTTON CLICK HANDLER =====
         container.querySelectorAll('.status-btn').forEach(btn =>
             btn.addEventListener('click', e => {
                 e.stopPropagation();
                 
-                const key = e.currentTarget.dataset.key;
-                const date = e.currentTarget.dataset.date;
+                const btn = e.currentTarget;
+                const date = btn.dataset.date;
+                const studentAdm = btn.dataset.student;
+                const sessionId = btn.dataset.sessionId || 'DEFAULT';
+                const key = btn.dataset.key;
                 const weekStartStr = currentWeekStartStr();
-                const currentStatus = (state.attendance[weekStartStr] && state.attendance[weekStartStr][key]?.status) || 'U';
-                
+
+                if (!state.attendance[weekStartStr]) state.attendance[weekStartStr] = {};
+
+                // ===== TIME-BASED CONFLICT PREVENTION VALIDATION =====
+                if (unlockedTeacher && state.sessions && state.sessions.length > 0) {
+                    timeSlotManager.loadSessions(state.sessions);
+                    const auth = validateMarkingAuthorization(unlockedTeacher, date);
+                    if (!auth.allowed) {
+                        const conflictHtml = `
+                            <div style="text-align:center;padding:20px 10px">
+                                <div style="font-size:50px;margin-bottom:15px">${auth.window === 'LOCKED_OTHER' ? '🔒' : auth.window === 'FUTURE' ? '📅' : '📋'}</div>
+                                <h3 style="color:#dc3545;margin-bottom:15px">Marking Not Authorized</h3>
+                                <div style="background:#f8d7da;border:1px solid #f5c6cb;border-radius:8px;padding:15px;text-align:left;margin-bottom:20px;font-size:14px;line-height:1.6">
+                                    ${auth.reason}
+                                </div>
+                                ${auth.window === 'LOCKED_OTHER' ? `<p style="font-size:13px;color:#555">This attempt has been <strong>logged</strong> and will be visible to the Global Admin.</p>` : ''}
+                                <button onclick="closeModal()" class="btn-primary" style="margin-top:10px"><i class="fas fa-times"></i> Understood</button>
+                            </div>`;
+                        openModal(conflictHtml);
+                        return;
+                    }
+                }
+                // ===== END VALIDATION =====
+
+                const currentRec = state.attendance[weekStartStr][key] || {};
+                const currentStatus = currentRec.status || 'U';
+
                 let nextStatus = 'P';
                 if (currentStatus === 'P') nextStatus = 'A';
                 else if (currentStatus === 'A') nextStatus = 'L';
                 else if (currentStatus === 'L') nextStatus = 'U';
                 
-                // CRITICAL FIX: Store the subject at marking time
-                const currentSubject = getCurrentSubject(unlockedTeacher, date);
+                const subjectFromBtn = btn.dataset.subject || '';
+                const currentSubject = subjectFromBtn || getCurrentSubject(unlockedTeacher, date);
+
+                let markingWindowType = 'OPEN';
+                if (unlockedTeacher && state.sessions) {
+                    timeSlotManager.loadSessions(state.sessions);
+                    const win = timeSlotManager.getMarkingWindow(unlockedTeacher);
+                    markingWindowType = win.markingWindow || win.type || 'OPEN';
+                }
                 
                 state.attendance[weekStartStr][key] = {
-                    ...(state.attendance[weekStartStr][key] || {}),
+                    ...currentRec,
                     status: nextStatus,
-                    subject: currentSubject, // Store subject permanently at marking time
+                    subject: currentSubject,
+                    sessionId: sessionId,
                     marked_by: unlockedTeacher,
-                    marked_at: new Date().toISOString()
+                    marked_at: new Date().toISOString(),
+                    scheduledTeacher: unlockedTeacher,
+                    markingWindow: markingWindowType,
+                    isAuthorized: true
                 };
+
+                // Also remove legacy key if it exists to avoid double counting
+                const legacyKey = btn.dataset.legacyKey;
+                if (legacyKey && legacyKey !== key && state.attendance[weekStartStr][legacyKey]) {
+                    // Migrate legacy to session key if not already present
+                    if (!state.attendance[weekStartStr][key] || state.attendance[weekStartStr][key].status === 'U') {
+                        // legacy already migrated above, nothing more needed
+                    }
+                }
                 
                 const symbol = nextStatus === 'P' ? '<span style="color:green;font-weight:bold">✓</span>' :
                               nextStatus === 'A' ? '<span style="color:red;font-weight:bold">✗</span>' :
                               nextStatus === 'L' ? '<span style="color:#7a1b4a;font-weight:bold">L</span>' : '—';
                 
-                e.currentTarget.innerHTML = symbol;
-                e.currentTarget.className = `status-btn ${nextStatus === 'P' ? 'present' : nextStatus === 'A' ? 'absent' : ''}`;
+                btn.innerHTML = symbol;
+                btn.className = `status-btn ${nextStatus === 'P' ? 'present' : nextStatus === 'A' ? 'absent' : ''}`;
                 
                 markUnsavedChanges();
                 calculateIntelligence();
@@ -7289,22 +7862,38 @@
             return;
         }
         
-        const totals = { P: 0, A: 0, U: 0, L: 0 };
         const weekStartStr = currentWeekStartStr();
         ensureWeekLoaded(weekStartStr);
         const weekStart = new Date(weekStartStr);
         const dates = [0, 1, 2, 3, 4].map(i => formatDate(addDays(weekStart, i)));
         
+        // Count across all session keys
+        let present = 0, absent = 0, late = 0, unmarked = 0;
+        const wkData = state.attendance[weekStartStr] || {};
+
         state.students.forEach(s => {
             dates.forEach(d => {
-                const key = `${s.Admission_No}|${d}`;
-                const st = (state.attendance[weekStartStr] && state.attendance[weekStartStr][key]?.status) || 'U';
-                totals[st] = (totals[st] || 0) + 1;
+                const teacherSessions = getTeacherSessionsForDate(unlockedTeacher, d);
+                if (teacherSessions.length === 0) {
+                    // No session on this day - don't count
+                    return;
+                }
+                // Count each session separately
+                teacherSessions.forEach(sess => {
+                    const key = buildAttendanceKey(s.Admission_No, d, sess.sessionId);
+                    const legacyKey = `${s.Admission_No}|${d}`;
+                    const rec = wkData[key] || (teacherSessions.length === 1 ? wkData[legacyKey] : null);
+                    const st = rec ? (rec.status || 'U') : 'U';
+                    if (st === 'P') present++;
+                    else if (st === 'A') absent++;
+                    else if (st === 'L') late++;
+                    else unmarked++;
+                });
             });
         });
         
         const sumBox = document.getElementById('summaryBox');
-        sumBox.textContent = `Students: ${state.students.length} | Present: ${totals.P} | Absent: ${totals.A} | Late: ${totals.L} | Unmarked: ${totals.U}`;
+        sumBox.textContent = `Students: ${state.students.length} | Present: ${present} | Absent: ${absent} | Late: ${late} | Unmarked: ${unmarked}`;
     }
     
     function markAllPresentForSelectedDay() {
@@ -7323,25 +7912,59 @@
         ensureWeekLoaded(weekStartStr);
         const base = new Date(weekStartStr);
         const targetDateStr = formatDate(addDays(base, dayIndex));
-        
-        // CRITICAL FIX: Get the subject once for this day and store it
-        const currentSubject = getCurrentSubject(unlockedTeacher, targetDateStr);
-        
-        state.students.forEach(s => {
-            const key = `${s.Admission_No}|${targetDateStr}`;
-            state.attendance[weekStartStr][key] = {
-                ...(state.attendance[weekStartStr][key] || {}),
-                status: 'P',
-                subject: currentSubject, // Store subject permanently
-                marked_by: unlockedTeacher,
-                marked_at: new Date().toISOString()
-            };
-        });
-        
-        renderRegister();
-        markUnsavedChanges();
-        calculateIntelligence();
-        showSuccess('All students marked present for selected day! Click Save Week to save changes.');
+
+        // ===== TIME-BASED AUTHORIZATION CHECK =====
+        if (state.sessions && state.sessions.length > 0) {
+            timeSlotManager.loadSessions(state.sessions);
+            const auth = validateMarkingAuthorization(unlockedTeacher, targetDateStr);
+            if (!auth.allowed) {
+                openModal(`<div style="text-align:center;padding:20px 10px">
+                    <div style="font-size:50px;margin-bottom:15px">🔒</div>
+                    <h3 style="color:#dc3545;margin-bottom:15px">Bulk Marking Not Authorized</h3>
+                    <div style="background:#f8d7da;border:1px solid #f5c6cb;border-radius:8px;padding:15px;text-align:left;margin-bottom:20px;font-size:14px;line-height:1.6">
+                        ${auth.reason}
+                    </div>
+                    <button onclick="closeModal()" class="btn-primary"><i class="fas fa-times"></i> Understood</button>
+                </div>`);
+                return;
+            }
+        }
+        // ===== END CHECK =====
+
+        // ===== MULTI-SESSION: determine which session to mark =====
+        const teacherSessions = getTeacherSessionsForDate(unlockedTeacher, targetDateStr);
+
+        const doMarkAll = function(session) {
+            const sessionId = session ? session.sessionId : 'DEFAULT';
+            const subject = session ? session.SUBJECT : getCurrentSubject(unlockedTeacher, targetDateStr);
+
+            if (!state.attendance[weekStartStr]) state.attendance[weekStartStr] = {};
+
+            state.students.forEach(s => {
+                const key = buildAttendanceKey(s.Admission_No, targetDateStr, sessionId);
+                state.attendance[weekStartStr][key] = {
+                    ...(state.attendance[weekStartStr][key] || {}),
+                    status: 'P',
+                    subject: subject,
+                    sessionId: sessionId,
+                    marked_by: unlockedTeacher,
+                    marked_at: new Date().toISOString()
+                };
+            });
+            
+            renderRegister();
+            markUnsavedChanges();
+            calculateIntelligence();
+            showSuccess(`All students marked present${session ? ' for ' + session.TIME : ''}! Click Save Week to save changes.`);
+        };
+
+        if (teacherSessions.length <= 1) {
+            // 0 or 1 session — mark directly
+            doMarkAll(teacherSessions[0] || null);
+        } else {
+            // Multiple sessions — ask which one
+            showSessionSelectionModal(unlockedTeacher, targetDateStr, weekStartStr, doMarkAll);
+        }
     }
     
     function openAttendanceMomentum() {
@@ -7554,7 +8177,7 @@
         const allRecords = [];
         const prefix = EncryptionSystem.encrypt(`iesr_${currentClass}_${teacherName}_`).substring(0, 30);
         
-        // Use a Set to track unique records
+        // Use a Set to track unique records — now includes sessionId to allow multiple sessions per day
         const uniqueKeys = new Set();
         
         Object.keys(localStorage).forEach(storageKey => {
@@ -7567,25 +8190,30 @@
                         
                         Object.keys(weekData).forEach(key => {
                             const parts = key.split('|');
-                            if (parts.length >= 2) {
-                                const admissionNo = parts[0];
-                                const dateStr = parts[1];
-                                const record = weekData[key];
-                                
-                                // Create unique key to prevent duplicates
-                                const uniqueKey = `${admissionNo}|${dateStr}`;
-                                
-                                if (record.status && record.status !== 'U' && record.marked_by === teacherName && !uniqueKeys.has(uniqueKey)) {
-                                    uniqueKeys.add(uniqueKey);
-                                    allRecords.push({
-                                        admissionNo,
-                                        date: dateStr,
-                                        status: record.status,
-                                        marked_by: teacherName,
-                                        timestamp: record.marked_at,
-                                        subject: record.subject || 'Unknown' // Include subject if available
-                                    });
-                                }
+                            if (parts.length < 2) return;
+                            const admissionNo = parts[0];
+                            const dateStr = parts[1];
+                            const sessionIdPart = parts[2] || 'DEFAULT';
+                            
+                            // Skip tags and notes keys
+                            if (sessionIdPart === 'tags' || sessionIdPart === 'notes') return;
+                            
+                            const record = weekData[key];
+                            
+                            // Unique key now includes sessionId so multiple sessions per day count separately
+                            const uniqueKey = `${admissionNo}|${dateStr}|${sessionIdPart}`;
+                            
+                            if (record.status && record.status !== 'U' && record.marked_by === teacherName && !uniqueKeys.has(uniqueKey)) {
+                                uniqueKeys.add(uniqueKey);
+                                allRecords.push({
+                                    admissionNo,
+                                    date: dateStr,
+                                    sessionId: sessionIdPart,
+                                    status: record.status,
+                                    marked_by: teacherName,
+                                    timestamp: record.marked_at,
+                                    subject: record.subject || 'Unknown'
+                                });
                             }
                         });
                     }
@@ -8029,45 +8657,47 @@
             
             Object.keys(submission.data || {}).forEach(key => {
                 const parts = key.split('|');
-                if (parts.length >= 2) {
-                    const admissionNo = parts[0];
-                    const record = submission.data[key];
+                if (parts.length < 2) return;
+                const admissionNo = parts[0];
+                const sessIdPart = parts[2] || 'DEFAULT';
+                // Skip tags and notes keys
+                if (sessIdPart === 'tags' || sessIdPart === 'notes') return;
+                const record = submission.data[key];
                     
-                    if (studentAttendance[admissionNo] && record.status && record.status !== 'U') {
-                        studentAttendance[admissionNo].total++;
-                        hoaData.totalMarkedLessons++;
+                if (studentAttendance[admissionNo] && record.status && record.status !== 'U') {
+                    studentAttendance[admissionNo].total++;
+                    hoaData.totalMarkedLessons++;
                         
-                        if (record.status === 'P' || record.status === 'L') {
-                            studentAttendance[admissionNo].present++;
-                            if (record.status === 'L') {
-                                studentAttendance[admissionNo].late++;
+                    if (record.status === 'P' || record.status === 'L') {
+                        studentAttendance[admissionNo].present++;
+                        if (record.status === 'L') {
+                            studentAttendance[admissionNo].late++;
+                        }
+                    } else if (record.status === 'A') {
+                        studentAttendance[admissionNo].absent++;
+                            
+                        const date = parts[1];
+                        const teacherName = record.marked_by || submission.teacher;
+                        // CRITICAL FIX: Use stored subject from the record
+                        const subject = record.subject || 'Unknown Subject';
+                            
+                        // Skip counting SPORTS as missed classes
+                        if (subject !== 'SPORTS' && !subject.includes('SPORTS') && subject !== 'Unknown Subject') {
+                            if (!studentMissedRecords[admissionNo][subject]) {
+                                studentMissedRecords[admissionNo][subject] = {
+                                    count: 0,
+                                    lastDate: date,
+                                    teacher: teacherName
+                                };
                             }
-                        } else if (record.status === 'A') {
-                            studentAttendance[admissionNo].absent++;
-                            
-                            const date = parts[1];
-                            const teacherName = record.marked_by || submission.teacher;
-                            // CRITICAL FIX: Use stored subject from the record
-                            const subject = record.subject || 'Unknown Subject';
-                            
-                            // Skip counting SPORTS as missed classes
-                            if (subject !== 'SPORTS' && !subject.includes('SPORTS') && subject !== 'Unknown Subject') {
-                                if (!studentMissedRecords[admissionNo][subject]) {
-                                    studentMissedRecords[admissionNo][subject] = {
-                                        count: 0,
-                                        lastDate: date,
-                                        teacher: teacherName
-                                    };
-                                }
-                                studentMissedRecords[admissionNo][subject].count++;
-                                studentMissedRecords[admissionNo][subject].lastDate = date;
+                            studentMissedRecords[admissionNo][subject].count++;
+                            studentMissedRecords[admissionNo][subject].lastDate = date;
                                 
-                                studentAttendance[admissionNo].missedClasses.push({
-                                    date: date,
-                                    teacher: teacherName,
-                                    subject: subject
-                                });
-                            }
+                            studentAttendance[admissionNo].missedClasses.push({
+                                date: date,
+                                teacher: teacherName,
+                                subject: subject
+                            });
                         }
                     }
                 }
@@ -8076,13 +8706,15 @@
             // Also collect subject attendance from all submissions
             Object.keys(submission.data || {}).forEach(key => {
                 const parts = key.split('|');
-                if (parts.length >= 2) {
-                    const record = submission.data[key];
-                    if (record.status && record.status !== 'U') {
-                        // CRITICAL FIX: Use stored subject
-                        const subject = record.subject || 'Unknown Subject';
-                        const teacher = record.marked_by || submission.teacher;
-                        const subjectKey = `${subject}|${teacher}`;
+                if (parts.length < 2) return;
+                const sessIdPart2 = parts[2] || 'DEFAULT';
+                if (sessIdPart2 === 'tags' || sessIdPart2 === 'notes') return;
+                const record = submission.data[key];
+                if (record.status && record.status !== 'U') {
+                    // CRITICAL FIX: Use stored subject
+                    const subject = record.subject || 'Unknown Subject';
+                    const teacher = record.marked_by || submission.teacher;
+                    const subjectKey = `${subject}|${teacher}`;
                         
                         if (!subjectAttendance[subjectKey]) {
                             subjectAttendance[subjectKey] = {
@@ -8101,7 +8733,6 @@
                         } else if (record.status === 'A') {
                             subjectAttendance[subjectKey].absent++;
                         }
-                    }
                 }
             });
         });
@@ -8637,12 +9268,37 @@
                     };
                 }
                 
-                const key = `${student.Admission_No}|${date}`;
-                const record = submission.data[key];
+                // Collect all session records for this student on this date
+                // (supports both legacy key and session-keyed records)
+                const allKeysForDate = Object.keys(submission.data || {}).filter(k => {
+                    const p = k.split('|');
+                    return p[0] === student.Admission_No && p[1] === date && p[2] !== 'tags' && p[2] !== 'notes';
+                });
+                
+                let mergedStatus = 'U';
+                let mergedSubject = 'Unknown';
+                allKeysForDate.forEach(k => {
+                    const rec = submission.data[k];
+                    if (rec && rec.status && rec.status !== 'U') {
+                        // Absent overrides Present in merged view
+                        if (mergedStatus === 'U' || rec.status === 'A') mergedStatus = rec.status;
+                        if (rec.subject) mergedSubject = rec.subject;
+                    }
+                });
+                // Also check legacy key if no session keys found
+                if (mergedStatus === 'U') {
+                    const legacyKey = `${student.Admission_No}|${date}`;
+                    const rec = submission.data[legacyKey];
+                    if (rec && rec.status && rec.status !== 'U') {
+                        mergedStatus = rec.status;
+                        if (rec.subject) mergedSubject = rec.subject;
+                    }
+                }
+
                 // CRITICAL FIX: Store subject with the attendance record for display
                 studentAttendance[student.Admission_No].attendance[date] = {
-                    status: record?.status || 'U',
-                    subject: record?.subject || 'Unknown'
+                    status: mergedStatus,
+                    subject: mergedSubject
                 };
             });
         });
@@ -8805,6 +9461,7 @@
         ensureWeekLoaded(weekStartStr);
         const weekStart = new Date(weekStartStr);
         const dates = [0, 1, 2, 3, 4].map(i => addDays(weekStart, i));
+        const dateFmts = dates.map(d => formatDate(d));
         
         const csvRows = [];
         csvRows.push(`IESR ATTENDANCE REPORT - ${currentClass} - Week ${weekStartStr}`);
@@ -8812,18 +9469,39 @@
         csvRows.push(`Generated: ${new Date().toLocaleString()}`);
         csvRows.push('');
         
-        const headers = ['Admission No', 'Student Name', ...dates.map(d => formatDateDisplay(d))];
+        // Build dynamic headers — include session sub-columns
+        const dayHeaders = [];
+        const sessionMaps = dateFmts.map(dateStr => getTeacherSessionsForDate(unlockedTeacher, dateStr));
+        
+        dateFmts.forEach((dateStr, i) => {
+            const sessions = sessionMaps[i];
+            if (sessions.length > 1) {
+                sessions.forEach(s => dayHeaders.push(`"${formatDateDisplay(dates[i])} ${s.TIME} (${s.SUBJECT})"`));
+            } else {
+                dayHeaders.push(`"${formatDateDisplay(dates[i])}"`);
+            }
+        });
+        
+        const headers = ['Admission No', 'Student Name', ...dayHeaders];
         csvRows.push(headers.join(','));
         
         state.students.forEach(s => {
             const row = [s.Admission_No, `"${s.Student_Name}"`];
-            dates.forEach(d => {
-                const key = `${s.Admission_No}|${formatDate(d)}`;
-                const rec = (state.attendance[weekStartStr] && state.attendance[weekStartStr][key]) || { status: 'U' };
-                const status = rec.status === 'P' ? 'Present' : 
-                              rec.status === 'A' ? 'Absent' : 
-                              rec.status === 'L' ? 'Late' : 'Unmarked';
-                row.push(status);
+            dateFmts.forEach((dateStr, i) => {
+                const sessions = sessionMaps[i];
+                if (sessions.length > 1) {
+                    sessions.forEach(sess => {
+                        const key = buildAttendanceKey(s.Admission_No, dateStr, sess.sessionId);
+                        const rec = (state.attendance[weekStartStr] && state.attendance[weekStartStr][key]) || { status: 'U' };
+                        row.push(rec.status === 'P' ? 'Present' : rec.status === 'A' ? 'Absent' : rec.status === 'L' ? 'Late' : 'Unmarked');
+                    });
+                } else {
+                    const sess = sessions[0];
+                    const key = sess ? buildAttendanceKey(s.Admission_No, dateStr, sess.sessionId) : `${s.Admission_No}|${dateStr}`;
+                    const legacyKey = `${s.Admission_No}|${dateStr}`;
+                    const rec = (state.attendance[weekStartStr] && (state.attendance[weekStartStr][key] || state.attendance[weekStartStr][legacyKey])) || { status: 'U' };
+                    row.push(rec.status === 'P' ? 'Present' : rec.status === 'A' ? 'Absent' : rec.status === 'L' ? 'Late' : 'Unmarked');
+                }
             });
             csvRows.push(row.join(','));
         });
@@ -8831,12 +9509,13 @@
         csvRows.push('');
         csvRows.push('SUMMARY');
         const totals = { P: 0, A: 0, U: 0, L: 0 };
-        state.students.forEach(s => {
-            dates.forEach(d => {
-                const key = `${s.Admission_No}|${formatDate(d)}`;
-                const rec = (state.attendance[weekStartStr] && state.attendance[weekStartStr][key]) || { status: 'U' };
-                totals[rec.status] = (totals[rec.status] || 0) + 1;
-            });
+        const wkData = state.attendance[weekStartStr] || {};
+        Object.entries(wkData).forEach(([key, rec]) => {
+            if (!rec || !rec.status) return;
+            const parts = key.split('|');
+            if (parts.length < 2) return;
+            if (parts[2] === 'tags' || parts[2] === 'notes') return;
+            totals[rec.status] = (totals[rec.status] || 0) + 1;
         });
         
         csvRows.push(`Total Present,${totals.P}`);
@@ -9188,15 +9867,20 @@
                         const weekData = JSON.parse(decrypted);
                         Object.keys(weekData).forEach(key => {
                             const parts = key.split('|');
-                            if (parts.length >= 2) {
-                                const admissionNo = parts[0];
-                                const dateStr = parts[1];
-                                const record = weekData[key];
-                                if (record.status && record.marked_by === unlockedTeacher) {
-                                    const mapKey = `${admissionNo}|${dateStr}`;
-                                    if (!teacherAttendanceMap[mapKey]) {
-                                        teacherAttendanceMap[mapKey] = record.status;
-                                    }
+                            if (parts.length < 2) return;
+                            const admissionNo = parts[0];
+                            const dateStr = parts[1];
+                            const sessionIdPart = parts[2] || 'DEFAULT';
+                            // Skip tag/note keys
+                            if (sessionIdPart === 'tags' || sessionIdPart === 'notes') return;
+                            const record = weekData[key];
+                            if (record.status && record.status !== 'U' && record.marked_by === unlockedTeacher) {
+                                const mapKey = `${admissionNo}|${dateStr}`;
+                                // For summary: if any session has Absent, mark Absent; else Present wins
+                                if (!teacherAttendanceMap[mapKey]) {
+                                    teacherAttendanceMap[mapKey] = record.status;
+                                } else if (record.status === 'A') {
+                                    teacherAttendanceMap[mapKey] = 'A'; // Absent overrides
                                 }
                             }
                         });
@@ -9283,23 +9967,22 @@
             const weekStart = new Date(weekStartStr);
             const dates = [0, 1, 2, 3, 4].map(i => formatDate(addDays(weekStart, i)));
             
-            // Track subjects in submission
+            // Count records across all session keys
             let recordsWithSubject = 0;
             let totalRecords = 0;
             
-            state.students.forEach(s => {
-                dates.forEach(d => {
-                    const key = `${s.Admission_No}|${d}`;
-                    const st = (weekData[key]?.status) || 'U';
-                    totals[st] = (totals[st] || 0) + 1;
-                    
-                    if (weekData[key] && weekData[key].status && weekData[key].status !== 'U') {
-                        totalRecords++;
-                        if (weekData[key].subject) {
-                            recordsWithSubject++;
-                        }
-                    }
-                });
+            Object.entries(weekData).forEach(([key, rec]) => {
+                if (!rec || !rec.status || rec.status === 'U') return;
+                const parts = key.split('|');
+                if (parts.length < 2) return;
+                const sessId = parts[2] || 'DEFAULT';
+                if (sessId === 'tags' || sessId === 'notes') return;
+                const dateStr = parts[1];
+                if (!dates.includes(dateStr)) return;
+                const st = rec.status;
+                totals[st] = (totals[st] || 0) + 1;
+                totalRecords++;
+                if (rec.subject) recordsWithSubject++;
             });
             
             const submission = {
@@ -9622,6 +10305,7 @@
         ensureWeekLoaded(weekStartStr);
         const weekStart = new Date(weekStartStr);
         const dates = [0, 1, 2, 3, 4].map(i => formatDate(addDays(weekStart, i)));
+        const wkData = state.attendance[weekStartStr] || {};
         
         const studentStats = {};
         state.students.forEach(s => {
@@ -9635,25 +10319,29 @@
             };
         });
         
-        state.students.forEach(s => {
-            dates.forEach(d => {
-                const key = `${s.Admission_No}|${d}`;
-                const status = (state.attendance[weekStartStr] && state.attendance[weekStartStr][key]?.status) || 'U';
-                
-                if (studentStats[s.Admission_No]) {
-                    if (status !== 'U') {
-                        studentStats[s.Admission_No].total++;
-                        if (status === 'P') {
-                            studentStats[s.Admission_No].present++;
-                        } else if (status === 'A') {
-                            studentStats[s.Admission_No].absent++;
-                        } else if (status === 'L') {
-                            studentStats[s.Admission_No].late++;
-                            studentStats[s.Admission_No].present++;
-                        }
-                    }
-                }
-            });
+        // Iterate all keys in attendance data — supports both legacy and session keys
+        Object.entries(wkData).forEach(([key, rec]) => {
+            if (!rec || !rec.status || rec.status === 'U') return;
+            if (key.includes('|tags') || key.includes('|notes')) return;
+            
+            const parts = key.split('|');
+            if (parts.length < 2) return;
+            const admNo = parts[0];
+            const dateStr = parts[1];
+            
+            if (!dates.includes(dateStr)) return;
+            if (!studentStats[admNo]) return;
+
+            const st = rec.status;
+            studentStats[admNo].total++;
+            if (st === 'P') {
+                studentStats[admNo].present++;
+            } else if (st === 'A') {
+                studentStats[admNo].absent++;
+            } else if (st === 'L') {
+                studentStats[admNo].late++;
+                studentStats[admNo].present++;
+            }
         });
         
         Object.keys(studentStats).forEach(id => {
@@ -9783,10 +10471,16 @@
         const base = new Date(weekStartStr);
         const targetDateStr = formatDate(addDays(base, dayIndex));
         
-        state.students.forEach(s => {
-            const key = `${s.Admission_No}|${targetDateStr}`;
-            delete state.attendance[weekStartStr][key];
-        });
+        const wkData = state.attendance[weekStartStr];
+        if (wkData) {
+            // Delete all keys for this date (supports both legacy and session-keyed)
+            Object.keys(wkData).forEach(key => {
+                const parts = key.split('|');
+                if (parts.length >= 2 && parts[1] === targetDateStr && parts[2] !== 'tags' && parts[2] !== 'notes') {
+                    delete wkData[key];
+                }
+            });
+        }
         
         renderRegister();
         markUnsavedChanges();
@@ -9995,6 +10689,7 @@
     
     function confirmLogout() {
         googleSync.stopAutoSync();
+        stopAuthChecker(); // stop time-based auth checker
         
         currentClass = null;
         unlockedTeacher = null;
@@ -10064,6 +10759,693 @@
         
         attachEventListeners();
     });
+
+    // ===================================================================
+    // ===== TIME-BASED TEACHER CONFLICT PREVENTION SYSTEM =====
+    // ===================================================================
+
+    /**
+     * TimeSlotManager — parses schedule sessions, converts times to minutes,
+     * determines the active session and authorized marking window at any moment.
+     */
+    class TimeSlotManager {
+        constructor() {
+            this.sessions = [];
+            this.DAY_MAP = { 'MON': 1, 'TUE': 2, 'WED': 3, 'THU': 4, 'FRI': 5 };
+        }
+
+        /** Load sessions from the current class's schedule */
+        loadSessions(sessions) {
+            this.sessions = sessions || [];
+        }
+
+        /** Convert "08:00AM" → minutes since midnight */
+        timeToMinutes(timeStr) {
+            if (!timeStr) return 0;
+            timeStr = timeStr.trim().toUpperCase();
+            const match = timeStr.match(/(\d{1,2}):(\d{2})(AM|PM)/);
+            if (!match) return 0;
+            let [, h, m, ampm] = match;
+            h = parseInt(h, 10);
+            m = parseInt(m, 10);
+            if (ampm === 'PM' && h !== 12) h += 12;
+            if (ampm === 'AM' && h === 12) h = 0;
+            return h * 60 + m;
+        }
+
+        /** Parse "08:00AM TO 10:00AM" → { start, end } in minutes */
+        parseTimeRange(timeRangeStr) {
+            if (!timeRangeStr) return null;
+            const parts = timeRangeStr.toUpperCase().split(/\s+TO\s+/);
+            if (parts.length !== 2) return null;
+            return {
+                start: this.timeToMinutes(parts[0].trim()),
+                end: this.timeToMinutes(parts[1].trim())
+            };
+        }
+
+        /** Get JS day number for a session DAY string */
+        getDayNumber(dayStr) {
+            return this.DAY_MAP[dayStr?.toUpperCase()] || 0;
+        }
+
+        /** Get current time in minutes since midnight */
+        getCurrentMinutes(date) {
+            const d = date || new Date();
+            return d.getHours() * 60 + d.getMinutes();
+        }
+
+        /** Get current JS day of week (1=Mon…5=Fri) */
+        getCurrentDayNum(date) {
+            const d = date || new Date();
+            const day = d.getDay(); // 0=Sun
+            return day === 0 ? 7 : day; // treat Sun as 7 (no sessions)
+        }
+
+        /** Get all sessions for today's day of week */
+        getTodaySessions(date) {
+            const dayNum = this.getCurrentDayNum(date);
+            return this.sessions.filter(s => this.getDayNumber(s.DAY) === dayNum);
+        }
+
+        /**
+         * Get the ACTIVE session at the given moment (or null if in a break/before/after).
+         * Returns full session object or null.
+         */
+        getActiveSession(date) {
+            const now = date || new Date();
+            const currentMins = this.getCurrentMinutes(now);
+            const todaySessions = this.getTodaySessions(now);
+
+            for (const session of todaySessions) {
+                const range = this.parseTimeRange(session.TIME);
+                if (!range) continue;
+                if (currentMins >= range.start && currentMins <= range.end) {
+                    return { ...session, range };
+                }
+            }
+            return null;
+        }
+
+        /**
+         * Get the NEXT upcoming session today.
+         * Returns session object or null.
+         */
+        getNextSession(date) {
+            const now = date || new Date();
+            const currentMins = this.getCurrentMinutes(now);
+            const todaySessions = this.getTodaySessions(now);
+            let next = null;
+            let minDiff = Infinity;
+
+            for (const session of todaySessions) {
+                const range = this.parseTimeRange(session.TIME);
+                if (!range) continue;
+                if (range.start > currentMins) {
+                    const diff = range.start - currentMins;
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        next = { ...session, range, minutesUntil: diff };
+                    }
+                }
+            }
+            return next;
+        }
+
+        /**
+         * Get the LAST session that ended today (before current time).
+         */
+        getLastEndedSession(date) {
+            const now = date || new Date();
+            const currentMins = this.getCurrentMinutes(now);
+            const todaySessions = this.getTodaySessions(now);
+            let last = null;
+            let maxEnd = -1;
+
+            for (const session of todaySessions) {
+                const range = this.parseTimeRange(session.TIME);
+                if (!range) continue;
+                if (range.end < currentMins && range.end > maxEnd) {
+                    maxEnd = range.end;
+                    last = { ...session, range };
+                }
+            }
+            return last;
+        }
+
+        /**
+         * Determine the MARKING WINDOW TYPE for a given teacher at a given moment.
+         * Returns: { type, session, message, authorized, conflictTeacher }
+         *
+         * Types:
+         *  DURING_CLASS   — teacher is in their scheduled session right now
+         *  BREAK          — between sessions, any teacher may mark
+         *  AFTER_HOURS    — after last session of the day (teacher may mark own sessions)
+         *  BEFORE_CLASS   — before first session of the day
+         *  LOCKED_OTHER   — another teacher's session is active right now
+         *  NO_CLASS_TODAY — no sessions scheduled today
+         */
+        getMarkingWindow(teacherName, date) {
+            if (!teacherName) return { type: 'NO_CLASS_TODAY', authorized: false, message: 'No teacher selected.' };
+
+            const now = date || new Date();
+            const todaySessions = this.getTodaySessions(now);
+
+            if (!todaySessions.length) {
+                return {
+                    type: 'NO_CLASS_TODAY',
+                    authorized: true,
+                    message: 'No sessions scheduled today. Marking allowed.',
+                    session: null
+                };
+            }
+
+            const currentMins = this.getCurrentMinutes(now);
+
+            // Sort sessions by start time
+            const sorted = todaySessions
+                .map(s => ({ ...s, range: this.parseTimeRange(s.TIME) }))
+                .filter(s => s.range)
+                .sort((a, b) => a.range.start - b.range.start);
+
+            const firstStart = sorted[0].range.start;
+            const lastEnd = sorted[sorted.length - 1].range.end;
+
+            // BEFORE FIRST CLASS
+            if (currentMins < firstStart) {
+                const minutesUntil = firstStart - currentMins;
+                const myNextSession = sorted.find(s => s.LECTURER && s.LECTURER.toUpperCase().includes(teacherName.toUpperCase()));
+                return {
+                    type: 'BEFORE_CLASS',
+                    authorized: true,
+                    session: myNextSession || sorted[0],
+                    message: `Pre-class window. Classes begin at ${sorted[0].TIME.split(' TO ')[0]}. You may mark in advance with caution.`,
+                    minutesUntil,
+                    markingWindow: 'BEFORE_CLASS'
+                };
+            }
+
+            // AFTER LAST CLASS
+            if (currentMins > lastEnd) {
+                const mySession = sorted.filter(s => s.LECTURER && s.LECTURER.toUpperCase().includes(teacherName.toUpperCase()));
+                return {
+                    type: 'AFTER_HOURS',
+                    authorized: true,
+                    session: mySession.length ? mySession[mySession.length - 1] : sorted[sorted.length - 1],
+                    message: `After-hours window. All sessions have ended. You may complete today's attendance.`,
+                    markingWindow: 'AFTER_HOURS'
+                };
+            }
+
+            // CHECK IF CURRENTLY IN A SESSION
+            const activeSession = this.getActiveSession(now);
+            if (activeSession) {
+                const isMySession = activeSession.LECTURER &&
+                    activeSession.LECTURER.toUpperCase().includes(teacherName.toUpperCase());
+
+                if (isMySession) {
+                    return {
+                        type: 'DURING_CLASS',
+                        authorized: true,
+                        session: activeSession,
+                        message: `✅ ACTIVE SESSION: You are authorized to mark ${activeSession.SUBJECT} (${activeSession.TIME})`,
+                        markingWindow: 'DURING_CLASS'
+                    };
+                } else {
+                    // Another teacher's session
+                    const nextMySession = sorted.find(s =>
+                        s.LECTURER && s.LECTURER.toUpperCase().includes(teacherName.toUpperCase()) &&
+                        s.range && s.range.start > currentMins
+                    );
+                    const myNextMsg = nextMySession
+                        ? ` Your next session: ${nextMySession.SUBJECT} (${nextMySession.TIME})`
+                        : '';
+                    return {
+                        type: 'LOCKED_OTHER',
+                        authorized: false,
+                        session: activeSession,
+                        conflictTeacher: activeSession.LECTURER,
+                        message: `🔒 LOCKED: ${activeSession.LECTURER} is currently teaching ${activeSession.SUBJECT} (${activeSession.TIME}).${myNextMsg}`,
+                        markingWindow: 'LOCKED_OTHER'
+                    };
+                }
+            }
+
+            // IN A BREAK BETWEEN SESSIONS
+            const nextSession = this.getNextSession(now);
+            const lastEnded = this.getLastEndedSession(now);
+            let breakMsg = '⚠️ BREAK PERIOD: You may mark, but ensure you are marking the correct session.';
+            if (nextSession) breakMsg += ` Next session: ${nextSession.SUBJECT} (${nextSession.TIME}) in ${nextSession.minutesUntil} min.`;
+
+            return {
+                type: 'BREAK',
+                authorized: true,
+                session: lastEnded,
+                nextSession,
+                message: breakMsg,
+                markingWindow: 'BREAK'
+            };
+        }
+
+        /**
+         * Format minutes-from-midnight as "08:00 AM"
+         */
+        minutesToDisplay(mins) {
+            const h = Math.floor(mins / 60);
+            const m = mins % 60;
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            const displayH = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+            return `${String(displayH).padStart(2, '0')}:${String(m).padStart(2, '0')} ${ampm}`;
+        }
+    }
+
+    // ===== CONFLICT LOG - stored in localStorage =====
+    const CONFLICT_LOG_KEY = 'iesr_conflict_log';
+
+    function getConflictLog() {
+        try {
+            const raw = localStorage.getItem(CONFLICT_LOG_KEY);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) { return []; }
+    }
+
+    function addConflictEntry(entry) {
+        const log = getConflictLog();
+        log.unshift({ ...entry, id: Date.now() });
+        if (log.length > 200) log.splice(200); // keep last 200
+        localStorage.setItem(CONFLICT_LOG_KEY, JSON.stringify(log));
+    }
+
+    // ===== UNMARKED SESSION FLAGS =====
+    const UNMARKED_FLAGS_KEY = 'iesr_unmarked_flags';
+
+    function getUnmarkedFlags() {
+        try {
+            const raw = localStorage.getItem(UNMARKED_FLAGS_KEY);
+            return raw ? JSON.parse(raw) : {};
+        } catch (e) { return {}; }
+    }
+
+    function setUnmarkedFlag(classKey, teacher, date, subject, pct) {
+        const flags = getUnmarkedFlags();
+        const key = `${classKey}|${teacher}|${date}|${subject}`;
+        flags[key] = { classKey, teacher, date, subject, pct, flaggedAt: new Date().toISOString() };
+        localStorage.setItem(UNMARKED_FLAGS_KEY, JSON.stringify(flags));
+    }
+
+    function clearUnmarkedFlag(classKey, teacher, date, subject) {
+        const flags = getUnmarkedFlags();
+        const key = `${classKey}|${teacher}|${date}|${subject}`;
+        delete flags[key];
+        localStorage.setItem(UNMARKED_FLAGS_KEY, JSON.stringify(flags));
+    }
+
+    // ===== GLOBAL TimeSlotManager INSTANCE =====
+    const timeSlotManager = new TimeSlotManager();
+
+    // ===== PERIODIC AUTH CHECKER (every 60s) =====
+    let authCheckInterval = null;
+
+    function startAuthChecker() {
+        if (authCheckInterval) clearInterval(authCheckInterval);
+        updateTimeAuthBanner();
+        authCheckInterval = setInterval(() => {
+            updateTimeAuthBanner();
+            checkEndOfSessionReminder();
+        }, 60000);
+    }
+
+    function stopAuthChecker() {
+        if (authCheckInterval) clearInterval(authCheckInterval);
+        authCheckInterval = null;
+        const banner = document.getElementById('timeAuthBanner');
+        if (banner) banner.style.display = 'none';
+    }
+
+    /**
+     * Update the visual banner at the top of the register.
+     * Called on load, every 60s, and on day/teacher change.
+     */
+    function updateTimeAuthBanner() {
+        if (!unlockedTeacher || !state.sessions) return;
+
+        const banner = document.getElementById('timeAuthBanner');
+        const mainEl = document.getElementById('timeAuthMain');
+        const subEl = document.getElementById('timeAuthSub');
+        const iconEl = document.getElementById('timeAuthIcon');
+        const badgeEl = document.getElementById('markingWindowBadge');
+        if (!banner) return;
+
+        timeSlotManager.loadSessions(state.sessions);
+        const win = timeSlotManager.getMarkingWindow(unlockedTeacher);
+
+        // Remove all type classes
+        banner.classList.remove('active-session','break-period','locked-session','after-hours','before-class');
+        banner.style.display = 'flex';
+
+        switch (win.type) {
+            case 'DURING_CLASS':
+                banner.classList.add('active-session');
+                iconEl.className = 'fas fa-check-circle';
+                mainEl.textContent = win.message;
+                subEl.textContent = `Session: ${win.session?.SUBJECT || ''} | Subject tracking active`;
+                if (badgeEl) badgeEl.innerHTML = `<span class="marking-window-badge mw-during"><i class="fas fa-bolt"></i> LIVE SESSION</span>`;
+                break;
+
+            case 'BREAK':
+                banner.classList.add('break-period');
+                iconEl.className = 'fas fa-coffee';
+                mainEl.textContent = '⚠️ BREAK PERIOD — You may mark attendance for your sessions.';
+                subEl.textContent = win.nextSession
+                    ? `Next: ${win.nextSession.SUBJECT} (${win.nextSession.TIME}) in ${win.nextSession.minutesUntil} min`
+                    : 'No more sessions today.';
+                if (badgeEl) badgeEl.innerHTML = `<span class="marking-window-badge mw-break"><i class="fas fa-hourglass-half"></i> BREAK</span>`;
+                break;
+
+            case 'LOCKED_OTHER':
+                banner.classList.add('locked-session');
+                iconEl.className = 'fas fa-lock';
+                mainEl.textContent = win.message;
+                subEl.textContent = 'Your marking is restricted during another teacher\'s active session.';
+                if (badgeEl) badgeEl.innerHTML = `<span class="marking-window-badge mw-locked"><i class="fas fa-ban"></i> RESTRICTED</span>`;
+                break;
+
+            case 'AFTER_HOURS':
+                banner.classList.add('after-hours');
+                iconEl.className = 'fas fa-moon';
+                mainEl.textContent = '🌙 AFTER HOURS — All sessions complete. You may finalize today\'s attendance.';
+                subEl.textContent = 'Mark any missed entries now before tomorrow.';
+                if (badgeEl) badgeEl.innerHTML = `<span class="marking-window-badge mw-after"><i class="fas fa-clock"></i> AFTER HOURS</span>`;
+                break;
+
+            case 'BEFORE_CLASS':
+                banner.classList.add('before-class');
+                iconEl.className = 'fas fa-sun';
+                mainEl.textContent = '🌅 PRE-CLASS — School day hasn\'t started yet. Early marking is allowed with caution.';
+                subEl.textContent = win.session
+                    ? `First session: ${win.session.SUBJECT} at ${win.session.TIME?.split(' TO ')[0]}`
+                    : '';
+                if (badgeEl) badgeEl.innerHTML = `<span class="marking-window-badge mw-before"><i class="fas fa-sun"></i> PRE-CLASS</span>`;
+                break;
+
+            default: // NO_CLASS_TODAY
+                banner.classList.add('after-hours');
+                iconEl.className = 'fas fa-calendar-times';
+                mainEl.textContent = 'No sessions scheduled for today. Attendance marking is open.';
+                subEl.textContent = '';
+                if (badgeEl) badgeEl.innerHTML = '';
+        }
+    }
+
+    /**
+     * Validate whether the current teacher is AUTHORIZED to mark AT THIS EXACT MOMENT.
+     * Called from the status button click handler.
+     * Returns { allowed: bool, reason: string, window: string }
+     */
+    function validateMarkingAuthorization(teacherName, dateStr) {
+        if (!teacherName) return { allowed: false, reason: 'No teacher unlocked.', window: 'NONE' };
+
+        // Only allow marking TODAY's date
+        const today = new Date();
+        const todayStr = today.toISOString().split('T')[0];
+
+        if (dateStr > todayStr) {
+            return {
+                allowed: false,
+                reason: `❌ FUTURE DATE BLOCKED: Cannot mark attendance for future dates. You can only mark today (${todayStr}).`,
+                window: 'FUTURE'
+            };
+        }
+
+        // Past dates — only allowed if date is today
+        if (dateStr < todayStr) {
+            return {
+                allowed: false,
+                reason: `❌ PAST DATE BLOCKED: You can only mark today's attendance (${todayStr}). Past dates cannot be marked. This will be flagged in admin.`,
+                window: 'PAST'
+            };
+        }
+
+        // Today — check time-based window
+        timeSlotManager.loadSessions(state.sessions);
+        const win = timeSlotManager.getMarkingWindow(teacherName);
+
+        if (!win.authorized) {
+            // Log the conflict attempt
+            addConflictEntry({
+                date: todayStr,
+                time: new Date().toLocaleTimeString(),
+                attemptingTeacher: teacherName,
+                scheduledTeacher: win.conflictTeacher || 'Unknown',
+                subject: win.session?.SUBJECT || 'Unknown',
+                class: state.className
+            });
+
+            // Flag the LOCKED teacher in admin
+            const flagKey = `${state.className}|CONFLICT|${todayStr}`;
+            const flags = getUnmarkedFlags();
+            flags[flagKey] = {
+                type: 'CONFLICT_ATTEMPT',
+                teacher: teacherName,
+                conflictWith: win.conflictTeacher,
+                date: todayStr,
+                time: new Date().toLocaleTimeString(),
+                class: state.className
+            };
+            localStorage.setItem(UNMARKED_FLAGS_KEY, JSON.stringify(flags));
+
+            return {
+                allowed: false,
+                reason: win.message,
+                window: 'LOCKED_OTHER',
+                conflictTeacher: win.conflictTeacher
+            };
+        }
+
+        return {
+            allowed: true,
+            reason: win.message,
+            window: win.markingWindow || 'OPEN',
+            session: win.session
+        };
+    }
+
+    /**
+     * End-of-session reminder: check if teacher marked ≥80% of students.
+     * Called every 60 seconds.
+     */
+    function checkEndOfSessionReminder() {
+        if (!unlockedTeacher || !state.sessions) return;
+
+        timeSlotManager.loadSessions(state.sessions);
+        const now = new Date();
+        const currentMins = timeSlotManager.getCurrentMinutes();
+        const todaySessions = timeSlotManager.getTodaySessions();
+        const todayStr = now.toISOString().split('T')[0];
+
+        for (const session of todaySessions) {
+            if (!session.LECTURER || !session.LECTURER.toUpperCase().includes(unlockedTeacher.toUpperCase())) continue;
+            const range = timeSlotManager.parseTimeRange(session.TIME);
+            if (!range) continue;
+
+            // Check if session ended 1-10 minutes ago
+            const minsAgo = currentMins - range.end;
+            if (minsAgo >= 1 && minsAgo <= 10) {
+                // Check marking completeness — use session-aware key
+                const weekStart = currentWeekStartStr();
+                const wkData = state.attendance[weekStart] || {};
+                const total = state.students.length;
+                const sessionId = buildSessionId(session);
+                let marked = 0;
+                state.students.forEach(s => {
+                    // Check session-keyed first, then legacy
+                    const sessionKey = buildAttendanceKey(s.Admission_No, todayStr, sessionId);
+                    const legacyKey = `${s.Admission_No}|${todayStr}`;
+                    const rec = wkData[sessionKey] || wkData[legacyKey];
+                    if (rec && rec.status && rec.status !== 'U') marked++;
+                });
+
+                const pct = total > 0 ? Math.round((marked / total) * 100) : 100;
+                if (pct < 80) {
+                    const unmkd = total - marked;
+                    // Show a reminder notification
+                    showSuccess(`⚠️ REMINDER: ${session.SUBJECT} ended ${minsAgo} min ago. ${unmkd} students still unmarked (${pct}%). Mark now before next session!`);
+                    // Flag in admin
+                    setUnmarkedFlag(state.className, unlockedTeacher, todayStr, session.SUBJECT, pct);
+                }
+                break; // only one reminder at a time
+            }
+        }
+    }
+
+    /**
+     * Enhanced unlockTeacherRegister — starts auth checker after unlock
+     */
+    const _origUnlockTeacherRegister = typeof unlockTeacherRegister !== 'undefined' ? unlockTeacherRegister : null;
+
+    // ===== CONFLICT LOG VIEWER (for Global Admin) =====
+    function openConflictLogViewer() {
+        const log = getConflictLog().filter(e => e.class === state.className);
+        const flags = getUnmarkedFlags();
+        const flagsForClass = Object.values(flags).filter(f => f.classKey === state.className || f.class === state.className);
+
+        let html = `<h3><i class="fas fa-shield-alt" style="color:#dc3545"></i> Teacher Conflict Log & Unmarked Session Flags</h3>`;
+
+        // CONFLICT ATTEMPTS
+        html += `<div class="admin-tabs" style="margin-bottom:0">
+            <div class="admin-tab active" onclick="showConflictTab('attempts', this)">Conflict Attempts (${log.length})</div>
+            <div class="admin-tab" onclick="showConflictTab('unmarked', this)">Unmarked Sessions (${flagsForClass.length})</div>
+            <div class="admin-tab" onclick="showConflictTab('compliance', this)">Marking Compliance</div>
+        </div>`;
+
+        html += `<div id="conflictTabAttempts">`;
+        if (log.length === 0) {
+            html += `<div style="padding:30px;text-align:center;color:#6c757d"><i class="fas fa-check-circle" style="font-size:40px;color:#28a745"></i><h4 style="margin-top:15px">No Conflict Attempts</h4><p>No unauthorized marking attempts recorded.</p></div>`;
+        } else {
+            html += `<table class="compliance-table" style="margin-top:15px"><thead><tr>
+                <th>Date</th><th>Time</th><th>Attempting Teacher</th><th>Active Session Teacher</th><th>Subject</th>
+            </tr></thead><tbody>`;
+            log.slice(0, 50).forEach(e => {
+                html += `<tr><td>${e.date||''}</td><td>${e.time||''}</td>
+                    <td><span style="color:#dc3545;font-weight:700">${e.attemptingTeacher||''}</span></td>
+                    <td>${e.scheduledTeacher||''}</td><td>${e.subject||''}</td></tr>`;
+            });
+            html += `</tbody></table>`;
+        }
+        html += `</div>`;
+
+        html += `<div id="conflictTabUnmarked" style="display:none">`;
+        if (flagsForClass.length === 0) {
+            html += `<div style="padding:30px;text-align:center;color:#6c757d"><i class="fas fa-check-circle" style="font-size:40px;color:#28a745"></i><h4 style="margin-top:15px">No Unmarked Session Flags</h4></div>`;
+        } else {
+            html += `<table class="compliance-table" style="margin-top:15px"><thead><tr>
+                <th>Teacher</th><th>Date</th><th>Subject</th><th>Completion %</th><th>Type</th>
+            </tr></thead><tbody>`;
+            flagsForClass.forEach(f => {
+                const isConflict = f.type === 'CONFLICT_ATTEMPT';
+                html += `<tr>
+                    <td><span style="color:#dc3545;font-weight:700">${f.teacher||''}</span></td>
+                    <td>${f.date||''}</td>
+                    <td>${f.subject||''}</td>
+                    <td>${f.pct !== undefined ? f.pct+'%' : '—'}</td>
+                    <td><span class="unmarked-flag">${isConflict ? '⚔️ CONFLICT' : '📋 INCOMPLETE'}</span></td>
+                </tr>`;
+            });
+            html += `</tbody></table>`;
+        }
+        html += `</div>`;
+
+        // COMPLIANCE TAB
+        html += `<div id="conflictTabCompliance" style="display:none">`;
+        html += buildComplianceTab();
+        html += `</div>`;
+
+        html += `<div style="display:flex;gap:8px;margin-top:15px;flex-wrap:wrap">
+            <button onclick="clearConflictLog()" class="danger-btn" style="font-size:12px"><i class="fas fa-trash"></i> Clear Conflict Log</button>
+            <button onclick="closeModal()" class="muted-btn">Close</button>
+        </div>`;
+
+        openModal(html);
+    }
+
+    function buildComplianceTab() {
+        if (!currentClass || !CLASS_CONFIG[currentClass]) return '<p>No class loaded.</p>';
+        const teachers = CLASS_CONFIG[currentClass].teachers;
+        const today = new Date().toISOString().split('T')[0];
+        const weekStart = currentWeekStartStr();
+        const wkData = state.attendance[weekStart] || {};
+        const total = state.students.length;
+
+        let html = `<h4 style="margin:15px 0 10px 0">Today's Marking Status — ${today}</h4>
+        <table class="compliance-table"><thead><tr>
+            <th>Teacher</th><th>Session Today</th><th>Marked</th><th>Completion</th><th>Status</th>
+        </tr></thead><tbody>`;
+
+        timeSlotManager.loadSessions(state.sessions);
+        const dayNum = timeSlotManager.getCurrentDayNum();
+        const todaySessions = teachers.map(t => {
+            const sessions = (state.sessions||[]).filter(s =>
+                timeSlotManager.getDayNumber(s.DAY) === dayNum &&
+                s.LECTURER && s.LECTURER.toUpperCase().includes(t.toUpperCase())
+            );
+            return { teacher: t, sessions };
+        });
+
+        todaySessions.forEach(({ teacher, sessions }) => {
+            if (sessions.length === 0) {
+                html += `<tr><td>${teacher}</td><td colspan="3" style="color:#999">No session today</td><td><span class="compliance-dot dot-gray"></span>N/A</td></tr>`;
+                return;
+            }
+            // Count marks across ALL session keys for this teacher today
+            let marked = 0;
+            const countedKeys = new Set();
+            // Check all keys in wkData for this teacher's sessions
+            sessions.forEach(sess => {
+                const sessId = buildSessionId(sess);
+                state.students.forEach(s => {
+                    const sessionKey = buildAttendanceKey(s.Admission_No, today, sessId);
+                    const legacyKey = `${s.Admission_No}|${today}`;
+                    const rec = wkData[sessionKey] || (sessions.length === 1 ? wkData[legacyKey] : null);
+                    const trackKey = `${s.Admission_No}|${sessId}`;
+                    if (rec && rec.marked_by === teacher && rec.status && rec.status !== 'U' && !countedKeys.has(trackKey)) {
+                        countedKeys.add(trackKey);
+                        marked++;
+                    }
+                });
+            });
+            // Total expected = students × sessions
+            const expectedTotal = total * sessions.length;
+            const pct = expectedTotal > 0 ? Math.round((marked / expectedTotal) * 100) : 0;
+            const color = pct >= 80 ? 'dot-green' : pct >= 50 ? 'dot-yellow' : 'dot-red';
+            const status = pct >= 80 ? '✅ Complete' : pct >= 50 ? '⚠️ Partial' : '❌ Incomplete';
+
+            html += `<tr>
+                <td><strong>${teacher}</strong></td>
+                <td>${sessions.map(s=>`${s.SUBJECT} <span style="color:#888;font-size:10px">(${(s.TIME||'').split(' TO ')[0]})</span>`).join('<br>')}</td>
+                <td>${marked} / ${expectedTotal}</td>
+                <td><strong>${pct}%</strong></td>
+                <td><span class="compliance-dot ${color}"></span>${status}</td>
+            </tr>`;
+        });
+
+        html += `</tbody></table>`;
+        return html;
+    }
+
+    window.showConflictTab = function(tab, btn) {
+        document.getElementById('conflictTabAttempts').style.display = tab === 'attempts' ? '' : 'none';
+        document.getElementById('conflictTabUnmarked').style.display = tab === 'unmarked' ? '' : 'none';
+        document.getElementById('conflictTabCompliance').style.display = tab === 'compliance' ? '' : 'none';
+        document.querySelectorAll('#modalContent .admin-tab').forEach(t => t.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+    };
+
+    window.switchConflictSubTab = function(tab, btn) {
+        ['attempts','unmarked','compliance'].forEach(t => {
+            const el = document.getElementById(`csTab-${t}`);
+            if (el) el.style.display = t === tab ? '' : 'none';
+        });
+        if (btn) {
+            btn.closest('#conflictSubTabs').querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    };
+
+    window.clearConflictLog = function() {
+        if (confirm('Clear the entire conflict log for this class?')) {
+            const log = getConflictLog().filter(e => e.class !== state.className);
+            localStorage.setItem(CONFLICT_LOG_KEY, JSON.stringify(log));
+            closeModal();
+            showSuccess('Conflict log cleared.');
+        }
+    };
+
+    // ===== EXPOSE CONFLICT LOG VIEWER TO WINDOW =====
+    window.openConflictLogViewer = openConflictLogViewer;
+
+    // ===================================================================
+    // ===== END TIME-BASED CONFLICT PREVENTION SYSTEM =====
+    // ===================================================================
 
     // ===== WINDOW BEFOREUNLOAD WARNING =====
     window.addEventListener('beforeunload', function (e) {
