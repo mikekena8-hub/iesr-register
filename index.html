@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -2552,8 +2553,570 @@
     .ttd-body.collapsed { display:none; }
  </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+  <style>
+  /* =================== CINEMATIC LOADING SCREEN =================== */
+  #ieSplashScreen {
+    position: fixed; inset: 0; z-index: 99999;
+    background: #020b18;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    overflow: hidden;
+    font-family: 'Exo 2', sans-serif;
+  }
+  #ieSplashScreen .splash-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, #001a3a 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, #0a0a30 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 80%, #00103a 0%, transparent 50%);
+    overflow: hidden;
+  }
+  .splash-grid {
+    position: absolute; inset: 0;
+    background-image: 
+      linear-gradient(rgba(0,100,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,100,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridFloat 20s linear infinite;
+  }
+  @keyframes gridFloat { 0%{transform:translateY(0)} 100%{transform:translateY(60px)} }
+
+  .splash-particles {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .splash-particle {
+    position: absolute; width: 2px; height: 2px;
+    background: #0b66ff; border-radius: 50%;
+    animation: particleFloat linear infinite;
+    opacity: 0;
+  }
+  @keyframes particleFloat {
+    0% { opacity:0; transform: translateY(100vh) scale(0); }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.5; }
+    100% { opacity:0; transform: translateY(-20px) scale(1); }
+  }
+
+  #ieSplashScreen .splash-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
+  .splash-logo-ring {
+    width: 140px; height: 140px; position: relative; margin-bottom: 30px;
+  }
+  .splash-logo-ring svg { position: absolute; inset: 0; animation: ringRotate 3s linear infinite; }
+  @keyframes ringRotate { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+  .splash-logo-inner {
+    position: absolute; inset: 15px;
+    background: linear-gradient(135deg, #0b2a6e, #0b66ff);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 40px rgba(11,102,255,0.6), 0 0 80px rgba(11,102,255,0.3);
+    animation: logoPulse 2s ease-in-out infinite;
+  }
+  @keyframes logoPulse {
+    0%,100%{box-shadow:0 0 40px rgba(11,102,255,0.6),0 0 80px rgba(11,102,255,0.3)}
+    50%{box-shadow:0 0 60px rgba(11,102,255,0.9),0 0 120px rgba(11,102,255,0.5)}
+  }
+  .splash-logo-inner i { font-size: 42px; color: white; }
+
+  .splash-title {
+    font-size: 64px; font-weight: 900; letter-spacing: 8px;
+    background: linear-gradient(135deg, #ffffff 0%, #7eb8ff 50%, #0b66ff 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    text-shadow: none;
+    animation: titleReveal 1s ease forwards;
+    opacity: 0; transform: translateY(20px);
+    margin-bottom: 6px;
+  }
+  @keyframes titleReveal { to{opacity:1;transform:translateY(0)} }
+
+  .splash-subtitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px; font-weight: 500; letter-spacing: 4px;
+    color: rgba(150,190,255,0.7); text-transform: uppercase;
+    animation: titleReveal 1s 0.3s ease forwards; opacity:0; transform:translateY(10px);
+    margin-bottom: 50px;
+  }
+  .splash-bar-track {
+    width: 340px; height: 3px; background: rgba(255,255,255,0.08);
+    border-radius: 3px; overflow: hidden; margin-bottom: 16px;
+    animation: titleReveal 0.5s 0.6s ease forwards; opacity:0;
+  }
+  .splash-bar-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #0b66ff, #00c8ff, #ffffff);
+    border-radius: 3px;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 12px rgba(11,102,255,0.8);
+  }
+  .splash-status {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px; letter-spacing: 2px; color: rgba(150,190,255,0.5);
+    animation: titleReveal 0.5s 0.8s ease forwards; opacity:0;
+    min-height: 20px; text-align: center;
+  }
+  .splash-version {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px; letter-spacing: 2px; color: rgba(150,190,255,0.3);
+  }
+  .splash-corner {
+    position: absolute; width: 80px; height: 80px;
+    border-color: rgba(11,102,255,0.3); border-style: solid;
+  }
+  .splash-corner.tl { top:30px;left:30px;border-width:2px 0 0 2px; }
+  .splash-corner.tr { top:30px;right:30px;border-width:2px 2px 0 0; }
+  .splash-corner.bl { bottom:30px;left:30px;border-width:0 0 2px 2px; }
+  .splash-corner.br { bottom:30px;right:30px;border-width:0 2px 2px 0; }
+
+  /* =================== ROLE SELECTOR OVERLAY =================== */
+  #roleSelector {
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(2,11,24,0.97);
+    align-items: center; justify-content: center;
+    font-family: 'Exo 2', sans-serif;
+  }
+  #roleSelector.active { display: flex; }
+  .role-selector-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(11,102,255,0.08) 0%, transparent 70%);
+  }
+  .role-selector-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 10px; padding: 40px 20px;
+    max-width: 900px; width: 100%;
+  }
+  .role-header {
+    text-align: center; margin-bottom: 20px;
+  }
+  .role-header h2 {
+    font-size: 36px; font-weight: 800; color: white; letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .role-header p {
+    color: rgba(150,190,255,0.6); font-size: 14px; letter-spacing: 1px;
+  }
+  .role-cards {
+    display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+    width: 100%;
+  }
+  .role-card {
+    flex: 1; min-width: 220px; max-width: 260px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 36px 24px;
+    cursor: pointer; transition: all 0.3s ease;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+    position: relative; overflow: hidden;
+  }
+  .role-card::before {
+    content: ''; position: absolute; inset: 0;
+    opacity: 0; transition: opacity 0.3s;
+    border-radius: 20px;
+  }
+  .role-card.teacher::before { background: radial-gradient(circle at 50% 0%, rgba(11,102,255,0.2),transparent 70%); }
+  .role-card.admin::before { background: radial-gradient(circle at 50% 0%, rgba(139,0,0,0.2),transparent 70%); }
+  .role-card.parent::before { background: radial-gradient(circle at 50% 0%, rgba(40,167,69,0.2),transparent 70%); }
+  .role-card:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.25); }
+  .role-card:hover::before { opacity: 1; }
+  .role-card.teacher:hover { box-shadow: 0 20px 60px rgba(11,102,255,0.3); border-color: rgba(11,102,255,0.4); }
+  .role-card.admin:hover { box-shadow: 0 20px 60px rgba(139,0,0,0.3); border-color: rgba(139,0,0,0.4); }
+  .role-card.parent:hover { box-shadow: 0 20px 60px rgba(40,167,69,0.3); border-color: rgba(40,167,69,0.4); }
+
+  .role-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; position: relative;
+  }
+  .role-card.teacher .role-icon { background: rgba(11,102,255,0.15); color: #4d9fff; border: 1px solid rgba(11,102,255,0.3); }
+  .role-card.admin .role-icon { background: rgba(139,0,0,0.15); color: #ff6b6b; border: 1px solid rgba(139,0,0,0.3); }
+  .role-card.parent .role-icon { background: rgba(40,167,69,0.15); color: #5dde82; border: 1px solid rgba(40,167,69,0.3); }
+
+  .role-lock {
+    position: absolute; top: -4px; right: -4px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(139,0,0,0.8); color: white;
+    font-size: 9px; display: flex; align-items: center; justify-content: center;
+  }
+  .role-name {
+    font-size: 20px; font-weight: 800; letter-spacing: 2px; color: white;
+  }
+  .role-desc {
+    font-size: 12px; color: rgba(150,190,255,0.5); text-align: center;
+    line-height: 1.6; letter-spacing: 0.5px;
+  }
+  .role-badge {
+    font-size: 10px; padding: 4px 12px; border-radius: 20px; letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .role-card.teacher .role-badge { background: rgba(11,102,255,0.2); color: #4d9fff; }
+  .role-card.admin .role-badge { background: rgba(139,0,0,0.2); color: #ff6b6b; }
+  .role-card.parent .role-badge { background: rgba(40,167,69,0.2); color: #5dde82; }
+
+  /* =================== ROLE PIN MODAL =================== */
+  #rolePinModal {
+    display: none; position: fixed; inset: 0; z-index: 99998;
+    background: rgba(2,11,24,0.95);
+    align-items: center; justify-content: center;
+    font-family: 'Exo 2', sans-serif;
+  }
+  #rolePinModal.active { display: flex; }
+  .role-pin-box {
+    background: linear-gradient(135deg, #0a1628 0%, #0d1f38 100%);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px; padding: 48px 40px;
+    width: 100%; max-width: 420px;
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .role-pin-icon {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(11,102,255,0.1); border: 2px solid rgba(11,102,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; color: #4d9fff;
+    animation: logoPulse 2s ease-in-out infinite;
+  }
+  .role-pin-icon.admin { background:rgba(139,0,0,0.1);border-color:rgba(139,0,0,0.3);color:#ff6b6b; }
+  .role-pin-title {
+    font-size: 22px; font-weight: 800; color: white; letter-spacing: 1px; text-align: center;
+  }
+  .role-pin-subtitle {
+    font-size: 13px; color: rgba(150,190,255,0.5); text-align: center; letter-spacing: 0.5px;
+    margin-top: -10px;
+  }
+  .role-pin-input {
+    width: 100%;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 16px 20px;
+    color: white; font-size: 24px; font-family: 'Exo 2', sans-serif;
+    letter-spacing: 8px; text-align: center;
+    transition: all 0.3s;
+    outline: none;
+  }
+  .role-pin-input:focus { border-color: rgba(11,102,255,0.5); box-shadow: 0 0 0 3px rgba(11,102,255,0.1); }
+  .role-pin-error {
+    color: #ff6b6b; font-size: 13px; text-align: center; display: none;
+    animation: shake 0.3s ease;
+  }
+  .role-pin-error.show { display: block; }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)}
+  }
+  .role-pin-btns { display: flex; gap: 12px; width: 100%; }
+  .role-pin-btn {
+    flex: 1; padding: 14px; border: none; border-radius: 12px;
+    font-family: 'Exo 2', sans-serif; font-size: 14px; font-weight: 700;
+    cursor: pointer; letter-spacing: 1px; transition: all 0.2s;
+  }
+  .role-pin-btn.cancel { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.08); }
+  .role-pin-btn.confirm { background: linear-gradient(135deg, #0b66ff, #0540b3); color: white; }
+  .role-pin-btn.confirm:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,102,255,0.4); }
+  .role-pin-btn.confirm.admin-style { background: linear-gradient(135deg, #8b0000, #5a0000); }
+  .role-pin-btn.confirm.admin-style:hover { box-shadow: 0 8px 20px rgba(139,0,0,0.4); }
+
+  /* =================== PARENT PORTAL =================== */
+  #parentPortal {
+    display: none; min-height: 100vh;
+    font-family: 'Exo 2', sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 50%, #f5f5ff 100%);
+  }
+  #parentPortal.active { display: block; }
+
+  .parent-header {
+    background: linear-gradient(135deg, #1a237e 0%, #0b66ff 100%);
+    padding: 0 30px; height: 65px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100;
+  }
+  .parent-brand { display: flex; align-items: center; gap: 14px; }
+  .parent-brand-icon {
+    width: 40px; height: 40px; background: rgba(255,255,255,0.2);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: white;
+  }
+  .parent-brand h1 { font-size: 18px; font-weight: 800; color: white; letter-spacing: 1px; margin: 0; }
+  .parent-brand span { font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 2px; display: block; margin-top: 1px; }
+  .parent-header-actions { display: flex; align-items: center; gap: 12px; }
+  .parent-class-badge {
+    background: rgba(255,255,255,0.15); color: white;
+    padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 1px;
+  }
+  .parent-logout-btn {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: white; padding: 7px 16px; border-radius: 8px; cursor: pointer;
+    font-size: 13px; font-family: 'Exo 2', sans-serif; font-weight: 600;
+    transition: all 0.2s; letter-spacing: 0.5px;
+  }
+  .parent-logout-btn:hover { background: rgba(255,255,255,0.2); }
+
+  .parent-portal-body { padding: 30px; max-width: 1300px; margin: 0 auto; }
+
+  .parent-welcome-banner {
+    background: linear-gradient(135deg, #0b66ff 0%, #1a237e 100%);
+    border-radius: 20px; padding: 28px 35px;
+    display: flex; align-items: center; gap: 24px;
+    margin-bottom: 28px; color: white;
+    box-shadow: 0 8px 30px rgba(11,102,255,0.25);
+    position: relative; overflow: hidden;
+  }
+  .parent-welcome-banner::after {
+    content: ''; position: absolute; right: -30px; top: -30px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.04); border-radius: 50%;
+  }
+  .parent-welcome-banner::before {
+    content: ''; position: absolute; right: 60px; bottom: -60px;
+    width: 160px; height: 160px;
+    background: rgba(255,255,255,0.03); border-radius: 50%;
+  }
+  .parent-welcome-icon {
+    width: 60px; height: 60px; background: rgba(255,255,255,0.15);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 26px; flex-shrink: 0;
+  }
+  .parent-welcome-text h2 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .parent-welcome-text p { font-size: 13px; opacity: 0.75; letter-spacing: 0.5px; }
+
+  .parent-stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin-bottom: 28px;
+  }
+  .parent-stat-card {
+    background: white; border-radius: 16px; padding: 22px 20px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    display: flex; align-items: center; gap: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .parent-stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+  .parent-stat-icon {
+    width: 50px; height: 50px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;
+  }
+  .parent-stat-icon.blue { background: rgba(11,102,255,0.1); color: #0b66ff; }
+  .parent-stat-icon.green { background: rgba(40,167,69,0.1); color: #28a745; }
+  .parent-stat-icon.red { background: rgba(220,53,69,0.1); color: #dc3545; }
+  .parent-stat-icon.orange { background: rgba(255,107,0,0.1); color: #ff6b00; }
+  .parent-stat-value { font-size: 28px; font-weight: 900; color: #0f1724; line-height: 1; margin-bottom: 3px; }
+  .parent-stat-label { font-size: 12px; color: #6c757d; font-weight: 500; letter-spacing: 0.5px; }
+
+  .parent-search-row {
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .parent-search-input {
+    flex: 1; min-width: 250px;
+    padding: 12px 18px 12px 44px; border-radius: 12px;
+    border: 1.5px solid rgba(0,0,0,0.1); font-size: 14px;
+    background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") no-repeat 14px center;
+    font-family: 'Exo 2', sans-serif; outline: none; transition: all 0.2s;
+  }
+  .parent-search-input:focus { border-color: #0b66ff; box-shadow: 0 0 0 3px rgba(11,102,255,0.1); }
+  .parent-filter-btn {
+    padding: 12px 20px; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.1);
+    background: white; font-family: 'Exo 2', sans-serif; font-size: 13px; font-weight: 600;
+    cursor: pointer; color: #555; transition: all 0.2s; white-space: nowrap;
+  }
+  .parent-filter-btn.active { background: #0b66ff; color: white; border-color: #0b66ff; }
+
+  .parent-table-card {
+    background: white; border-radius: 20px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .parent-table-header {
+    padding: 20px 24px; border-bottom: 1px solid rgba(0,0,0,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(135deg, #f8faff, #f0f4ff);
+  }
+  .parent-table-title { font-size: 16px; font-weight: 800; color: #0f1724; letter-spacing: 0.5px; }
+  .parent-table-count {
+    background: rgba(11,102,255,0.1); color: #0b66ff;
+    padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;
+  }
+  .parent-students-table { width: 100%; border-collapse: collapse; }
+  .parent-students-table th {
+    padding: 14px 16px; text-align: left; font-size: 11px;
+    font-weight: 700; letter-spacing: 1px; color: #6c757d; text-transform: uppercase;
+    background: #fafbfc; border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .parent-students-table td {
+    padding: 14px 16px; font-size: 13px; color: #333;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    vertical-align: middle;
+  }
+  .parent-students-table tbody tr:hover { background: rgba(11,102,255,0.02); cursor: pointer; }
+  .parent-students-table tbody tr:last-child td { border-bottom: none; }
+
+  .parent-adm-no {
+    font-size: 11px; color: #6c757d; font-weight: 500; margin-top: 2px;
+  }
+  .parent-attendance-bar {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .parent-att-track {
+    flex: 1; height: 8px; background: #f0f0f0; border-radius: 4px; overflow: hidden; min-width: 80px;
+  }
+  .parent-att-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+  .parent-att-fill.good { background: linear-gradient(90deg, #28a745, #20c997); }
+  .parent-att-fill.warn { background: linear-gradient(90deg, #ffc107, #fd7e14); }
+  .parent-att-fill.bad { background: linear-gradient(90deg, #dc3545, #e0405a); }
+  .parent-att-pct { font-size: 13px; font-weight: 700; min-width: 38px; }
+  .parent-att-pct.good { color: #28a745; }
+  .parent-att-pct.warn { color: #ffc107; }
+  .parent-att-pct.bad { color: #dc3545; }
+
+  .parent-status-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .parent-status-chip.good { background: rgba(40,167,69,0.1); color: #28a745; }
+  .parent-status-chip.risk { background: rgba(255,193,7,0.1); color: #856404; }
+  .parent-status-chip.critical { background: rgba(220,53,69,0.1); color: #dc3545; }
+
+  .parent-view-btn {
+    background: rgba(11,102,255,0.08); border: 1px solid rgba(11,102,255,0.2);
+    color: #0b66ff; padding: 6px 14px; border-radius: 8px; cursor: pointer;
+    font-size: 12px; font-weight: 600; font-family: 'Exo 2',sans-serif;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .parent-view-btn:hover { background: #0b66ff; color: white; }
+
+  /* Student Detail Modal */
+  #parentStudentModal {
+    display: none; position: fixed; inset: 0; z-index: 10000;
+    background: rgba(0,0,0,0.6); align-items: center; justify-content: center; padding: 20px;
+    font-family: 'Exo 2', sans-serif;
+  }
+  #parentStudentModal.active { display: flex; }
+  .parent-student-modal-box {
+    background: white; border-radius: 24px; width: 100%; max-width: 720px;
+    max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+  }
+  .psm-header {
+    background: linear-gradient(135deg, #1a237e, #0b66ff);
+    padding: 28px 30px; color: white; border-radius: 24px 24px 0 0;
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .psm-header h3 { font-size: 20px; font-weight: 800; margin: 0 0 4px 0; }
+  .psm-header p { font-size: 12px; opacity: 0.7; letter-spacing: 0.5px; margin: 0; }
+  .psm-close {
+    background: rgba(255,255,255,0.15); border: none; color: white;
+    width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 16px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .psm-close:hover { background: rgba(255,255,255,0.25); }
+  .psm-body { padding: 28px 30px; }
+  .psm-stats-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 14px; margin-bottom: 28px;
+  }
+  .psm-stat {
+    background: #f8faff; border-radius: 14px; padding: 16px;
+    text-align: center; border: 1px solid rgba(11,102,255,0.08);
+  }
+  .psm-stat-val { font-size: 26px; font-weight: 900; color: #0b66ff; line-height: 1; margin-bottom: 5px; }
+  .psm-stat-val.red { color: #dc3545; }
+  .psm-stat-val.green { color: #28a745; }
+  .psm-stat-val.orange { color: #fd7e14; }
+  .psm-stat-lbl { font-size: 11px; color: #6c757d; font-weight: 500; letter-spacing: 0.5px; }
+
+  .psm-section-title {
+    font-size: 14px; font-weight: 800; color: #0f1724; letter-spacing: 0.5px;
+    margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #f0f4ff;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .psm-absent-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .psm-absent-table th {
+    background: #f8faff; padding: 10px 14px; text-align: left;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: #6c757d;
+    text-transform: uppercase;
+  }
+  .psm-absent-table td {
+    padding: 10px 14px; font-size: 13px; color: #333;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .psm-absent-table tr:last-child td { border-bottom: none; }
+  .psm-absent-chip {
+    display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;
+  }
+  .psm-absent-chip.absent { background: rgba(220,53,69,0.1); color: #dc3545; }
+  .psm-absent-chip.late { background: rgba(255,193,7,0.1); color: #856404; }
+
+  .psm-no-absences {
+    text-align: center; padding: 30px; color: #6c757d;
+    background: rgba(40,167,69,0.05); border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .psm-no-absences i { font-size: 36px; color: #28a745; margin-bottom: 10px; display: block; }
+
+  /* Parent class selector overlay */
+  #parentClassSelector {
+    display: none; position: fixed; inset: 0; z-index: 9998;
+    background: rgba(2,11,24,0.97); align-items: center; justify-content: center;
+    font-family: 'Exo 2', sans-serif;
+  }
+  #parentClassSelector.active { display: flex; }
+  .pcs-box {
+    background: linear-gradient(135deg, #0a1628, #0d1f38);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 24px;
+    padding: 48px 40px; width: 100%; max-width: 480px;
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  }
+  .pcs-icon { font-size: 48px; color: #5dde82; margin-bottom: 8px; }
+  .pcs-title { font-size: 24px; font-weight: 800; color: white; letter-spacing: 1px; text-align: center; }
+  .pcs-subtitle { font-size: 13px; color: rgba(150,190,255,0.5); text-align: center; letter-spacing: 0.5px; }
+  .pcs-select {
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 14px 18px;
+    color: white; font-size: 15px; font-family: 'Exo 2', sans-serif; outline: none;
+  }
+  .pcs-select option { background: #0d1f38; color: white; }
+  .pcs-btn {
+    width: 100%; padding: 15px; border: none; border-radius: 12px;
+    background: linear-gradient(135deg, #28a745, #1e7e34); color: white;
+    font-family: 'Exo 2', sans-serif; font-size: 15px; font-weight: 700;
+    cursor: pointer; letter-spacing: 1px; transition: all 0.2s;
+  }
+  .pcs-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(40,167,69,0.4); }
+  .pcs-back {
+    color: rgba(150,190,255,0.4); font-size: 13px; cursor: pointer; text-decoration: underline;
+    background: none; border: none; font-family: 'Exo 2', sans-serif; transition: color 0.2s;
+  }
+  .pcs-back:hover { color: rgba(150,190,255,0.8); }
+
+  /* Empty parent state */
+  .parent-empty-state {
+    text-align: center; padding: 60px 20px; color: #6c757d;
+  }
+  .parent-empty-state i { font-size: 48px; margin-bottom: 16px; display: block; opacity: 0.4; }
+  .parent-empty-state h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #333; }
+
+  /* Loading spinner in parent portal */
+  .parent-loading {
+    text-align: center; padding: 60px;
+  }
+  .parent-spinner {
+    display: inline-block; width: 40px; height: 40px;
+    border: 3px solid rgba(11,102,255,0.1); border-top-color: #0b66ff;
+    border-radius: 50%; animation: parentSpin 0.8s linear infinite;
+  }
+  @keyframes parentSpin { to{transform:rotate(360deg)} }
+
+  .parent-no-data { color: #6c757d; font-size: 13px; font-style: italic; }
+  </style>
   
   <!-- AUTO-UPDATE SCRIPT - IESR AUTO UPDATER -->
   <script>
@@ -2606,6 +3169,206 @@
   </script>
 </head>
 <body>
+
+  <!-- =================== CINEMATIC SPLASH SCREEN =================== -->
+  <div id="ieSplashScreen">
+    <div class="splash-bg">
+      <div class="splash-grid"></div>
+      <div class="splash-particles" id="splashParticles"></div>
+    </div>
+    <div class="splash-corner tl"></div>
+    <div class="splash-corner tr"></div>
+    <div class="splash-corner bl"></div>
+    <div class="splash-corner br"></div>
+    <div class="splash-content">
+      <div class="splash-logo-ring">
+        <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="70" cy="70" r="65" fill="none" stroke="rgba(11,102,255,0.15)" stroke-width="2"/>
+          <circle cx="70" cy="70" r="65" fill="none" stroke="url(#ringGrad)" stroke-width="3"
+            stroke-dasharray="180 228" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0b66ff"/>
+              <stop offset="100%" stop-color="#00c8ff"/>
+            </linearGradient>
+          </defs>
+          <circle cx="70" cy="5" r="4" fill="#0b66ff"/>
+        </svg>
+        <div class="splash-logo-inner"><i class="fas fa-graduation-cap"></i></div>
+      </div>
+      <div class="splash-title">IESR</div>
+      <div class="splash-subtitle">Intelligent Electronic School Register</div>
+      <div class="splash-bar-track"><div class="splash-bar-fill" id="splashBarFill"></div></div>
+      <div class="splash-status" id="splashStatus">Initializing system...</div>
+    </div>
+    <div class="splash-version">IESR v2026 · ELECTRICAL DEPARTMENT · SECURE</div>
+  </div>
+
+  <!-- =================== ROLE SELECTOR =================== -->
+  <div id="roleSelector">
+    <div class="role-selector-bg"></div>
+    <div class="role-selector-content">
+      <div class="role-header">
+        <h2>SELECT YOUR ROLE</h2>
+        <p>CHOOSE HOW YOU WANT TO ACCESS THE SYSTEM</p>
+      </div>
+      <div class="role-cards">
+        <div class="role-card teacher" onclick="selectRole('teacher')">
+          <div class="role-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <div class="role-lock"><i class="fas fa-lock"></i></div>
+          </div>
+          <div class="role-name">TEACHER</div>
+          <div class="role-desc">Access class registers, mark attendance, and view reports. Requires teacher PIN.</div>
+          <div class="role-badge">PIN REQUIRED</div>
+        </div>
+        <div class="role-card admin" onclick="selectRole('admin')">
+          <div class="role-icon">
+            <i class="fas fa-user-shield"></i>
+            <div class="role-lock"><i class="fas fa-lock"></i></div>
+          </div>
+          <div class="role-name">ADMIN</div>
+          <div class="role-desc">Full system access with override capabilities, reports, and all class data.</div>
+          <div class="role-badge">ADMIN PIN REQUIRED</div>
+        </div>
+        <div class="role-card parent" onclick="selectRole('parent')">
+          <div class="role-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="role-name">PARENT</div>
+          <div class="role-desc">Monitor your child's attendance, view absences, and track overall performance.</div>
+          <div class="role-badge">FREE ACCESS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== ROLE PIN MODAL =================== -->
+  <div id="rolePinModal">
+    <div class="role-pin-box">
+      <div class="role-pin-icon" id="rolePinIcon"><i class="fas fa-lock"></i></div>
+      <div class="role-pin-title" id="rolePinTitle">Enter PIN</div>
+      <div class="role-pin-subtitle" id="rolePinSubtitle">Enter your PIN to continue</div>
+      <input type="password" class="role-pin-input" id="rolePinInput" maxlength="6" placeholder="• • • •" autocomplete="off">
+      <div class="role-pin-error" id="rolePinError">Invalid PIN. Access denied.</div>
+      <div class="role-pin-btns">
+        <button class="role-pin-btn cancel" onclick="closeRolePinModal()">Back</button>
+        <button class="role-pin-btn confirm" id="rolePinConfirmBtn" onclick="verifyRolePin()">
+          <i class="fas fa-unlock-alt"></i> UNLOCK
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== PARENT CLASS SELECTOR =================== -->
+  <div id="parentClassSelector">
+    <div class="pcs-box">
+      <div class="pcs-icon"><i class="fas fa-school"></i></div>
+      <div class="pcs-title">Parent Access</div>
+      <div class="pcs-subtitle">Select your child's class to view their attendance records</div>
+      <select class="pcs-select" id="parentClassSelect">
+        <option value="">-- Select Class --</option>
+        <optgroup label="CRAFT CERTIFICATE - Electrical">
+          <option value="CEEMAY2025R">CEEMAY2025R (Craft Electrical)</option>
+          <option value="CEESEP2024A">CEESEP2024A (Craft Electrical)</option>
+          <option value="CEESEP2024B">CEESEP2024B (Craft Electrical)</option>
+          <option value="CDAC/L5/EE/SEP2025">CDAC/L5/EE/SEP2025 (Craft Level 5)</option>
+        </optgroup>
+        <optgroup label="DIPLOMA - Electrical Engineering">
+          <option value="DEEMAY2024A">DEEMAY2024A (Diploma Electrical)</option>
+          <option value="DEEMAY2024B">DEEMAY2024B (Diploma Electrical)</option>
+          <option value="DEEMAY2025R">DEEMAY2025R (Diploma Electrical)</option>
+          <option value="CDAC/L6/EE/SEP2025">CDAC/L6/EE/SEP2025 (Diploma Level 6)</option>
+          <option value="DEESEP2023R">DEESEP2023R (Diploma Electrical)</option>
+        </optgroup>
+      </select>
+      <button class="pcs-btn" onclick="openParentPortalForClass()">
+        <i class="fas fa-eye"></i> VIEW CLASS ATTENDANCE
+      </button>
+      <button class="pcs-back" onclick="backToRoleSelector()">← Back to role selection</button>
+    </div>
+  </div>
+
+  <!-- =================== PARENT PORTAL =================== -->
+  <div id="parentPortal">
+    <div class="parent-header">
+      <div class="parent-brand">
+        <div class="parent-brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div>
+          <h1>IESR PARENT MONITOR</h1>
+          <span>ATTENDANCE TRACKING SYSTEM</span>
+        </div>
+      </div>
+      <div class="parent-header-actions">
+        <div class="parent-class-badge" id="parentClassBadge">Loading...</div>
+        <button class="parent-logout-btn" onclick="logoutParent()">
+          <i class="fas fa-sign-out-alt"></i> Exit
+        </button>
+      </div>
+    </div>
+    <div class="parent-portal-body">
+      <div class="parent-welcome-banner">
+        <div class="parent-welcome-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="parent-welcome-text">
+          <h2>Class Attendance Overview</h2>
+          <p id="parentPortalDesc">Showing all students and their attendance records. Click any student for detailed view.</p>
+        </div>
+      </div>
+      <div class="parent-stats-grid" id="parentStatsGrid">
+        <div class="parent-stat-card">
+          <div class="parent-stat-icon blue"><i class="fas fa-users"></i></div>
+          <div><div class="parent-stat-value" id="pStatTotal">—</div><div class="parent-stat-label">Total Students</div></div>
+        </div>
+        <div class="parent-stat-card">
+          <div class="parent-stat-icon green"><i class="fas fa-check-circle"></i></div>
+          <div><div class="parent-stat-value" id="pStatGood">—</div><div class="parent-stat-label">Good Attendance (≥80%)</div></div>
+        </div>
+        <div class="parent-stat-card">
+          <div class="parent-stat-icon orange"><i class="fas fa-exclamation-triangle"></i></div>
+          <div><div class="parent-stat-value" id="pStatRisk">—</div><div class="parent-stat-label">At Risk (60–79%)</div></div>
+        </div>
+        <div class="parent-stat-card">
+          <div class="parent-stat-icon red"><i class="fas fa-times-circle"></i></div>
+          <div><div class="parent-stat-value" id="pStatCritical">—</div><div class="parent-stat-label">Critical (&lt;60%)</div></div>
+        </div>
+      </div>
+
+      <div class="parent-search-row">
+        <input type="text" class="parent-search-input" id="parentSearchInput" placeholder="Search student by name or admission number..." oninput="filterParentStudents()">
+        <button class="parent-filter-btn active" id="pFilterAll" onclick="setParentFilter('all')">All Students</button>
+        <button class="parent-filter-btn" id="pFilterGood" onclick="setParentFilter('good')">✅ Good</button>
+        <button class="parent-filter-btn" id="pFilterRisk" onclick="setParentFilter('risk')">⚠️ At Risk</button>
+        <button class="parent-filter-btn" id="pFilterCritical" onclick="setParentFilter('critical')">❌ Critical</button>
+      </div>
+
+      <div class="parent-table-card">
+        <div class="parent-table-header">
+          <div class="parent-table-title"><i class="fas fa-list-alt" style="color:#0b66ff;margin-right:8px"></i>Student Attendance Records</div>
+          <div class="parent-table-count" id="parentTableCount">0 students</div>
+        </div>
+        <div id="parentTableBody" style="overflow-x:auto">
+          <div class="parent-loading"><div class="parent-spinner"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== PARENT STUDENT DETAIL MODAL =================== -->
+  <div id="parentStudentModal">
+    <div class="parent-student-modal-box">
+      <div class="psm-header">
+        <div>
+          <h3 id="psmStudentName">Student Name</h3>
+          <p id="psmStudentMeta">Admission No · Class</p>
+        </div>
+        <button class="psm-close" onclick="closeParentStudentModal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="psm-body" id="psmBody">
+        <div class="parent-loading"><div class="parent-spinner"></div></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== LOGIN PAGE ===== -->
   <!-- TIMETABLE DASHBOARD (above login container, full-width) -->
   <div id="timetableDashboard" style="width:100%;max-width:1200px;margin:16px auto 0 auto;display:none;">
@@ -11001,12 +11764,14 @@
         hasUnsavedChanges = false;
         
         document.getElementById('registerContainer').style.display = 'none';
-        document.getElementById('loginContainer').style.display = 'flex';
+        document.getElementById('loginContainer').style.display = 'none';
         var ttd = document.getElementById('timetableDashboard');
-        if (ttd) ttd.style.display = 'block';
+        if (ttd) ttd.style.display = 'none';
         document.getElementById('loginForm').reset();
         document.getElementById('errorMessage').classList.remove('show');
         hideUnsavedWarning();
+        // Return to role selector
+        document.getElementById('roleSelector').classList.add('active');
     }
 
     // ===== CLOCK =====
@@ -11990,6 +12755,705 @@
             return 'You have unsaved changes! Are you sure you want to leave?';
         }
     });
+  </script>
+
+  <!-- =================== SPLASH + ROLE SELECTOR + PARENT PORTAL JS =================== -->
+  <script>
+  // ===================== SPLASH SCREEN =====================
+  (function() {
+    // Generate floating particles
+    const container = document.getElementById('splashParticles');
+    for (let i = 0; i < 40; i++) {
+      const p = document.createElement('div');
+      p.className = 'splash-particle';
+      p.style.cssText = `
+        left: ${Math.random()*100}%;
+        animation-duration: ${4 + Math.random()*8}s;
+        animation-delay: ${Math.random()*6}s;
+        width: ${Math.random() > 0.7 ? 3 : 2}px;
+        height: ${Math.random() > 0.7 ? 3 : 2}px;
+        opacity: ${0.3 + Math.random()*0.7};
+        background: ${Math.random() > 0.5 ? '#0b66ff' : '#00c8ff'};
+      `;
+      container.appendChild(p);
+    }
+
+    const fill = document.getElementById('splashBarFill');
+    const status = document.getElementById('splashStatus');
+    const messages = [
+      'Initializing system...',
+      'Loading class registers...',
+      'Verifying encryption keys...',
+      'Connecting to database...',
+      'Loading student records...',
+      'Preparing attendance modules...',
+      'System ready.'
+    ];
+
+    let progress = 0;
+    let msgIdx = 0;
+    const step = () => {
+      if (progress < 100) {
+        progress += Math.random() * 18 + 4;
+        if (progress > 100) progress = 100;
+        fill.style.width = progress + '%';
+        if (msgIdx < messages.length - 1 && progress > (msgIdx + 1) * (100 / messages.length)) {
+          msgIdx++;
+          status.textContent = messages[msgIdx];
+        }
+        setTimeout(step, 120 + Math.random() * 200);
+      } else {
+        status.textContent = 'System ready.';
+        setTimeout(showRoleSelector, 600);
+      }
+    };
+    setTimeout(step, 800);
+  })();
+
+  function showRoleSelector() {
+    const splash = document.getElementById('ieSplashScreen');
+    splash.style.transition = 'opacity 0.6s ease';
+    splash.style.opacity = '0';
+    setTimeout(() => {
+      splash.style.display = 'none';
+      document.getElementById('roleSelector').classList.add('active');
+    }, 600);
+  }
+
+  // ===================== ROLE SELECTION =====================
+  let _currentRole = null;
+
+  window.selectRole = function(role) {
+    _currentRole = role;
+    if (role === 'parent') {
+      // Parents go directly to class selector — no PIN
+      document.getElementById('roleSelector').classList.remove('active');
+      document.getElementById('parentClassSelector').classList.add('active');
+      return;
+    }
+    // Teacher or Admin: show PIN modal
+    const icon = document.getElementById('rolePinIcon');
+    const title = document.getElementById('rolePinTitle');
+    const sub = document.getElementById('rolePinSubtitle');
+    const btn = document.getElementById('rolePinConfirmBtn');
+    document.getElementById('rolePinInput').value = '';
+    document.getElementById('rolePinError').classList.remove('show');
+
+    if (role === 'teacher') {
+      icon.className = 'role-pin-icon';
+      icon.innerHTML = '<i class="fas fa-chalkboard-teacher"></i>';
+      title.textContent = 'Teacher Access';
+      sub.textContent = 'Enter your teacher PIN to access the register';
+      btn.className = 'role-pin-btn confirm';
+    } else if (role === 'admin') {
+      icon.className = 'role-pin-icon admin';
+      icon.innerHTML = '<i class="fas fa-user-shield"></i>';
+      title.textContent = 'Admin Access';
+      sub.textContent = 'Enter Admin PIN (2003) to continue';
+      btn.className = 'role-pin-btn confirm admin-style';
+    }
+
+    document.getElementById('roleSelector').classList.remove('active');
+    document.getElementById('rolePinModal').classList.add('active');
+    document.getElementById('rolePinInput').focus();
+  };
+
+  window.closeRolePinModal = function() {
+    document.getElementById('rolePinModal').classList.remove('active');
+    document.getElementById('roleSelector').classList.add('active');
+    _currentRole = null;
+  };
+
+  document.getElementById('rolePinInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') verifyRolePin();
+  });
+
+  window.verifyRolePin = function() {
+    const pin = document.getElementById('rolePinInput').value.trim();
+    const errEl = document.getElementById('rolePinError');
+    errEl.classList.remove('show');
+
+    if (!pin) {
+      errEl.textContent = 'Please enter your PIN.';
+      errEl.classList.add('show'); return;
+    }
+
+    if (_currentRole === 'admin') {
+      // Admin PIN is 2003 (or global admin 13030)
+      const enteredHash = EncryptionSystem.hashPin(pin);
+      if (enteredHash === ADMIN_PINS.hash_2003 || enteredHash === ADMIN_PINS.hash_13030) {
+        document.getElementById('rolePinModal').classList.remove('active');
+        openTeacherAdminRegister(pin);
+      } else {
+        errEl.textContent = 'Invalid Admin PIN. Access denied.';
+        errEl.classList.add('show');
+        document.getElementById('rolePinInput').value = '';
+        document.getElementById('rolePinInput').focus();
+      }
+      return;
+    }
+
+    if (_currentRole === 'teacher') {
+      // Check if pin belongs to ANY teacher in ANY class
+      let found = false;
+      for (const cls in CLASS_CONFIG) {
+        const pins = CLASS_CONFIG[cls].teacherPins || {};
+        for (const teacher in pins) {
+          if (EncryptionSystem.hashPin(pin) === pins[teacher]) {
+            found = true; break;
+          }
+        }
+        if (found) break;
+      }
+      if (found) {
+        document.getElementById('rolePinModal').classList.remove('active');
+        openTeacherAdminRegister(pin);
+      } else {
+        errEl.textContent = 'Invalid teacher PIN. Please check your PIN.';
+        errEl.classList.add('show');
+        document.getElementById('rolePinInput').value = '';
+        document.getElementById('rolePinInput').focus();
+      }
+    }
+  };
+
+  function openTeacherAdminRegister(pin) {
+    // Show the original login container
+    document.getElementById('loginContainer').style.display = 'flex';
+    document.getElementById('timetableDashboard').style.display = '';
+    // Pre-fill if we can identify the teacher (best-effort; user picks class)
+    // The register system handles teacher unlock internally
+    // Scroll to top
+    window.scrollTo(0, 0);
+  }
+
+  window.backToRoleSelector = function() {
+    document.getElementById('parentClassSelector').classList.remove('active');
+    document.getElementById('roleSelector').classList.add('active');
+  };
+
+  // ===================== PARENT CLASS SELECTOR =====================
+  window.openParentPortalForClass = function() {
+    const cls = document.getElementById('parentClassSelect').value;
+    if (!cls) { alert('Please select a class first.'); return; }
+    document.getElementById('parentClassSelector').classList.remove('active');
+    document.getElementById('parentPortal').classList.add('active');
+    // Parent portal is async (cloud-only attendance load), but the UI can proceed immediately.
+    initParentPortal(cls).catch(e => console.error('[Parent Portal] init error:', e));
+  };
+
+  window.logoutParent = function() {
+    document.getElementById('parentPortal').classList.remove('active');
+    document.getElementById('roleSelector').classList.add('active');
+    _parentCurrentClass = null; _parentStudents = []; _parentAttendance = [];
+    _parentCloudError = null;
+    _parentFilter = 'all';
+    document.getElementById('parentSearchInput').value = '';
+  };
+
+  // ===================== PARENT PORTAL ENGINE =====================
+  let _parentCurrentClass = null;
+  let _parentStudents = [];
+  let _parentAttendance = []; // cloud-only attendance records (array)
+  let _parentSessions = [];
+  let _parentFilter = 'all';
+  let _parentCloudError = null;
+
+  async function initParentPortal(cls) {
+    _parentCurrentClass = cls;
+    const cfg = CLASS_CONFIG[cls];
+    if (!cfg) {
+      document.getElementById('parentTableBody').innerHTML = '<div class="parent-empty-state"><i class="fas fa-exclamation-triangle"></i><h3>Class not found</h3></div>';
+      return;
+    }
+
+    _parentCloudError = null;
+
+    document.getElementById('parentClassBadge').textContent = cls;
+    document.getElementById('parentPortalDesc').textContent =
+      `Showing all students in ${cfg.displayName || cls}. Click any student to see detailed attendance.`;
+
+    // Load students from embedded list
+    _parentStudents = (cfg.embeddedStudents || []).slice();
+
+    _parentSessions = cfg.defaultSessions || [];
+
+    // Show loading state while fetching cloud attendance
+    document.getElementById('parentTableBody').innerHTML = `
+      <div class="parent-empty-state" style="color:#0b66ff">
+        <i class="fas fa-spinner fa-spin" style="font-size:36px;margin-bottom:12px"></i>
+        <h3>Loading attendance from Google Sheets...</h3>
+        <p>Class: ${cfg.displayName || cls} (cloud-only)</p>
+      </div>`;
+
+    try {
+      // CLOUD-ONLY: attendance must come from Google Sheets (no localStorage fallback).
+      _parentAttendance = await loadParentAttendanceFromCloud(cls);
+
+      // Merge any students that exist in cloud but not in embedded list.
+      const studentById = new Map(_parentStudents.map(s => [s.Admission_No, s]));
+      _parentAttendance.forEach(rec => {
+        if (!rec || !rec.studentId) return;
+        if (!studentById.has(rec.studentId)) {
+          _parentStudents.push({
+            Admission_No: rec.studentId,
+            Student_Name: rec.studentName || 'Unknown',
+            Class: cls
+          });
+          studentById.set(rec.studentId, _parentStudents[_parentStudents.length - 1]);
+        }
+      });
+
+      // Count cloud records (ignore untracked)
+      const totalRecords = _parentAttendance.filter(r => r && r.status && r.status !== 'U').length;
+      document.getElementById('parentPortalDesc').textContent =
+        `${cfg.displayName || cls} — ${totalRecords} cloud attendance records loaded. Click any student for details.`;
+
+      renderParentPortal();
+    } catch (e) {
+      // CLOUD ONLY => do not fall back to localStorage.
+      _parentAttendance = [];
+
+      const errMsg = (e && e.message) ? e.message : String(e || '');
+      const isOffline = !navigator.onLine || errMsg.toLowerCase().includes('offline');
+      _parentCloudError = {
+        title: isOffline ? 'Offline (Cloud Required)' : 'Cloud Load Failed',
+        message: isOffline
+          ? 'Parent Portal can only load attendance from Google Sheets. Please check your internet connection and retry.'
+          : `Unable to load attendance from Google Sheets right now. Please try again.`
+      };
+
+      document.getElementById('parentPortalDesc').textContent =
+        `${cfg.displayName || cls} — Attendance unavailable (cloud). Students will show "No Data" until cloud loads successfully.`;
+
+      renderParentPortal();
+    }
+  }
+
+  // Load attendance records for a class from Google Sheets (cloud-only).
+  async function loadParentAttendanceFromCloud(cls) {
+    const raw = await googleSync.loadFromSheets({ class: cls });
+    if (!Array.isArray(raw)) return [];
+
+    // Normalize into a consistent shape used by computeStudentAttendance/buildSubjectBreakdown.
+    return raw.map(r => {
+      const studentId =
+        r && (r.studentId ?? r.admissionNo ?? r.Admission_No ?? r.admissionNo ?? r.student_id ?? r.admNo ?? '');
+
+      const status = (r && (r.status ?? r.Status ?? '')).toString().toUpperCase();
+      const date = r && (r.date ?? r.Date ?? '');
+      if (!studentId || !date) return null;
+
+      return {
+        studentId: String(studentId),
+        studentName: r && (r.studentName ?? r.Student_Name ?? r.name ?? ''),
+        class: r && (r.class ?? r.Class ?? cls),
+        teacher: r && (r.teacher ?? r.Teacher ?? ''),
+        date: String(date),
+        sessionId: r && (r.sessionId ?? r.sessionID ?? r.session ?? 'DEFAULT'),
+        subject: r && (r.subject ?? r.Subject ?? ''),
+        status
+      };
+    }).filter(Boolean);
+  }
+
+  function loadAllAttendanceForClass(cls, cfg) {
+    const allAtt = {};
+
+    // ── PRIMARY: Broad localStorage prefix scan (mirrors Global Admin approach) ──
+    // Scans ALL localStorage keys that start with iesr_att_<cls>_ regardless of
+    // teacher name or week date — this guarantees we catch every record saved by
+    // any teacher, without relying on the teachers array being perfectly in sync.
+    const attPrefix = `iesr_att_${cls}_`;
+    try {
+      Object.keys(localStorage).forEach(storageKey => {
+        if (!storageKey.startsWith(attPrefix)) return;
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return;
+        let parsed = null;
+        try { const d = EncryptionSystem.decrypt(raw); if (d) parsed = JSON.parse(d); } catch(e) {}
+        if (!parsed) { try { parsed = JSON.parse(raw); } catch(e) {} }
+        if (!parsed || typeof parsed !== 'object') return;
+        for (const [k, v] of Object.entries(parsed)) {
+          if (!allAtt[k]) {
+            allAtt[k] = v;
+          } else {
+            // Keep the most recent non-U status entry
+            if (v && v.status && v.status !== 'U' &&
+                (!allAtt[k].status || allAtt[k].status === 'U')) {
+              allAtt[k] = v;
+            }
+          }
+        }
+      });
+    } catch(e) {
+      console.warn('[Parent Portal] localStorage scan error:', e);
+    }
+
+    // ── SECONDARY: Fallback narrow scan for any keys missed above ──
+    // Keeps backward compatibility with older key formats
+    const teachers = cfg.teachers || [];
+    const weeks = getRecentWeeks(52); // extend to 52 weeks to cover full academic year
+    for (const teacher of teachers) {
+      for (const week of weeks) {
+        const key = `iesr_att_${cls}_${teacher}_${week}`;
+        if (localStorage.getItem(key) === null) continue; // already scanned via prefix above
+        // (records already merged by prefix scan above — no duplicates needed)
+      }
+    }
+
+    return allAtt;
+  }
+
+  function getRecentWeeks(count) {
+    const weeks = [];
+    const now = new Date();
+    for (let i = 0; i < count; i++) {
+      const d = new Date(now);
+      d.setDate(d.getDate() - i * 7);
+      // Get Monday of that week
+      const day = d.getDay();
+      const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+      const mon = new Date(d.setDate(diff));
+      const y = mon.getFullYear();
+      const m = String(mon.getMonth()+1).padStart(2,'0');
+      const dd = String(mon.getDate()).padStart(2,'0');
+      weeks.push(`${y}-${m}-${dd}`);
+    }
+    return weeks;
+  }
+
+  function computeStudentAttendance(student) {
+    const admNo = student.Admission_No;
+    let totalSessions = 0;
+    let present = 0;
+    let absent = 0;
+    let late = 0;
+    const absences = []; // {date, subject, status}
+
+    // Count all marked records for this student
+    const seen = new Set();
+    for (const record of _parentAttendance) {
+      if (!record || !record.status) continue;
+      if (record.studentId !== admNo) continue;
+
+      const dateStr = record.date;
+      if (!dateStr || dateStr === 'undefined') continue;
+      const sessionId = record.sessionId || 'DEFAULT';
+      const uniqKey = `${dateStr}|${sessionId}`;
+      if (seen.has(uniqKey)) continue;
+      seen.add(uniqKey);
+
+      const status = (record.status || '').toString().toUpperCase();
+      if (status === 'U') continue; // untracked
+      totalSessions++;
+      if (status === 'P') present++;
+      else if (status === 'A') {
+        absent++;
+        absences.push({ date: dateStr, subject: record.subject || '—', status: 'A' });
+      } else if (status === 'L') {
+        late++;
+        absences.push({ date: dateStr, subject: record.subject || '—', status: 'L' });
+      }
+    }
+
+    const attended = present + late;
+    const pct = totalSessions > 0 ? Math.round((attended / totalSessions) * 100) : null;
+    absences.sort((a, b) => b.date.localeCompare(a.date));
+
+    return { totalSessions, present, absent, late, pct, absences };
+  }
+
+  function getAttClass(pct) {
+    if (pct === null) return 'gray';
+    if (pct >= 80) return 'good';
+    if (pct >= 60) return 'warn';
+    return 'bad';
+  }
+
+  function renderParentPortal() {
+    const search = (document.getElementById('parentSearchInput').value || '').toLowerCase();
+
+    let filtered = _parentStudents.filter(s => {
+      const nameMatch = s.Student_Name.toLowerCase().includes(search);
+      const admMatch = s.Admission_No.toLowerCase().includes(search);
+      return nameMatch || admMatch;
+    });
+
+    // Apply filter
+    if (_parentFilter !== 'all') {
+      filtered = filtered.filter(s => {
+        const { pct } = computeStudentAttendance(s);
+        if (_parentFilter === 'good') return pct !== null && pct >= 80;
+        if (_parentFilter === 'risk') return pct !== null && pct >= 60 && pct < 80;
+        if (_parentFilter === 'critical') return pct !== null && pct < 60;
+        return true;
+      });
+    }
+
+    // Update stats
+    let good=0, risk=0, critical=0, noData=0;
+    _parentStudents.forEach(s => {
+      const {pct} = computeStudentAttendance(s);
+      if (pct === null) { noData++; return; }
+      if (pct >= 80) good++;
+      else if (pct >= 60) risk++;
+      else critical++;
+    });
+    document.getElementById('pStatTotal').textContent = _parentStudents.length;
+    document.getElementById('pStatGood').textContent = good;
+    document.getElementById('pStatRisk').textContent = risk;
+    document.getElementById('pStatCritical').textContent = critical;
+    document.getElementById('parentTableCount').textContent = filtered.length + ' students';
+
+    const cloudBannerHtml = _parentCloudError ? `
+      <div style="margin-bottom:12px;background:rgba(11,102,255,0.06);border:1px solid rgba(11,102,255,0.18);padding:12px;border-radius:12px;color:#0b66ff">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div><i class="fas fa-cloud" style="font-size:18px"></i></div>
+          <div>
+            <div style="font-weight:800">${_parentCloudError.title}</div>
+            <div style="margin-top:6px;font-size:12px;opacity:0.85">${_parentCloudError.message}</div>
+          </div>
+        </div>
+      </div>` : '';
+
+    if (filtered.length === 0) {
+      document.getElementById('parentTableBody').innerHTML = `
+        ${cloudBannerHtml}
+        <div class="parent-empty-state">
+          <i class="fas fa-search"></i>
+          <h3>No students found</h3>
+          <p>Try a different search or filter.</p>
+        </div>`;
+      return;
+    }
+
+    let html = `${cloudBannerHtml}<table class="parent-students-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Student Name</th>
+          <th>Admission No</th>
+          <th>Attendance Rate</th>
+          <th>Sessions</th>
+          <th>Absent</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead><tbody>`;
+
+    filtered.forEach((s, i) => {
+      const att = computeStudentAttendance(s);
+      const pct = att.pct;
+      const cls = getAttClass(pct);
+      const pctDisplay = pct !== null ? pct + '%' : 'No data';
+
+      let statusChip = '';
+      if (pct === null) {
+        statusChip = '<span class="parent-status-chip risk"><i class="fas fa-minus"></i> No Data</span>';
+      } else if (pct >= 80) {
+        statusChip = '<span class="parent-status-chip good"><i class="fas fa-check"></i> Good</span>';
+      } else if (pct >= 60) {
+        statusChip = '<span class="parent-status-chip risk"><i class="fas fa-exclamation"></i> At Risk</span>';
+      } else {
+        statusChip = '<span class="parent-status-chip critical"><i class="fas fa-times"></i> Critical</span>';
+      }
+
+      html += `<tr onclick="openParentStudentDetail('${s.Admission_No.replace(/'/g,"\\'")}')">
+        <td style="color:#6c757d;font-size:12px">${i+1}</td>
+        <td>
+          <div style="font-weight:700;color:#0f1724">${s.Student_Name}</div>
+        </td>
+        <td><div class="parent-adm-no">${s.Admission_No}</div></td>
+        <td>
+          <div class="parent-attendance-bar">
+            <div class="parent-att-track"><div class="parent-att-fill ${cls}" style="width:${pct||0}%"></div></div>
+            <div class="parent-att-pct ${cls}">${pctDisplay}</div>
+          </div>
+        </td>
+        <td style="font-size:13px;color:#555">${att.totalSessions > 0 ? att.present+'+'+att.late+'/'+att.totalSessions : '—'}</td>
+        <td style="color:#dc3545;font-weight:700;font-size:14px">${att.absent > 0 ? att.absent : '<span style="color:#28a745">0</span>'}</td>
+        <td>${statusChip}</td>
+        <td><button class="parent-view-btn" onclick="event.stopPropagation();openParentStudentDetail('${s.Admission_No.replace(/'/g,"\\'")}')">
+          <i class="fas fa-eye"></i> Details
+        </button></td>
+      </tr>`;
+    });
+
+    html += '</tbody></table>';
+    document.getElementById('parentTableBody').innerHTML = html;
+  }
+
+  window.filterParentStudents = function() { renderParentPortal(); };
+
+  window.setParentFilter = function(f) {
+    _parentFilter = f;
+    ['all','good','risk','critical'].forEach(id => {
+      document.getElementById('pFilter'+id.charAt(0).toUpperCase()+id.slice(1)).classList.toggle('active', id===f);
+    });
+    renderParentPortal();
+  };
+
+  window.openParentStudentDetail = function(admNo) {
+    const student = _parentStudents.find(s => s.Admission_No === admNo);
+    if (!student) return;
+
+    const att = computeStudentAttendance(student);
+    const pct = att.pct;
+    const cls = getAttClass(pct);
+
+    document.getElementById('psmStudentName').textContent = student.Student_Name;
+    document.getElementById('psmStudentMeta').textContent = student.Admission_No + ' · ' + (_parentCurrentClass || '');
+
+    let pctColor = cls === 'good' ? '#28a745' : cls === 'warn' ? '#ffc107' : cls === 'bad' ? '#dc3545' : '#6c757d';
+
+    let bodyHtml = `
+      <div class="psm-stats-row">
+        <div class="psm-stat">
+          <div class="psm-stat-val" style="color:${pctColor}">${pct !== null ? pct+'%' : '—'}</div>
+          <div class="psm-stat-lbl">Attendance Rate</div>
+        </div>
+        <div class="psm-stat">
+          <div class="psm-stat-val">${att.totalSessions}</div>
+          <div class="psm-stat-lbl">Total Sessions</div>
+        </div>
+        <div class="psm-stat">
+          <div class="psm-stat-val green">${att.present}</div>
+          <div class="psm-stat-lbl">Present</div>
+        </div>
+        <div class="psm-stat">
+          <div class="psm-stat-val red">${att.absent}</div>
+          <div class="psm-stat-lbl">Absent</div>
+        </div>
+        <div class="psm-stat">
+          <div class="psm-stat-val orange">${att.late}</div>
+          <div class="psm-stat-lbl">Late / Excused</div>
+        </div>
+      </div>`;
+
+    // Attendance status summary
+    let statusMsg = '', statusColor = '#0b66ff';
+    if (pct === null) {
+      statusMsg = 'No attendance data recorded yet for this student.';
+      statusColor = '#6c757d';
+    } else if (pct >= 80) {
+      statusMsg = '✅ Excellent attendance! Keep it up.';
+      statusColor = '#28a745';
+    } else if (pct >= 60) {
+      statusMsg = '⚠️ Attendance is below the recommended 80% threshold. Please take action.';
+      statusColor = '#856404';
+    } else {
+      statusMsg = '🚨 Critical attendance level! Immediate action required. Risk of failing.';
+      statusColor = '#dc3545';
+    }
+    bodyHtml += `<div style="background:rgba(0,0,0,0.03);border-radius:12px;padding:16px;margin-bottom:24px;border-left:4px solid ${statusColor}">
+      <p style="margin:0;color:${statusColor};font-weight:700;font-size:14px">${statusMsg}</p>
+    </div>`;
+
+    // Absences / late detail
+    bodyHtml += `<div class="psm-section-title"><i class="fas fa-calendar-times" style="color:#dc3545"></i> Missed & Late Sessions</div>`;
+
+    if (att.absences.length === 0) {
+      bodyHtml += `<div class="psm-no-absences"><i class="fas fa-check-circle"></i><p>No missed sessions recorded!</p></div>`;
+    } else {
+      bodyHtml += `<table class="psm-absent-table"><thead><tr>
+        <th>Date</th><th>Subject / Session</th><th>Status</th>
+      </tr></thead><tbody>`;
+      att.absences.forEach(a => {
+        const d = new Date(a.date + 'T12:00:00');
+        const dStr = d.toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'});
+        const dayName = d.toLocaleDateString('en-GB', {weekday:'long'});
+        bodyHtml += `<tr>
+          <td><strong>${dStr}</strong><br><span style="font-size:11px;color:#6c757d">${dayName}</span></td>
+          <td>${a.subject}</td>
+          <td><span class="psm-absent-chip ${a.status === 'A' ? 'absent' : 'late'}">${a.status === 'A' ? '❌ ABSENT' : '⏰ LATE'}</span></td>
+        </tr>`;
+      });
+      bodyHtml += `</tbody></table>`;
+    }
+
+    // Subject breakdown
+    if (att.totalSessions > 0) {
+      bodyHtml += buildSubjectBreakdown(admNo);
+    }
+
+    document.getElementById('psmBody').innerHTML = bodyHtml;
+    document.getElementById('parentStudentModal').classList.add('active');
+  };
+
+  function buildSubjectBreakdown(admNo) {
+    // Group absences by subject
+    const subjectTotal = {};
+    const seen = new Set(); // dedupe by date+sessionId per student record
+
+    for (const record of _parentAttendance) {
+      if (!record || !record.status) continue;
+      if (record.studentId !== admNo) continue;
+
+      const status = (record.status || '').toString().toUpperCase();
+      if (status === 'U') continue;
+
+      const dateStr = record.date;
+      if (!dateStr) continue;
+      const sessionId = record.sessionId || 'DEFAULT';
+      const uniqKey = `${dateStr}|${sessionId}`;
+      if (seen.has(uniqKey)) continue;
+      seen.add(uniqKey);
+
+      const subj = record.subject || 'Unknown';
+      if (!subjectTotal[subj]) subjectTotal[subj] = { present: 0, absent: 0, late: 0, total: 0 };
+      subjectTotal[subj].total++;
+      if (status === 'P') subjectTotal[subj].present++;
+      else if (status === 'A') subjectTotal[subj].absent++;
+      else if (status === 'L') subjectTotal[subj].late++;
+    }
+
+    const subjects = Object.keys(subjectTotal);
+    if (subjects.length === 0) return '';
+
+    let html = `<div class="psm-section-title" style="margin-top:24px"><i class="fas fa-book" style="color:#0b66ff"></i> Subject Attendance Breakdown</div>`;
+    html += `<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">`;
+
+    subjects.sort((a,b) => {
+      const pA = subjectTotal[a].total > 0 ? (subjectTotal[a].present + subjectTotal[a].late) / subjectTotal[a].total : 0;
+      const pB = subjectTotal[b].total > 0 ? (subjectTotal[b].present + subjectTotal[b].late) / subjectTotal[b].total : 0;
+      return pA - pB;
+    });
+
+    subjects.forEach(subj => {
+      const d = subjectTotal[subj];
+      const attended = d.present + d.late;
+      const pct = d.total > 0 ? Math.round((attended/d.total)*100) : 0;
+      const color = pct >= 80 ? '#28a745' : pct >= 60 ? '#ffc107' : '#dc3545';
+      html += `<div style="display:flex;align-items:center;gap:12px">
+        <div style="width:160px;font-size:12px;font-weight:600;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${subj}">${subj}</div>
+        <div style="flex:1;height:10px;background:#f0f0f0;border-radius:5px;overflow:hidden">
+          <div style="height:100%;width:${pct}%;background:${color};border-radius:5px;transition:width 0.3s"></div>
+        </div>
+        <div style="font-size:12px;font-weight:700;color:${color};min-width:38px">${pct}%</div>
+        <div style="font-size:11px;color:#6c757d;min-width:60px">${attended}/${d.total}</div>
+      </div>`;
+    });
+
+    html += '</div>';
+    return html;
+  }
+
+  window.closeParentStudentModal = function() {
+    document.getElementById('parentStudentModal').classList.remove('active');
+  };
+
+  // Close parent modal on backdrop click
+  document.getElementById('parentStudentModal').addEventListener('click', function(e) {
+    if (e.target === this) closeParentStudentModal();
+  });
+
+  // Hide login container initially (shown only after role selection)
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('loginContainer').style.display = 'none';
+    document.getElementById('timetableDashboard').style.display = 'none';
+  });
+
   </script>
 </body>
 </html>
